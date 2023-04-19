@@ -1,3 +1,5 @@
 .header {
 	background-color: var(--primary-color);
+	display: flex;
+	justify-content: flex-end;
 }
