@@ -23,12 +23,17 @@
 	margin-bottom: 1rem;
 }
 
+.weekly-goal__goal {
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
 .weekly-goal__span {
 	color: var(--primary-color)
 }
 
 .weekly-goal__progress {
-	margin: 1rem 0;
+	margin-top: 1rem;
 	height: 5px;
 	border-radius: 5px;
 	background-color: var(--primary-color);
@@ -41,12 +46,27 @@
 	border-radius: 1rem;
 }
 
+.daily-activities-tab {
+	display: flex;
+	justify-content: space-between;
+}
+
 .daily-activities__running-tab, .daily-activities__cycling-tab {
 	background-color: inherit;
 	border: none;
 	cursor: pointer;
+	width: 100%;
 }
-
+.daily-activities__tab-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 0.9rem;
+}
+.daily-activities__tab-content--span {
+	display: block;
+	
+}
 .daily-activities__icon {
 	height: 2rem;
 }
