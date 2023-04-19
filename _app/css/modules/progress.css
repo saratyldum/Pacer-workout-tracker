@@ -109,12 +109,33 @@
 	padding: 1rem;
 }
 
+.total-progress__title {
+	padding: 1rem 0;
+	font-weight: 600;
+}
+
 .total-progress__stats {
 	display: flex;
 	padding: 1rem;
-	justify-content: space-around;
+	justify-content: space-between;
 	border-radius: 0.5rem;
 	background-color: var(--primary-color-lighter);
 	border: 1px solid var(--primary-color-low-opacity);
+}
+
+.total-progress__stats--distance, .total-progress__stats--time {
+	display: flex;
+	align-items: center;
+}
+
+.total-progress__stats-divider {
+	height: 2.5rem;
+	width: 1px;
+	background-color: var(--font-color-dark);
+	opacity: 0.1;
+}
+.total-progress__stats--icon {
+	/* object-position: 5px 5px; */
+	height: 2.5rem;
 }
 
