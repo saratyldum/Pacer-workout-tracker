@@ -14,3 +14,38 @@
 	object-fit:cover;
 	border-radius: 50%;
 }
+.daily-activities {
+	width: 100%;
+}
+
+.daily-activities__running-tab, .daily-activities__cycling-tab {
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
+}
+
+.daily-activities__icon {
+	height: 2rem;
+}
+
+.daily-activities__running-statistic {
+	width: 100%;
+	height: 300px;
+	padding: 1rem;
+	display: flex;
+	gap: 0.5rem;
+}
+
+.daily-activities__bar-container {
+	width: 5px;
+	height: 80px;
+	background-color: var(--primary-color);
+	border-radius: 5px 5px 0 0;
+}
+
+/* .daily-activities__bar {
+	width: 5px;
+	background-color: var(--primary-color);
+	border-radius: 5px 5px 0 0;
+} */
+

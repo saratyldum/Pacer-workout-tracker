@@ -5,6 +5,7 @@ html {
 body {
 	font-family: 'Manrope', sans-serif;
 	font-weight: 400;
+	height: 100dvh;
 }
 
 img {
@@ -32,6 +33,7 @@ li {
 }
 
 .grid-wrapper {
+	height: 100dvh;
 	display: grid;
 	grid-template-areas: 
 		'progress-view'
