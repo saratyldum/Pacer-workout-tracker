@@ -1,0 +1,141 @@
+.grid-progress {
+	padding: 1rem;
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem;
+}
+.user__image {
+	height: 80px;
+	width: 80px;
+	object-fit:cover;
+	border-radius: 50%;
+}
+
+.weekly-goal, .daily-activities, .total-progress {
+	width: 100%;
+	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+	border: 3px solid var(--primary-color-low-opacity);
+}
+
+.weekly-goal {
+	padding: 1rem;
+}
+
+.weekly-goal__goal {
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.weekly-goal__span {
+	color: var(--primary-color);
+}
+
+.weekly-goal__progress {
+	margin-top: 1rem;
+	height: 5px;
+	border-radius: 5px;
+	background-color: var(--primary-color);
+
+}
+.daily-activities {
+	padding-bottom: 1rem;
+	width: 100%;
+}
+
+.daily-activities-tab {
+	display: flex;
+	justify-content: space-between;
+}
+
+.daily-activities__running-tab, .daily-activities__cycling-tab {
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	padding: 0.5rem;
+}
+
+.daily-activities__cycling-tab {
+	background-color: var(--secondary-color-light);
+}
+.daily-activities__tab-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 0.9rem;
+	padding: 1rem;
+}
+
+.daily-activities__tab-content.hidden {
+	display: none;
+}
+.daily-activities__tab-content--span {
+	display: block;
+	color: var(--primary-color);
+	padding-bottom: 1rem;
+}
+
+.daily-activities__icon {
+	height: 2rem;
+}
+
+.daily-activities__running-statistic {
+	padding: 1rem;
+	display: flex;
+	gap: 0.75rem;
+}
+
+.daily-activities__bar-container {
+	width: 0.6rem;
+	height: 100px;
+	background-color: var(--primary-color);
+	border-radius: 5px 5px 0 0;
+	position: relative;
+}
+
+.daily-activities__bar--day {
+	position: absolute;
+	font-size: 0.6rem;
+	bottom: -1rem;
+}
+
+.total-progress {
+	padding: 1rem;
+}
+
+.total-progress__title {
+	padding: 1rem 0;
+	font-weight: 600;
+}
+
+.total-progress__stats {
+	display: flex;
+	padding: 1rem;
+	justify-content: space-between;
+	border-radius: 0.5rem;
+	background-color: var(--primary-color-lighter);
+	border: 1px solid var(--primary-color-low-opacity);
+}
+
+.total-progress__stats--distance, .total-progress__stats--time {
+	display: flex;
+	align-items: center;
+}
+
+.total-progress__stats-divider {
+	height: 2.5rem;
+	width: 1px;
+	background-color: var(--font-color-dark);
+	opacity: 0.1;
+}
+.total-progress__stats--icon {
+	/* object-position: 5px 5px; */
+	height: 2.5rem;
+}
+
