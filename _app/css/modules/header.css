@@ -5,8 +5,17 @@
 	justify-content: flex-start;
 }
 
-
 .logo img {
 	height: 2rem;
 	object-fit: contain;
+}
+
+@media screen and (max-width: 992px) {
+	.header {
+		position: absolute;
+		width: 3rem;
+		right: 1rem;
+		top: 2rem;
+		padding: 0;
+	}
 }
