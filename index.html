@@ -52,11 +52,25 @@
 				<ul class="workouts">
 					<form class="workout-form hidden">
 						<div class="workout-form__row">
-							<label for="" class="workout-form__label">Type</label>
-							<select name="" id="" class="workout-form__input workout-form__input--type">
+							<label class="workout-form__label">Type</label>
+							<select class="workout-form__input workout-form__input--type">
 								<option value="running">Running</option>
 								<option value="cycling">Cycling</option>
 							</select>
+						</div>
+						<div class="workout-form__row">
+							<label class="workout-form__label">Distance</label>
+							<input 
+								type="number" 
+								class="workout-form__input workout-form__input--distance"
+								placeholder="km">
+						</div>
+						<div class="workout-form__row">
+							<label class="workout-form__label">Duration</label>
+							<input 
+								type="number" 
+								class="workout-form__input workout-form__input--duration"
+								placeholder="min">
 						</div>
 						
 					</form>
