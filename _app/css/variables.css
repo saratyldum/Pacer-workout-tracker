@@ -3,6 +3,7 @@
 	/* ------------ COLORS ----------- */
 	--primary-color: #5D63D1;
 	--primary-color-lighter: #F3F7FF;
+	--primary-color-low-opacity: rgba(93, 99, 209, 0.1);
 	--secondary-color: #FFFFFF;
 	--secondary-color-light: #F2F2F2;
 

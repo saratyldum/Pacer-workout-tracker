@@ -21,6 +21,7 @@
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	margin-bottom: 1rem;
+	border: 3px solid var(--primary-color-low-opacity);
 }
 
 .weekly-goal__goal {
@@ -29,7 +30,7 @@
 }
 
 .weekly-goal__span {
-	color: var(--primary-color)
+	color: var(--primary-color);
 }
 
 .weekly-goal__progress {
@@ -40,10 +41,12 @@
 
 }
 .daily-activities {
-	padding: 1rem;
+	padding-bottom: 1rem;
 	width: 100%;
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
+	border: 3px solid var(--primary-color-low-opacity);
+
 }
 
 .daily-activities-tab {
@@ -56,6 +59,11 @@
 	border: none;
 	cursor: pointer;
 	width: 100%;
+	padding: 0.5rem;
+}
+
+.daily-activities__cycling-tab {
+	background-color: var(--secondary-color-light);
 }
 .daily-activities__tab-content {
 	display: flex;
@@ -71,6 +79,7 @@
 .daily-activities__tab-content--span {
 	display: block;
 	color: var(--primary-color);
+	padding-bottom: 1rem;
 }
 
 .daily-activities__icon {
@@ -85,7 +94,7 @@
 
 .daily-activities__bar-container {
 	width: 0.6rem;
-	height: 80px;
+	height: 100px;
 	background-color: var(--primary-color);
 	border-radius: 5px 5px 0 0;
 	position: relative;
