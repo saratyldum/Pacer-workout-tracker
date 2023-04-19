@@ -36,3 +36,24 @@
 	font-weight: 600;
 	grid-column: 1 / -1;
  }
+
+.workout__details {
+  display: flex;
+  align-items: baseline;
+}
+
+.workout__icon {
+	font-size: 1rem;
+	margin-right: 0.2rem;
+ }
+
+ .workout__value {
+	font-size: 1rem;
+	margin-right: 0.5rem;
+ }
+
+ .workout__unit {
+	font-size: 0.9rem;
+	color: var(--secondary-color-light);
+	text-transform: uppercase;
+ }
