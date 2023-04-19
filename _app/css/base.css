@@ -6,6 +6,7 @@ body {
 	font-family: 'Manrope', sans-serif;
 	font-weight: 400;
 	height: 100dvh;
+	background-color: var(--primary-color);
 }
 
 img {
@@ -45,6 +46,9 @@ li {
 }
 
 @media screen and (min-width: 992px) {
+	body {
+		background-color: var(--secondary-color);
+	}
 	.grid-wrapper {
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-areas: 

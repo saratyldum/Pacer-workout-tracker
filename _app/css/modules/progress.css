@@ -139,3 +139,28 @@
 	height: 2.5rem;
 }
 
+@media screen and (max-width: 992px) {
+	.daily-activities, .total-progress {
+		display: none;
+	}
+
+	.user {
+		color: var(--secondary-color);
+	}
+
+	.user__image {
+		height: 50px;
+		width: 50px;
+	}
+
+	.grid-progress {
+		background-color: var(--primary-color);
+	}
+
+	.weekly-goal {
+		background-color: var(--secondary-color);
+		max-width: 450px;
+		margin: 0 auto 1rem;
+	}
+}
+
