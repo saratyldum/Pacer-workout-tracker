@@ -84,10 +84,17 @@
 }
 
 .daily-activities__bar-container {
-	width: 8px;
+	width: 0.6rem;
 	height: 80px;
 	background-color: var(--primary-color);
 	border-radius: 5px 5px 0 0;
+	position: relative;
+}
+
+.daily-activities__bar--day {
+	position: absolute;
+	font-size: 0.6rem;
+	bottom: -1rem;
 }
 
 /* .daily-activities__bar {
