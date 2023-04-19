@@ -159,6 +159,8 @@
 
 	.weekly-goal {
 		background-color: var(--secondary-color);
+		max-width: 450px;
+		margin: 0 auto 1rem;
 	}
 }
 
