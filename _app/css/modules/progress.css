@@ -105,9 +105,16 @@
 	bottom: -1rem;
 }
 
-/* .daily-activities__bar {
-	width: 5px;
-	background-color: var(--primary-color);
-	border-radius: 5px 5px 0 0;
-} */
+.total-progress {
+	padding: 1rem;
+}
+
+.total-progress__stats {
+	display: flex;
+	padding: 1rem;
+	justify-content: space-around;
+	border-radius: 0.5rem;
+	background-color: var(--primary-color-lighter);
+	border: 1px solid var(--primary-color-low-opacity);
+}
 
