@@ -1,0 +1,128 @@
+.grid-workouts {
+	background-color: var(--primary-color);
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.workouts {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	color: var(--font-color-light);
+}
+
+.workout-form, .workout {
+	background-color: var(--workout);
+	border-radius: 5px;
+	padding: 1rem 1.5rem;
+	margin-bottom: 1.5rem;
+	display: grid;
+	gap: 0.5rem 2.5rem;
+ 
+}
+
+.workout {
+	cursor: pointer;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.workout--running {
+	border-left: 5px solid var(--running);
+ }
+
+.workout--cycling {
+	border-left: 5px solid var(--cycling);
+ }
+
+ .workout__title {
+	font-size: 1.5rem;
+	font-weight: 500;
+	grid-column: 1 / -1;
+ }
+
+ .workout__location {
+	font-size: 1rem;
+	grid-column: 1 / -1
+ }
+
+.workout__details {
+  display: flex;
+  align-items: baseline;
+}
+
+.workout__icon {
+	font-size: 1rem;
+	margin-right: 0.2rem;
+ }
+
+ .workout__value {
+	font-size: 1rem;
+	margin-right: 0.5rem;
+ }
+
+ .workout__unit {
+	font-size: 0.9rem;
+	color: var(--secondary-color-light);
+	text-transform: uppercase;
+ }
+
+ .workout-form {
+	grid-template-columns: 1fr 1fr;
+	/* transition for when form becomes activity */
+	transition: all 0.5s, transform 1ms;
+ }
+
+ /*
+ .workout-form.hidden {
+	transform: translateY(-30rem);
+	height: 0;
+	padding: 0 2.25rem; 
+	margin-bottom: 0;
+	opacity: 0;
+ }
+ */
+
+ .workout-form__row {
+	display: flex;
+ }
+
+ .workout-form__row--hidden {
+	display: none;
+ }
+
+ .workout-form__label {
+	flex: 0 0 50%; /*LES NØYERE OM DETTE*/
+	font-size: 1rem;
+	font-weight: 600;
+ }
+
+ .workout-form__input {
+	width: 100%;
+	padding: 0.3rem;
+	font-family: inherit;
+	font-size: 0.8rem;
+	border: 1px solid var(--secondary-color);
+	color: var(--secondary-color);
+	border-radius: 3px;
+	transition: all 0.2s;
+	background-color: var(--primary-color-light);
+ }
+
+ .workout-form__input:focus {
+	outline: none;
+	color: var(--primary-color);
+	background-color: var(--secondary-color-light);
+ }
+
+ .workout-form__input:focus::placeholder {
+	color: var(--primary-color);
+ }
+
+ ::placeholder {
+	color: var(--secondary-color);
+ }
+
+ .workout-form__button {
+	display: none;
+ }
+

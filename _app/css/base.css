@@ -4,10 +4,15 @@ html {
 
 body {
 	font-family: 'Manrope', sans-serif;
+	font-weight: 400;
 }
 
 img {
 	width: 100%;
+}
+
+li {
+	list-style: none;
 }
 
 .header {
@@ -28,7 +33,6 @@ img {
 
 .grid-wrapper {
 	display: grid;
-	gap: 1rem;
 	grid-template-areas: 
 		'progress-view'
 		'map'
