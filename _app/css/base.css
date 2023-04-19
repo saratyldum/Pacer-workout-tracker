@@ -6,6 +6,10 @@ body {
 	font-family: 'Manrope', sans-serif;
 }
 
+img {
+	width: 100%;
+}
+
 .header {
 	width: 100%;
 }
