@@ -21,3 +21,11 @@
 	grid-template-columns: repeat(4, 1fr);
 	gap: 0.5rem 1rem;
 }
+
+.workout--running {
+	border-left: 5px solid var(--running);
+ }
+
+.workout--cycling {
+	border-left: 5px solid var(--cycling);
+ }
