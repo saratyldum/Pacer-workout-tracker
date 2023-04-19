@@ -11,16 +11,19 @@
 	color: var(--font-color-light);
 }
 
-.workout {
+.workout-form, .workout {
 	background-color: var(--workout);
 	border-radius: 5px;
-	padding: 1rem 2rem;
+	padding: 1rem 1.5rem;
 	margin-bottom: 1.5rem;
-	cursor: pointer;
-
 	display: grid;
+	gap: 0.5rem 2.5rem;
+ 
+}
+
+.workout {
+	cursor: pointer;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 0.5rem 1rem;
 }
 
 .workout--running {
@@ -56,4 +59,18 @@
 	font-size: 0.9rem;
 	color: var(--secondary-color-light);
 	text-transform: uppercase;
+ }
+
+ .workout-form {
+	grid-template-columns: 1fr 1fr;
+	/* transition for when form becomes activity */
+	transition: all 0.5s, transform 1ms;
+ }
+
+ .workout-form.hidden {
+	transform: translateY(-30rem);
+	height: 0;
+	/* padding: 0 2.25rem; */
+	margin-bottom: 0;
+	opacity: 0;
  }
