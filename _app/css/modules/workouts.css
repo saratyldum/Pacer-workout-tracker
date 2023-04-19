@@ -72,7 +72,7 @@
 	transition: all 0.5s, transform 1ms;
  }
 
- /*
+ 
  .workout-form.hidden {
 	transform: translateY(-30rem);
 	height: 0;
@@ -80,7 +80,7 @@
 	margin-bottom: 0;
 	opacity: 0;
  }
- */
+
 
  .workout-form__row {
 	display: flex;
