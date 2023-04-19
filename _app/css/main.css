@@ -2,5 +2,6 @@
 @import '/_app/css/variables.css';
 @import '/_app/css/base.css';
 
-@import '/_app/css/modules/header.css'
+@import '/_app/css/modules/header.css';
+@import '/_app/css/modules/progress-view.css'
 
