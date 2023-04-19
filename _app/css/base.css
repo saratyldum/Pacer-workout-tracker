@@ -1,0 +1,40 @@
+html {
+	font-size: 16px;
+}
+
+body {
+	font-family: 'Manrope', sans-serif;
+}
+
+.header {
+	width: 100%;
+}
+
+.grid-progress {
+	grid-area: progress-view;
+}
+
+.grid-map {
+	grid-area: map;
+}
+
+.grid-workouts {
+	grid-area: workout-list;
+}
+
+.grid-wrapper {
+	display: grid;
+	gap: 1rem;
+	grid-template-areas: 
+		'progress-view'
+		'map'
+		'workout-list';
+}
+
+@media screen and (min-width: 992px) {
+	.grid-wrapper {
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-areas: 
+			'progress-view map map workout-list'
+	}
+}

@@ -10,6 +10,46 @@
 	</head>
 	
 	<body>
-		index.html
+		<header class="header"></header>
+		<main class="grid-wrapper">
+			<div class="grid-progress">
+				<div class="user">
+					<img class="user__image" src="./_app/assets/images/photo-1539571696357-5a69c17a67c6.avif" alt="user profile picture">
+					<div class="user__message">Hello, <strong>Andrew</strong></div>
+				</div>
+				<div class="weekly-goal">
+					<div class="weekly-goal__goal">
+						Week goal <span class="weekly-goal__span">50km</span>
+					</div>
+					<div class="weekly-goal__progress"></div>
+				</div>
+				<div class="daily-activities hidden">
+					<div class="daily-activities__running-tab">
+						<img src="./_app/assets/icons/running.svg" alt="">
+						<div class="daily-activities__running-tab--content">
+							This Week <span>35km</span>
+							<div class="daily-activities__running-tab--statistic"></div>
+						</div>
+					</div>
+					<div class="daily-activities__cycling-tab">
+						<img src="./_app/assets/icons/cycling.svg" alt="">
+						<div class="daily-activities__cycling-tab--content">
+							This Week <span>35km</span>
+							<div class="daily-activities__cycling-tab--statistic"></div>
+
+						</div>
+					</div>
+				</div>
+				<div class="total-progress hidden">
+					<div class="total-progress__headline">Total progress</div>
+					<div class="total-progress__stats">
+						<div class="total-progress__stats--distance">🏃🏻‍♂️ 50km</div>
+						<div class="total-progress__stats--time">⏱ 4hr</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-map"></div>
+			<div class="grid-workouts"></div>
+		</main>
 	</body>
 </html>

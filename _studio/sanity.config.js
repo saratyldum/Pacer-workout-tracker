@@ -6,10 +6,10 @@ import settings from './structure/settings.js';
 import blog from './structure/blog.js';
 
 export default {
-	title: 'Studio',
+	title: 'Pacer',
 
-	projectId: '',
-	dataset: '',
+	projectId: 'qtf22vsb',
+	dataset: 'production',
 
 	plugins: [
 		deskTool({
