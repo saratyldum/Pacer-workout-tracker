@@ -15,13 +15,16 @@
 	border-radius: 50%;
 }
 
-.weekly-goal {
-	padding: 1rem;
+.weekly-goal, .daily-activities, .total-progress {
 	width: 100%;
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	margin-bottom: 1rem;
 	border: 3px solid var(--primary-color-low-opacity);
+}
+
+.weekly-goal {
+	padding: 1rem;
 }
 
 .weekly-goal__goal {
@@ -43,10 +46,6 @@
 .daily-activities {
 	padding-bottom: 1rem;
 	width: 100%;
-	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
-	border-radius: 1rem;
-	border: 3px solid var(--primary-color-low-opacity);
-
 }
 
 .daily-activities-tab {
