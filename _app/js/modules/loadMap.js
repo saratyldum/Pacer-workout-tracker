@@ -28,7 +28,7 @@ export default function loadMap(position) {
 
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
-
+	containerWorkouts.addEventListener('click', moveToPopup);
 
 	function handleMapClick(event) {
 		showWorkoutForm(event);
@@ -73,11 +73,8 @@ export default function loadMap(position) {
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
 
 			const workout = runningWorkout(coordinates, distance, duration, cadence, date, id)
-			// workouts.push(workout);
+			workouts.push(workout);
 			renderHTML(workout)
-			// renderWorkoutMaker(coordinates, description);
-			// renderWorkoutList(workout);
-			// hideWorkoutForm();
 
 		}
 
@@ -94,9 +91,6 @@ export default function loadMap(position) {
 			const workout = cyclingWorkout(coordinates, distance, duration, elevation, date, id)
 			workouts.push(workout);
 			renderHTML(workout);
-			// renderWorkoutMaker(coordinates, description)
-			// renderWorkoutList(workout);
-			// hideWorkoutForm();
 		}
 	}
 
@@ -118,7 +112,6 @@ export default function loadMap(position) {
 	//Render wokrout in list
 	function renderWorkoutList(workout) {
 		//SKRIV OM!!!!
-		console.log(workout);
 		let html = `
 		<li class="workout workout--${workout.type}" data-id="${workout.id}">
 			<h2 class="workout__title">${workout.description}</h2>
@@ -155,12 +148,12 @@ export default function loadMap(position) {
 		html += `
 			<div class="workout__details">
 				<span class="workout__icon">⚡️</span>
-				<span class="workout__value">${workout.speed.toFixed(1)}</span>
+				<span class="workout__value">${workout.speed}</span>
 				<span class="workout__unit">km/h</span>
 			</div>
 			<div class="workout__details">
 				<span class="workout__icon">⛰</span>
-				<span class="workout__value">${workout.elevationGain}</span>
+				<span class="workout__value">${workout.elevation}</span>
 				<span class="workout__unit">m</span>
 			</div>
 		</li>
@@ -205,6 +198,7 @@ export default function loadMap(position) {
 	function calculateSpeed(distance, duration) {
 		// km/h
 		const speed = distance / (duration / 60);
+		console.log(speed);
 		return speed;
 	}
 
@@ -215,6 +209,23 @@ export default function loadMap(position) {
 		form.style.display = 'none';
 		form.classList.add('hidden');
 		setTimeout(() => (form.style.display = 'grid'), 1000);
+	}
+
+	function moveToPopup(event) {
+		if (!map) return;
+
+		const workoutElement = event.target.closest('.workout');
+
+		if (!workoutElement) return;
+
+		const workout = workouts.find(
+		work => work.id === workoutElement.dataset.id
+		);
+
+		map.flyTo({
+			center: workout.coordinates
+		});
+		
 	}
 
 

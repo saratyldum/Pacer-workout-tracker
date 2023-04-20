@@ -1,4 +1,4 @@
-import mapbox from "./modules/loadMap.js";
+import loadMap from "./modules/loadMap.js";
 import getUserPosition from "./modules/getUserPosition.js";
 import workoutForm from "./modules/workoutForm.js";
 
