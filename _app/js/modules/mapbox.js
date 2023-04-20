@@ -37,11 +37,15 @@ export default function mapbox(userCoordinates) {
 		const longitude = mapEvent.lngLat.lng;
 		const coordinates = [longitude, latitude]
 
+		//Clear input fields
+
+		//Create popup
 		const popup = new mapboxgl.Popup({closeOnClick: false})
 		.setText('workout')
 		.setLngLat(coordinates)
 		.addClassName('running-popup');
 
+		//Add marker
 		const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
 		.setLngLat(coordinates)
 		.setPopup(popup)
