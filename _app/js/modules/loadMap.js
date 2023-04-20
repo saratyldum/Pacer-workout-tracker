@@ -47,11 +47,9 @@ export default function loadMap(position) {
 	function newWorkout(event) {
 		event.preventDefault();
 
-		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input))
-
-		const latitude = mapEvent.lngLat.lat;
-		const longitude = mapEvent.lngLat.lng;
-		const coordinates = [longitude, latitude]
+		//helping functions
+		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input)); //les mer om isFinite
+		const allPositive = (...inputs) => inputs.every(input => input > 0);
 
 		//Get data from form 
 		const type = inputType.value;
@@ -63,22 +61,32 @@ export default function loadMap(position) {
 		if (type === 'running') {
 			const cadence = +inputCadence.value;
 			//Check if data is valid
-			if(!isValidInputs(distance, duration, cadence)) 
-				return alert('Input have to be positive number'); //les mer om isFinite
+			if (
+				!isValidInputs(distance, duration, cadence) || 
+				!allPositive(distance, duration, cadence)
+			) 
+				return alert('Input have to be positive number'); //fiks bedre error meldinger
 		}
 
 		//If activity is cycling, create cycling object
 		if (type === 'cycling') {
 			const elevation = +inputElevation.value;
 			//Check if data is valid
-			if(!isValidInputs(distance, duration, elevation)) 
-			return alert('Input have to be positive number'); //les mer om isFinite
+			if (
+				!isValidInputs(distance, duration, elevation) ||
+				!allPositive(distance, duration)
+			) 
+				return alert('Input have to be positive number'); //fiks bedre error meldinger
 
 		}
 
 		//Add new object to workout array
 
 		// Render workout on map as a marker
+		const latitude = mapEvent.lngLat.lat;
+		const longitude = mapEvent.lngLat.lng;
+		const coordinates = [longitude, latitude]
+
 			//Create popup
 			const popup = new mapboxgl.Popup({closeOnClick: false})
 			.setText('workout')
