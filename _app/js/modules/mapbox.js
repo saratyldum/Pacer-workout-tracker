@@ -2,10 +2,10 @@ export default function mapbox(userCoordinates) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
 	const inputType = document.querySelector('.workout-form__input--type');
-	let inputDistance = document.querySelector('.workout-form__input--distance');
-	let inputDuration = document.querySelector('.workout-form__input--duration');
-	let inputCadence = document.querySelector('.workout-form__input--cadence');
-	let inputElevation = document.querySelector('.workout-form__input--elevation');
+	const inputDistance = document.querySelector('.workout-form__input--distance');
+	const inputDuration = document.querySelector('.workout-form__input--duration');
+	const inputCadence = document.querySelector('.workout-form__input--cadence');
+	const inputElevation = document.querySelector('.workout-form__input--elevation');
 
 	let map, mapEvent;
 
@@ -38,7 +38,7 @@ export default function mapbox(userCoordinates) {
 		const coordinates = [longitude, latitude]
 
 		//Clear input fields
-		inputDistance = inputDuration = inputCadence = inputElevation = '';
+		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
 
 		//Create popup
 		const popup = new mapboxgl.Popup({closeOnClick: false})
