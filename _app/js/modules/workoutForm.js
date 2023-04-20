@@ -11,6 +11,10 @@ export default function workoutForm() {
 	inputType.addEventListener('change', handleInputTypeChange);
 
 	function handleInputTypeChange() {
+		toggleElevationField();
+	}
+
+	function toggleElevationField() {
 		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 	}

@@ -1,7 +1,7 @@
-import mapbox from "./modules/mapbox.js";
-import userLocation from "./modules/userLocation.js";
+import mapbox from "./modules/loadMap.js";
+import getUserPosition from "./modules/getUserPosition.js";
 import workoutForm from "./modules/workoutForm.js";
 
 // mapbox(); få denne til å kjøre herfra, ikke fra userlocation
-userLocation();
+getUserPosition();
 workoutForm();

@@ -1,4 +1,4 @@
-export default function mapbox(userCoordinates) {
+export default function loadMap(position) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
 	const inputType = document.querySelector('.workout-form__input--type');
@@ -6,6 +6,9 @@ export default function mapbox(userCoordinates) {
 	const inputDuration = document.querySelector('.workout-form__input--duration');
 	const inputCadence = document.querySelector('.workout-form__input--cadence');
 	const inputElevation = document.querySelector('.workout-form__input--elevation');
+
+	const {latitude, longitude} = position.coords;
+	const userCoordinates = [longitude, latitude];
 
 	let map, mapEvent;
 
@@ -23,17 +26,25 @@ export default function mapbox(userCoordinates) {
 
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
-	// inputType.addEventListener('change', handleInputTypeChange);
+
 
 	function handleMapClick(event) {
-		mapEvent = event;
-		form.classList.remove('hidden');
-		inputDistance.focus();
+		showWorkoutForm(event);
 	}
-
 
 	function handleFormSubmit(event) {
 		event.preventDefault();
+		newWorkout(event);
+	}
+
+	function showWorkoutForm(event) {
+		mapEvent = event;
+		form.classList.remove('hidden');
+		inputDistance.focus();
+
+	}
+
+	function newWorkout(event) {
 		const latitude = mapEvent.lngLat.lat;
 		const longitude = mapEvent.lngLat.lng;
 		const coordinates = [longitude, latitude]
@@ -53,11 +64,5 @@ export default function mapbox(userCoordinates) {
 		.setPopup(popup)
 		.addTo(map)
 	}
-
-	// function handleInputTypeChange() {
-	// 	inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
-	// 	inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
-	// }
-
 		
 }
