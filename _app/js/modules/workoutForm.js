@@ -8,6 +8,11 @@ export default function workoutForm() {
 	const inputCadence = document.querySelector('.workout-form__input--cadence');
 	const inputElevation = document.querySelector('.workout-form__input--elevation');
 
+	let type;
+	let coordinates; // [long, lat]
+	let distance; // in km
+	let duration; // in min
+
 	inputType.addEventListener('change', handleInputTypeChange);
 
 	function handleInputTypeChange() {
@@ -18,5 +23,7 @@ export default function workoutForm() {
 		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 	}
+
+
 
 }
