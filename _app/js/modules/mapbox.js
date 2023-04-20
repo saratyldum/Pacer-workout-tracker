@@ -9,4 +9,8 @@ export default function mapbox() {
 	center: [10.768063, 59.924545], // starting position [lng, lat]
 	zoom: 13, // starting zoom
 	});
+
+	const marker2 = new mapboxgl.Marker({ color: 'var(--primary-color)'})
+		.setLngLat([10.768063, 59.924545])
+		.addTo(map)
 }
