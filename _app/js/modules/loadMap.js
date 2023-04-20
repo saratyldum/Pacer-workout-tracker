@@ -73,9 +73,12 @@ export default function loadMap(position) {
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
 
 			const workout = runningWorkout(coordinates, distance, duration, cadence, date, id)
-			workouts.push(workout);
-			renderWorkoutMaker(coordinates, description);
-			renderWorkoutList(workout);
+			// workouts.push(workout);
+			renderHTML(workout)
+			// renderWorkoutMaker(coordinates, description);
+			// renderWorkoutList(workout);
+			// hideWorkoutForm();
+
 		}
 
 		//If activity is cycling, create cycling object
@@ -90,83 +93,80 @@ export default function loadMap(position) {
 			
 			const workout = cyclingWorkout(coordinates, distance, duration, elevation, date, id)
 			workouts.push(workout);
-			renderWorkoutMaker(coordinates, description)
-			renderWorkoutList(workout);
+			renderHTML(workout);
+			// renderWorkoutMaker(coordinates, description)
+			// renderWorkoutList(workout);
+			// hideWorkoutForm();
 		}
+	}
 
-		// Render workout on map as a marker
-		function renderWorkoutMaker(coordinates, description) {
-			//Create popup
-			const popup = new mapboxgl.Popup({closeOnClick: false})
-			.setText(description)
-			.setLngLat(coordinates)
-			.addClassName('running-popup');
-	
-			//Add marker
-			const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
-			.setLngLat(coordinates)
-			.setPopup(popup)
-			.addTo(map)
-		}
+	// Render workout on map as a marker
+	function renderWorkoutMaker(coordinates, description) {
+		//Create popup
+		const popup = new mapboxgl.Popup({closeOnClick: false})
+		.setText(description)
+		.setLngLat(coordinates)
+		.addClassName('running-popup');
 
-		//Render wokrout in list
-		function renderWorkoutList(workout) {
-			console.log(workout);
-			let html = `
-			<li class="workout workout--${workout.type}" data-id="${workout.id}">
-			  <h2 class="workout__title">${workout.description}</h2>
-			  <div class="workout__details">
-				 <span class="workout__icon">${
-					workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
-				 }</span>
-				 <span class="workout__value">${workout.distance}</span>
-				 <span class="workout__unit">km</span>
-			  </div>
-			  <div class="workout__details">
-				 <span class="workout__icon">⏱</span>
-				 <span class="workout__value">${workout.duration}</span>
-				 <span class="workout__unit">min</span>
-			  </div>
-		 `;
-	
-		 if (workout.type === 'running')
-			html += `
-			  <div class="workout__details">
-				 <span class="workout__icon">⚡️</span>
-				 <span class="workout__value">${workout.pace.toFixed(1)}</span>
-				 <span class="workout__unit">min/km</span>
-			  </div>
-			  <div class="workout__details">
-				 <span class="workout__icon">🦶🏼</span>
-				 <span class="workout__value">${workout.cadence}</span>
-				 <span class="workout__unit">spm</span>
-			  </div>
-			</li>
-			`;
-	
-		 if (workout.type === 'cycling')
-			html += `
-			  <div class="workout__details">
-				 <span class="workout__icon">⚡️</span>
-				 <span class="workout__value">${workout.speed.toFixed(1)}</span>
-				 <span class="workout__unit">km/h</span>
-			  </div>
-			  <div class="workout__details">
-				 <span class="workout__icon">⛰</span>
-				 <span class="workout__value">${workout.elevationGain}</span>
-				 <span class="workout__unit">m</span>
-			  </div>
-			</li>
-			`;
-	
-		 form.insertAdjacentHTML('afterend', html);
-		}
+		//Add marker
+		const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
+		.setLngLat(coordinates)
+		.setPopup(popup)
+		.addTo(map)
+	}
 
-		//Hide form + clear input fields
+	//Render wokrout in list
+	function renderWorkoutList(workout) {
+		//SKRIV OM!!!!
+		console.log(workout);
+		let html = `
+		<li class="workout workout--${workout.type}" data-id="${workout.id}">
+			<h2 class="workout__title">${workout.description}</h2>
+			<div class="workout__details">
+				<span class="workout__icon">${
+				workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+				}</span>
+				<span class="workout__value">${workout.distance}</span>
+				<span class="workout__unit">km</span>
+			</div>
+			<div class="workout__details">
+				<span class="workout__icon">⏱</span>
+				<span class="workout__value">${workout.duration}</span>
+				<span class="workout__unit">min</span>
+			</div>
+		`;
 
-		//Clear input fields
-		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+		if (workout.type === 'running')
+		html += `
+			<div class="workout__details">
+				<span class="workout__icon">⚡️</span>
+				<span class="workout__value">${workout.pace.toFixed(1)}</span>
+				<span class="workout__unit">min/km</span>
+			</div>
+			<div class="workout__details">
+				<span class="workout__icon">🦶🏼</span>
+				<span class="workout__value">${workout.cadence}</span>
+				<span class="workout__unit">spm</span>
+			</div>
+		</li>
+		`;
 
+		if (workout.type === 'cycling')
+		html += `
+			<div class="workout__details">
+				<span class="workout__icon">⚡️</span>
+				<span class="workout__value">${workout.speed.toFixed(1)}</span>
+				<span class="workout__unit">km/h</span>
+			</div>
+			<div class="workout__details">
+				<span class="workout__icon">⛰</span>
+				<span class="workout__value">${workout.elevationGain}</span>
+				<span class="workout__unit">m</span>
+			</div>
+		</li>
+		`;
+
+		form.insertAdjacentHTML('afterend', html);
 	}
 
 	function setDescription(type, date) {
@@ -206,5 +206,21 @@ export default function loadMap(position) {
 		// km/h
 		const speed = distance / (duration / 60);
 		return speed;
+	}
+
+	function hideWorkoutForm() {
+		//Clear input fields
+		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+		form.style.display = 'none';
+		form.classList.add('hidden');
+		setTimeout(() => (form.style.display = 'grid'), 1000);
+	}
+
+
+	function renderHTML(workout) {
+		renderWorkoutMaker(workout.coordinates, workout.description);
+		renderWorkoutList(workout);
+		hideWorkoutForm();
 	}
 }
