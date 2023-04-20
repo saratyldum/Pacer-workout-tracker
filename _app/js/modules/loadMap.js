@@ -11,7 +11,8 @@ export default function loadMap(position) {
 	const userCoordinates = [longitude, latitude];
 
 
-	let map, mapEvent;
+	let map, mapEvent, description;
+	let workouts = [];
 
 	/**
 	 * @TODO hide access token
@@ -55,7 +56,11 @@ export default function loadMap(position) {
 		const type = inputType.value;
 		const distance = +inputDistance.value; //+ converts String to Number
 		const duration = +inputDuration.value;
-
+		const latitude = mapEvent.lngLat.lat;
+		const longitude = mapEvent.lngLat.lng;
+		const coordinates = [longitude, latitude]
+		const date = new Date();
+		const id = (Date.now() + '').slice(-10);
 		
 		//If activity is running, create running object
 		if (type === 'running') {
@@ -66,6 +71,11 @@ export default function loadMap(position) {
 				!allPositive(distance, duration, cadence)
 			) 
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
+
+			const workout = runningWorkout(coordinates, distance, duration, cadence, date, id)
+			workouts.push(workout);
+			renderWorkoutMaker(coordinates, description)
+
 		}
 
 		//If activity is cycling, create cycling object
@@ -77,19 +87,17 @@ export default function loadMap(position) {
 				!allPositive(distance, duration)
 			) 
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
-
+			
+			const workout = cyclingWorkout(coordinates, distance, duration, elevation, date, id)
+			workouts.push(workout);
+			renderWorkoutMaker(coordinates, description)
 		}
 
-		//Add new object to workout array
-
 		// Render workout on map as a marker
-		const latitude = mapEvent.lngLat.lat;
-		const longitude = mapEvent.lngLat.lng;
-		const coordinates = [longitude, latitude]
-
+		function renderWorkoutMaker(coordinates, description) {
 			//Create popup
 			const popup = new mapboxgl.Popup({closeOnClick: false})
-			.setText('workout')
+			.setText(description)
 			.setLngLat(coordinates)
 			.addClassName('running-popup');
 	
@@ -98,6 +106,7 @@ export default function loadMap(position) {
 			.setLngLat(coordinates)
 			.setPopup(popup)
 			.addTo(map)
+		}
 
 		//Render wokrout in list
 
@@ -107,5 +116,43 @@ export default function loadMap(position) {
 		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
 
 	}
-		
+
+	function setDescription(type, date) {
+		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${
+			months[date.getMonth()]
+		 } ${date.getDate()}`;
+
+		 return description;
+	}
+
+	function runningWorkout(coordinates, distance, duration, cadence, date, id) {
+		const type = 'running';
+		const pace = calculatePace(duration, distance);
+		description = setDescription(type, date);
+		const running = {description, pace, coordinates, distance, duration, cadence, date, id};
+		return running;
+
+	}
+
+	function cyclingWorkout(coordinates, distance, duration, elevation, date, id) {
+		const type = 'cycling';
+		const speed = calculateSpeed(distance, duration);
+		description = setDescription(type, date);
+		const cycling = {description, speed, coordinates, distance, duration, elevation, date, id};
+		return cycling;
+	}
+
+	function calculatePace(duration, distance) {
+		// min/km
+		const pace = duration / distance;
+		return pace;
+	}
+
+	function calculateSpeed(distance, duration) {
+		// km/h
+		const speed = distance / (duration / 60);
+		return speed;
+	}
 }
