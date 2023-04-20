@@ -1,4 +1,4 @@
-export default function mapbox() {
+export default function mapbox(userCoordinates) {
 	/**
 	 * @TODO hide access token
 	 */
@@ -6,11 +6,11 @@ export default function mapbox() {
 	const map = new mapboxgl.Map({
 	container: 'map', // container ID
 	style: 'mapbox://styles/mapbox/streets-v12', // style URL
-	center: [10.768063, 59.924545], // starting position [lng, lat]
+	center: userCoordinates, // starting position [lng, lat]
 	zoom: 13, // starting zoom
 	});
 
 	const marker2 = new mapboxgl.Marker({ color: 'var(--primary-color)'})
-		.setLngLat([10.768063, 59.924545])
+		.setLngLat(userCoordinates)
 		.addTo(map)
 }
