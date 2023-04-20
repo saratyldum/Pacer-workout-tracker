@@ -47,17 +47,34 @@ export default function loadMap(position) {
 	function newWorkout(event) {
 		event.preventDefault();
 
+		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input))
+
 		const latitude = mapEvent.lngLat.lat;
 		const longitude = mapEvent.lngLat.lng;
 		const coordinates = [longitude, latitude]
 
 		//Get data from form 
+		const type = inputType.value;
+		const distance = +inputDistance.value; //+ converts String to Number
+		const duration = +inputDuration.value;
 
-		//Check if data is valid
-
+		
 		//If activity is running, create running object
+		if (type === 'running') {
+			const cadence = +inputCadence.value;
+			//Check if data is valid
+			if(!isValidInputs(distance, duration, cadence)) 
+				return alert('Input have to be positive number'); //les mer om isFinite
+		}
 
 		//If activity is cycling, create cycling object
+		if (type === 'cycling') {
+			const elevation = +inputElevation.value;
+			//Check if data is valid
+			if(!isValidInputs(distance, duration, elevation)) 
+			return alert('Input have to be positive number'); //les mer om isFinite
+
+		}
 
 		//Add new object to workout array
 
