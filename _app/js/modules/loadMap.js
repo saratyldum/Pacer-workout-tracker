@@ -10,6 +10,7 @@ export default function loadMap(position) {
 	const {latitude, longitude} = position.coords;
 	const userCoordinates = [longitude, latitude];
 
+
 	let map, mapEvent;
 
 	/**
@@ -33,7 +34,6 @@ export default function loadMap(position) {
 	}
 
 	function handleFormSubmit(event) {
-		event.preventDefault();
 		newWorkout(event);
 	}
 
@@ -45,24 +45,42 @@ export default function loadMap(position) {
 	}
 
 	function newWorkout(event) {
+		event.preventDefault();
+
 		const latitude = mapEvent.lngLat.lat;
 		const longitude = mapEvent.lngLat.lng;
 		const coordinates = [longitude, latitude]
 
+		//Get data from form 
+
+		//Check if data is valid
+
+		//If activity is running, create running object
+
+		//If activity is cycling, create cycling object
+
+		//Add new object to workout array
+
+		// Render workout on map as a marker
+			//Create popup
+			const popup = new mapboxgl.Popup({closeOnClick: false})
+			.setText('workout')
+			.setLngLat(coordinates)
+			.addClassName('running-popup');
+	
+			//Add marker
+			const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
+			.setLngLat(coordinates)
+			.setPopup(popup)
+			.addTo(map)
+
+		//Render wokrout in list
+
+		//Hide form + clear input fields
+
 		//Clear input fields
 		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
 
-		//Create popup
-		const popup = new mapboxgl.Popup({closeOnClick: false})
-		.setText('workout')
-		.setLngLat(coordinates)
-		.addClassName('running-popup');
-
-		//Add marker
-		const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
-		.setLngLat(coordinates)
-		.setPopup(popup)
-		.addTo(map)
 	}
 		
 }
