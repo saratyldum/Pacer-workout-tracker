@@ -23,7 +23,7 @@ export default function mapbox(userCoordinates) {
 
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
-	inputType.addEventListener('change', handleInputTypeChange);
+	// inputType.addEventListener('change', handleInputTypeChange);
 
 	function handleMapClick(event) {
 		mapEvent = event;
@@ -54,10 +54,10 @@ export default function mapbox(userCoordinates) {
 		.addTo(map)
 	}
 
-	function handleInputTypeChange() {
-		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
-		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
-	}
+	// function handleInputTypeChange() {
+	// 	inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+	// 	inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+	// }
 
 		
 }

@@ -8,4 +8,11 @@ export default function workoutForm() {
 	const inputCadence = document.querySelector('.workout-form__input--cadence');
 	const inputElevation = document.querySelector('.workout-form__input--elevation');
 
+	inputType.addEventListener('change', handleInputTypeChange);
+
+	function handleInputTypeChange() {
+		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+	}
+
 }
