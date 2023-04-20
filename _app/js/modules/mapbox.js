@@ -16,14 +16,20 @@ export default function mapbox(userCoordinates) {
 		function handleMapClick(event) {
 			const latitude = event.lngLat.lat;
 			const longitude = event.lngLat.lng;
-			const markerCoordinates = [longitude, latitude]
+			const coordinates = [longitude, latitude]
 
-			addMarker(markerCoordinates)
+			addFeatures(coordinates)
 		}
 
-		function addMarker(markerCoordinates) {
-			const marker2 = new mapboxgl.Marker({ color: 'var(--primary-color)'})
-			.setLngLat(markerCoordinates)
+		function addFeatures(coordinates) {
+			const popup = new mapboxgl.Popup({closeOnClick: false})
+			.setText('workout')
+			.setLngLat(coordinates)
+			.addClassName('running-popup');
+
+			const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
+			.setLngLat(coordinates)
+			.setPopup(popup)
 			.addTo(map)
 		}
 
