@@ -23,6 +23,7 @@ export default function mapbox(userCoordinates) {
 
 		function handleMapClick(event) {
 			form.classList.remove('hidden');
+			inputDistance.focus();
 			// const latitude = event.lngLat.lat;
 			// const longitude = event.lngLat.lng;
 			// const coordinates = [longitude, latitude]
