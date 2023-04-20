@@ -22,11 +22,12 @@ export default function mapbox(userCoordinates) {
 		map.on('click', handleMapClick);
 
 		function handleMapClick(event) {
-			const latitude = event.lngLat.lat;
-			const longitude = event.lngLat.lng;
-			const coordinates = [longitude, latitude]
+			form.classList.remove('hidden');
+			// const latitude = event.lngLat.lat;
+			// const longitude = event.lngLat.lng;
+			// const coordinates = [longitude, latitude]
 
-			addFeatures(coordinates)
+			// addFeatures(coordinates)
 		}
 
 		function addFeatures(coordinates) {
