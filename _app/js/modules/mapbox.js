@@ -23,6 +23,7 @@ export default function mapbox(userCoordinates) {
 
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
+	inputType.addEventListener('change', handleInputTypeChange);
 
 	function handleMapClick(event) {
 		mapEvent = event;
@@ -51,6 +52,11 @@ export default function mapbox(userCoordinates) {
 		.setLngLat(coordinates)
 		.setPopup(popup)
 		.addTo(map)
+	}
+
+	function handleInputTypeChange() {
+		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 	}
 
 		
