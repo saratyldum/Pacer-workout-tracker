@@ -26,6 +26,11 @@ export default function loadMap(position) {
 	zoom: 13, // starting zoom
 	});
 
+	/**
+	 * @TODO fetch workouts from sanity and place on map
+	 * @TODO move workoutForm functions to separate module and save workouts in sanity. From sanity they will be loaded here and displayed on map
+	 */
+
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
 	containerWorkouts.addEventListener('click', moveToPopup);
