@@ -4,4 +4,19 @@ export default function dailyProgress() {
 	 * @TODO reset every week
 	 * @TODO fetch info from sanity
 	 */
+	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
+	const tabContents = document.querySelectorAll('.daily-activities__tab-content');
+
+	tabButtons.forEach(tabButton => {
+		tabButton.addEventListener('click', handleTabButtonClick)
+	})
+
+	function handleTabButtonClick(tabButton) {
+		tabButtons.forEach(tabButton => {
+			tabButton.style.backgroundColor = 'var(--secondary-color-light)';
+		})
+		
+		tabButton.currentTarget.style.backgroundColor = 'inherit';
+	}
+
 }
