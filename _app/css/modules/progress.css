@@ -41,9 +41,23 @@
 	font-size: 1rem;
 }
 
-.weekly-goal__progress {
+.weekly-goal__progress-info {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.75rem;
 	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.weekly-goal__progress-bar {
 	height: 8px;
+	border-radius: 5px;
+	width: 100%;
+	background-color: var(--secondary-color-light);
+}
+
+.weekly-goal__progress-bar--bar {
+	height: 100%;
 	border-radius: 5px;
 	background-color: var(--primary-color);
 	width: 0;

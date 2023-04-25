@@ -1,5 +1,5 @@
 export default function weeklyProgress() {
-	const progressBar = document.querySelector('.weekly-goal__progress');
+	const progressBar = document.querySelector('.weekly-goal__progress-bar--bar');
 	const goalInput = document.querySelector('.weekly-goal__input');
 	let progress = 0;
 	let finalValue = 10; //dette tallet må oppdateres når treninger addes
@@ -21,6 +21,5 @@ export default function weeklyProgress() {
 	function changeProgressBarWidth() {
 		const progressBarWidth = calculateProgressPercentage()
 		progressBar.style.width = `${progressBarWidth}%`;
-		console.log(progressBar);
 	}
 }
