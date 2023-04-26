@@ -2,8 +2,8 @@ import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
 
 import schemas from './schemas/schemas.js';
+import workouts from './structure/workouts.js';
 import settings from './structure/settings.js';
-import blog from './structure/blog.js';
 
 export default {
 	title: 'Pacer',
@@ -11,11 +11,12 @@ export default {
 	projectId: 'qtf22vsb',
 	dataset: 'production',
 
-	plugins: [
+	plugins: [ 
 		deskTool({
-			title: '',
-			name: ''
-		}), 
+			title: 'Workouts',
+			name: 'workouts',
+			structure: workouts
+		}),
 		deskTool({
 			title: 'Settings',
 			name: 'settings',
