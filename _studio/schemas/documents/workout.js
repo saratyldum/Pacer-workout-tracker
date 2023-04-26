@@ -11,6 +11,7 @@ export default {
 		{
 			title: 'Coordinates',
 			name: 'coordinates',
+			description: 'long and long',
 			type: 'array',
 			of: [{ type : 'number' }]
 		},
@@ -27,11 +28,13 @@ export default {
 		{
 			title: 'Distance',
 			name: 'distance',
+			description: 'In km',
 			type: 'string',
 		},
 		{
 			title: 'Duration',
 			name: 'duration',
+			description: 'In minutes',
 			type: 'string',
 		},
 		{
@@ -48,6 +51,7 @@ export default {
 		{
 			title: 'Cadence',
 			name: 'cadence',
+			description: 'step/min',
 			type: 'string',
 		}
 
