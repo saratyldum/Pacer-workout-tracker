@@ -5,21 +5,19 @@ export default {
 	type: 'Document',
 	fields: [
 		{
-			title: 'Announcement',
-			name: 'announcement',
-			type: 'object',
-			fields: [
-				{
-					title: 'Text',
-					name: 'text',
-					type: 'string',
-				},
-				{
-					title: 'Visible',
-					name: 'visible',
-					type: 'boolean',
-				}
-			]
+			title: 'User Name',
+			name: 'userName',
+			type: 'string',
+		},
+		{
+			title: 'User Image',
+			name: 'userImage',
+			type: 'image',
+		},
+		{
+			title: 'Weekly goal',
+			name: 'weeklyGoal',
+			type: 'string',
 		}
 	],
 
