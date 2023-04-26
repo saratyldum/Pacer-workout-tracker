@@ -53,6 +53,16 @@ export default {
 			name: 'cadence',
 			description: 'step/min',
 			type: 'string',
+		},
+		{
+			title: 'Pace',
+			name: 'pace',
+			type: 'number',
+		},
+		{
+			title: 'Speed',
+			name: 'speed',
+			type: 'number',
 		}
 
 	]
