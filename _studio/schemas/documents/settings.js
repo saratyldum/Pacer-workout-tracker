@@ -2,7 +2,7 @@
 export default {
 	title: 'Settings',
 	name: 'settings',
-	type: 'Document',
+	type: 'document',
 	fields: [
 		{
 			title: 'User Name',

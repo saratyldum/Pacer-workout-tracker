@@ -17,7 +17,7 @@ export default {
 		{
 			title: 'Date',
 			name: 'date',
-			type: 'dateTime',
+			type: 'datetime',
 		},
 		{
 			title: 'Description',
