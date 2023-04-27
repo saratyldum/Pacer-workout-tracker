@@ -17,6 +17,7 @@ navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
 function handleGeolocationSucess(position) {
 const map = loadMap(position)
 renderWorkouts(map, workouts);
+workoutForm(map)
 
 }
 
@@ -27,6 +28,6 @@ alert('Could not get your position')
 
 
 // getUserPosition();
-workoutForm(); //return distance whenever a new workout is added
-weeklyProgress(); //use distance to add onto progress bar
-dailyProgress();
+// workoutForm(); //return distance whenever a new workout is added
+// weeklyProgress(); //use distance to add onto progress bar
+// dailyProgress();

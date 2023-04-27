@@ -1,13 +1,35 @@
 export default function renderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
+	const containerWorkouts = document.querySelector('.workouts');
+
 
 	map = map;
 	workouts = workouts;
-	/**
-	 * @TODO fetch workouts from sanity and place on map
-	 * @TODO move workoutForm functions to separate module and save workouts in sanity. From sanity they will be loaded here and displayed on map
-	 */ 
- 
+
+	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
+
+	function handleContainerWorkoutsClick(event) {
+		moveToPopup(event);
+	}
+
+	function moveToPopup(event) {
+		if (!map) return;
+
+		const workoutElement = event.target.closest('.workout');
+
+		if (!workoutElement) return;
+
+		const workout = workouts.find(
+		work => work._id === workoutElement.dataset.id
+		);
+
+		console.log(workoutElement);
+
+		map.flyTo({
+			center: workout.coordinates
+		});
+	}
+
 	 // Render workout on map as a marker
 	 function renderWorkoutMaker(coordinates, description) {
 		 //Create popup
@@ -27,7 +49,7 @@ export default function renderWorkouts(map, workouts) {
 	 function renderWorkoutList(workout) {
 		 //SKRIV OM!!!!
 		 let html = `
-		 <li class="workout workout--${workout.type}" data-id="${workout.id}">
+		 <li class="workout workout--${workout.type}" data-id="${workout._id}">
 			 <h2 class="workout__title">${workout.description}</h2>
 			 <div class="workout__details">
 				 <span class="workout__icon">${

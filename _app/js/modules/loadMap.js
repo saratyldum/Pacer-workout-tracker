@@ -10,9 +10,7 @@ export default function loadMap(position) {
 	const {latitude, longitude} = position.coords;
 	const userCoordinates = [longitude, latitude];
 
-
-	let map, mapEvent, description;
-	let workouts = [];
+	let map;
 
 	/**
 	 * @TODO hide access token
