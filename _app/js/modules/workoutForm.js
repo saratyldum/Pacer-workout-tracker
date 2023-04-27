@@ -34,7 +34,7 @@ export default async function workoutForm(map) {
 				sendWorkoutToSanity(workout);
 	}
 
-	function handleContainerWorkoutsClick() {
+	function handleContainerWorkoutsClick(event) {
 		moveToPopup(event);
 	}
 
