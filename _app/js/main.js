@@ -16,7 +16,7 @@ navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
 
 function handleGeolocationSucess(position) {
 const map = loadMap(position)
-// renderWorkouts(map, workouts);
+renderWorkouts(map, workouts);
 workoutForm(map)
 
 }
