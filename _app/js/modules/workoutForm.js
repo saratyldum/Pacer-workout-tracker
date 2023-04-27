@@ -1,5 +1,6 @@
 import { sanityMutate  } from "../sanity.js";
 import renderWorkouts from "./renderWorkouts.js";
+import weeklyProgress from "./weeklyProgress.js";
 export default async function workoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
@@ -31,6 +32,7 @@ export default async function workoutForm(map) {
 		const workout = newWorkout(event);
 				sendWorkoutToSanity(workout);
 				renderWorkouts(map, [workout]);
+				weeklyProgress();
 				hideWorkoutForm();
 	}
 
