@@ -28,12 +28,12 @@ export default async function workoutForm(map) {
 		showWorkoutForm(event);
 	}
 
-	function handleFormSubmit(event) {
+	async function handleFormSubmit(event) {
 		const workout = newWorkout(event);
-				sendWorkoutToSanity(workout);
-				renderWorkouts(map, [workout]);
-				weeklyProgress();
-				hideWorkoutForm();
+		sendWorkoutToSanity(workout);
+		renderWorkouts(map, [workout]);
+		await weeklyProgress();
+		hideWorkoutForm();
 	}
 
 
