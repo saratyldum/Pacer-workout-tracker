@@ -10,7 +10,9 @@ export default async function fetchWorkouts() {
 		duration,
 		elevGain,
 		cadence,
-		'type': type -> type
+		pace,
+		speed,
+		type,
 	 }`
 
 	const workouts = await sanity.fetch(query);
