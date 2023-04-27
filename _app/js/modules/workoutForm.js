@@ -3,7 +3,6 @@ import renderWorkouts from "./renderWorkouts.js";
 export default async function workoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
-	const containerWorkouts = document.querySelector('.workouts');
 	const inputType = document.querySelector('.workout-form__input--type');
 	const inputDistance = document.querySelector('.workout-form__input--distance');
 	const inputDuration = document.querySelector('.workout-form__input--duration');
@@ -19,7 +18,6 @@ export default async function workoutForm(map) {
 	inputType.addEventListener('change', handleInputTypeChange);
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
-	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
 
 	function handleInputTypeChange() {
 		toggleElevationField();
@@ -33,11 +31,10 @@ export default async function workoutForm(map) {
 		const workout = newWorkout(event);
 				sendWorkoutToSanity(workout);
 				renderWorkouts(map, [workout]);
+				hideWorkoutForm();
 	}
 
-	function handleContainerWorkoutsClick(event) {
-		moveToPopup(event);
-	}
+
 
 	function toggleElevationField() {
 		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
@@ -85,15 +82,15 @@ export default async function workoutForm(map) {
 
 		//If activity is cycling, create cycling object
 		if (type === 'cycling') {
-			const elevation = +inputElevation.value;
+			const elevGain = +inputElevation.value;
 			//Check if data is valid
 			if (
-				!isValidInputs(distance, duration, elevation) ||
+				!isValidInputs(distance, duration, elevGain) ||
 				!allPositive(distance, duration)
 			) 
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
 			
-			const workout = cyclingWorkout(coordinates, distance, duration, elevation, date, id);
+			const workout = cyclingWorkout(coordinates, distance, duration, elevGain, date, id);
 			return workout;
 		}
 	}
@@ -185,11 +182,11 @@ export default async function workoutForm(map) {
 
 	}
 
-	function cyclingWorkout(coordinates, distance, duration, elevation, date, id) {
+	function cyclingWorkout(coordinates, distance, duration, elevGain, date, id) {
 		const type = 'cycling';
 		const speed = calculateSpeed(distance, duration);
 		description = setDescription(type, date);
-		const cycling = {description, speed, coordinates, distance, duration, elevation, date, id, type};
+		const cycling = {description, speed, coordinates, distance, duration, elevGain, date, id, type};
 		return cycling;
 	}
 
@@ -214,21 +211,7 @@ export default async function workoutForm(map) {
 		setTimeout(() => (form.style.display = 'grid'), 1000);
 	}
 
-	function moveToPopup(event) {
-		if (!map) return;
 
-		const workoutElement = event.target.closest('.workout');
-
-		if (!workoutElement) return;
-
-		const workout = workouts.find(
-		work => work.id === workoutElement.dataset.id
-		);
-
-		map.flyTo({
-			center: workout.coordinates
-		});
-	}
 
 	async function sendWorkoutToSanity(workout) {
 
@@ -244,7 +227,7 @@ export default async function workoutForm(map) {
 						distance: workout.distance,
 						duration: workout.duration,
 						type: workout.type,
-						elevGain: workout.elevation,
+						elevGain: workout.elevGain,
 						cadence: workout.cadence,
 						pace: workout.pace,
 						speed: workout.speed
