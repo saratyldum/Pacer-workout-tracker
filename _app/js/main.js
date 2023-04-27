@@ -29,5 +29,5 @@ alert('Could not get your position')
 
 // getUserPosition();
 // workoutForm(); //return distance whenever a new workout is added
-// weeklyProgress(); //use distance to add onto progress bar
+weeklyProgress(); //use distance to add onto progress bar
 // dailyProgress();
