@@ -4,11 +4,6 @@ export default {
 	type: 'document',
 	fields: [
 		{
-			title: 'id',
-			name: 'id',
-			type: 'number',
-		},
-		{
 			title: 'Coordinates',
 			name: 'coordinates',
 			description: 'long and long',
@@ -29,30 +24,29 @@ export default {
 			title: 'Distance',
 			name: 'distance',
 			description: 'In km',
-			type: 'string',
+			type: 'number',
 		},
 		{
 			title: 'Duration',
 			name: 'duration',
 			description: 'In minutes',
-			type: 'string',
+			type: 'number',
 		},
 		{
 			title: 'Type',
 			name: 'type',
-			type: 'reference',
-			to: [{ type: 'activity' }]
+			type: 'string',
 		},
 		{
 			title: 'Elevation gain',
 			name: 'elevGain',
-			type: 'string',
+			type: 'number',
 		},
 		{
 			title: 'Cadence',
 			name: 'cadence',
 			description: 'step/min',
-			type: 'string',
+			type: 'number',
 		},
 		{
 			title: 'Pace',
