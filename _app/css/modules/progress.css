@@ -116,10 +116,18 @@
 
 .daily-activities__bar-container {
 	width: 0.6rem;
-	height: 100px;
+	height: 120px;
+	position: relative;
+}
+
+.daily-activities__bar {
 	background-color: var(--primary-color);
 	border-radius: 5px 5px 0 0;
-	position: relative;
+	height: 1%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	transition: 1s ease 0.3s;
 }
 
 .daily-activities__bar--day {

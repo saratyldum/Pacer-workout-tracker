@@ -12,7 +12,7 @@ export default async function updateUI(map) {
 		renderWorkouts(map, workouts);
 		await weeklyProgress();
 		await totalProgress();
-		dailyProgress();
+		await dailyProgress();
 
 	}
 }
