@@ -8,7 +8,6 @@ export default function renderWorkouts(map, workouts) {
 
 	renderHTML(workouts);
 
-
 	function handleContainerWorkoutsClick(event) {
 		moveToPopup(event);
 	}
@@ -28,6 +27,13 @@ export default function renderWorkouts(map, workouts) {
 			center: workout.coordinates
 		});
 	}
+
+	function renderHTML(workouts) {
+		for (let index = 0; index < workouts.length; index++) {
+			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
+			renderWorkoutList(workouts[index]);
+		}
+	 }
 
 	 // Render workout on map as a marker
 	 function renderWorkoutMaker(coordinates, description) {
@@ -97,12 +103,4 @@ export default function renderWorkouts(map, workouts) {
  
 		 form.insertAdjacentHTML('afterend', html);
 	 }
-
-	 function renderHTML(workouts) {
-		for (let index = 0; index < workouts.length; index++) {
-			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
-			renderWorkoutList(workouts[index]);
-		}
-	 }
- 
 }
