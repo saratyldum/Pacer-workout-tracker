@@ -24,7 +24,15 @@ export default async function dailyProgress() {
 		calculateBarHeight(index);
 	}
 
-	function calculateBarHeight(index) {
+	function toggleTabColor(tabButton) {
+		tabButtons.forEach(tabButton => {
+			tabButton.style.backgroundColor = 'var(--secondary-color-light)';
+		});
+
+		tabButton.style.backgroundColor = 'inherit';
+	}
+
+	function calculateBarHeight(workouts, index) {
 		const initialValue = 0;
 		const sameDay = allDays.filter(day => day.day === index);
 
