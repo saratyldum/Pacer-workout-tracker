@@ -7,12 +7,12 @@ export default  async function weeklyProgress() {
 	const weeklyDistanceRemaining = document.querySelector('.weekly-goal__progress-info--remaining');
 
 	let goalInput = document.querySelector('.weekly-goal__input');
-	let finalValue;
+	let totalDistance;
 	let weeklyValue = 0;
 	let progressPerecentage;
 
-	const weeklyGoal = await setWeeklyGoal();
-	const workouts = await fetchDistance();
+	const weeklyGoal = await setWeeklyGoalUIValue();
+	const workouts = await fetchWorkouts();
 
 	goalInput.addEventListener('keyup', handleGoalInputKeyup);
 
@@ -23,7 +23,7 @@ export default  async function weeklyProgress() {
 			weeklyValue = parseInt(goalInput.value, 10);
 
 			await sendWeeklyGoalToSanity(weeklyValue);
-			const weeklyGoal = await setWeeklyGoal();
+			const weeklyGoal = await setWeeklyGoalUIValue();
 			renderHTML(weeklyGoal, workouts)
 		} else {
 			return
@@ -31,11 +31,11 @@ export default  async function weeklyProgress() {
 	}
 
 	function renderHTML(weeklyGoal, workouts) {
-		calculateDistance(weeklyGoal, workouts); 
+		calculateDistances(weeklyGoal, workouts); 
 		changeProgressBarWidth(weeklyGoal);
 	}
 
-	async function setWeeklyGoal() {
+	async function setWeeklyGoalUIValue() {
 		const weeklyGoal = await fetchWeeklyGoal();
 		goalInput.value = '';
 		goalInput.value = weeklyGoal;
@@ -48,7 +48,7 @@ export default  async function weeklyProgress() {
 		return goal.weeklyGoal;
 	}
 
-	async function fetchDistance() {
+	async function fetchWorkouts() {
 		const query = `*[_type == 'workout']{
 			distance
 		}`;
@@ -57,26 +57,24 @@ export default  async function weeklyProgress() {
 		return workouts;
 	}
 
-	function calculateDistance(weeklyGoal, workouts) {
+	function calculateDistances(weeklyGoal, workouts) {
+		const initialValue = 0;
 		let distance = [];
+
 		for (const workout of workouts) {
 			distance.push(workout.distance)
 		}
 
-		const initialValue = 0;
-		const reducedDistance = distance.reduce(
-			(accumulator, currentValue) => accumulator + currentValue, initialValue
-		);
-
+		const reducedDistance = distance.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
 		const distanceRemaining = parseInt((weeklyGoal - reducedDistance));
 
-		finalValue = reducedDistance;
+		totalDistance = reducedDistance;
 		weeklyDistanceDone.textContent = reducedDistance;
 		weeklyDistanceRemaining.textContent = distanceRemaining >= 0 ? distanceRemaining : 0;
 	}
 
 	function calculateProgressPercentage(weeklyGoal) {
-		progressPerecentage = (finalValue / weeklyGoal) * 100;
+		progressPerecentage = (totalDistance / weeklyGoal) * 100;
 		return progressPerecentage;
 	}
 
