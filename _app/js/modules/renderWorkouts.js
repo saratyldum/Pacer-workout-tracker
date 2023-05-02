@@ -1,8 +1,6 @@
 export default function renderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
-
-
 	map = map;
 	workouts = workouts;
 

@@ -14,8 +14,6 @@ export default async function totalProgress() {
 		}`;
 
 		const workouts = await sanity.fetch(query);
-		console.log(workouts);
-
 		return workouts;
 	}
 
@@ -42,8 +40,4 @@ export default async function totalProgress() {
 
 	}
 
-	/**
-	 * @TODO add together all distance and all time from workouts in sanity and display total numbers is UI.
-	 * Fetch from sanity
-	 */
 }
