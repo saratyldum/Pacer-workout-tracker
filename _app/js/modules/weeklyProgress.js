@@ -12,7 +12,7 @@ export default  async function weeklyProgress() {
 	let weeklyValue = 0;
 	let progressPerecentage;
 
-	// goalInput.addEventListener('keyup', handleGoalInputKeyup);
+	goalInput.addEventListener('keyup', handleGoalInputKeyup);
 
 	const weeklyGoal = await setWeeklyGoal();
 	const workouts = await fetchDistance();
@@ -58,19 +58,17 @@ export default  async function weeklyProgress() {
 
 		finalValue = reducedDistance;
 		weeklyDistanceDone.textContent = reducedDistance;
-		console.log(weeklyGoal);
 		weeklyDistanceRemaining.textContent = parseInt((weeklyGoal - reducedDistance));
 	}
 
 
-	function handleGoalInputKeyup(event) {
-		console.log(event.key);
+	async function handleGoalInputKeyup(event) {
 		if(event.key == 'Enter') {
 			weeklyValue = parseInt(goalInput.value, 10);
-			console.log(weeklyValue);
-			changeProgressBarWidth();
-			sendWeeklyGoalToSanity(weeklyValue);
-			setWeeklyGoal();
+			await sendWeeklyGoalToSanity(weeklyValue);
+			const weeklyGoal = await setWeeklyGoal();
+			changeProgressBarWidth(weeklyGoal);
+			calculateDistance(workouts); //FÅ TIL Å FUNKE
 		} else {
 			return
 		}
@@ -83,7 +81,6 @@ export default  async function weeklyProgress() {
 
 	function changeProgressBarWidth(weeklyGoal) {
 		const progressBarWidth = calculateProgressPercentage(weeklyGoal);
-		console.log(weeklyGoal);
 		progressBar.style.width = `${progressBarWidth}%`;
 	}
 
