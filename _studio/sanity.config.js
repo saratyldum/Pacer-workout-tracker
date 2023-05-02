@@ -3,7 +3,6 @@ import { visionTool } from '@sanity/vision';
 
 import schemas from './schemas/schemas.js';
 import workouts from './structure/workouts.js';
-import settings from './structure/settings.js';
 
 export default {
 	title: 'Pacer',
@@ -17,11 +16,6 @@ export default {
 			name: 'workouts',
 			structure: workouts
 		}),
-		deskTool({
-			title: 'Settings',
-			name: 'settings',
-			structure: settings
-		}), 
 		visionTool()
 	],
 
