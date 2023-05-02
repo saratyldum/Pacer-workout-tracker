@@ -1,7 +1,5 @@
 import { sanityMutate  } from "../sanity.js";
-import renderWorkouts from "./renderWorkouts.js";
-import weeklyProgress from "./weeklyProgress.js";
-import totalProgress from "./totalProgress.js";
+import updateUI from "./updateUI.js";
 export default async function workoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
@@ -11,11 +9,7 @@ export default async function workoutForm(map) {
 	const inputCadence = document.querySelector('.workout-form__input--cadence');
 	const inputElevation = document.querySelector('.workout-form__input--elevation');
 
-	let type;
-	let coordinates; // [long, lat]
-	let distance; // in km
-	let duration; // in min
-	let mapEvent, description;
+	let mapEvent;
 
 	inputType.addEventListener('change', handleInputTypeChange);
 	map.on('click', handleMapClick);
@@ -30,30 +24,25 @@ export default async function workoutForm(map) {
 	}
 
 	async function handleFormSubmit(event) {
-		const workout = newWorkout(event);
-		sendWorkoutToSanity(workout);
-		renderWorkouts(map, [workout]);
-		await weeklyProgress();
-		await totalProgress();
+		const workout = createNewWorkoutObject(event);
+		await sendWorkoutToSanity(workout);
+
 		hideWorkoutForm();
+		await updateUI(map);
 	}
-
-
 
 	function toggleElevationField() {
 		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 	}
 
-
 	function showWorkoutForm(event) {
 		mapEvent = event;
 		form.classList.remove('hidden');
 		inputDistance.focus();
-
 	}
 
-	function newWorkout(event) {
+	function createNewWorkoutObject(event) {
 		event.preventDefault();
 
 		//helping functions
@@ -73,6 +62,7 @@ export default async function workoutForm(map) {
 		//If activity is running, create running object
 		if (type === 'running') {
 			const cadence = +inputCadence.value;
+
 			//Check if data is valid
 			if (
 				!isValidInputs(distance, duration, cadence) || 
@@ -80,7 +70,7 @@ export default async function workoutForm(map) {
 			) 
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
 
-			const workout = runningWorkout(coordinates, distance, duration, cadence, date, id);
+			const workout = createRunningWorkoutObject(coordinates, distance, duration, cadence, date, id);
 			return workout;
 		}
 
@@ -94,80 +84,12 @@ export default async function workoutForm(map) {
 			) 
 				return alert('Input have to be positive number'); //fiks bedre error meldinger
 			
-			const workout = cyclingWorkout(coordinates, distance, duration, elevGain, date, id);
+			const workout = createCyclingWorkoutObject(coordinates, distance, duration, elevGain, date, id);
 			return workout;
 		}
 	}
 
-	// Render workout on map as a marker
-	function renderWorkoutMaker(coordinates, description) {
-		//Create popup
-		const popup = new mapboxgl.Popup({closeOnClick: false})
-		.setText(description)
-		.setLngLat(coordinates)
-		.addClassName('running-popup');
-
-		//Add marker
-		const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
-		.setLngLat(coordinates)
-		.setPopup(popup)
-		.addTo(map)
-	}
-
-	//Render wokrout in list
-	function renderWorkoutList(workout) {
-		//SKRIV OM!!!!
-		let html = `
-		<li class="workout workout--${workout.type}" data-id="${workout.id}">
-			<h2 class="workout__title">${workout.description}</h2>
-			<div class="workout__details">
-				<span class="workout__icon">${
-				workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
-				}</span>
-				<span class="workout__value">${workout.distance}</span>
-				<span class="workout__unit">km</span>
-			</div>
-			<div class="workout__details">
-				<span class="workout__icon">⏱</span>
-				<span class="workout__value">${workout.duration}</span>
-				<span class="workout__unit">min</span>
-			</div>
-		`;
-
-		if (workout.type === 'running')
-		html += `
-			<div class="workout__details">
-				<span class="workout__icon">⚡️</span>
-				<span class="workout__value">${workout.pace.toFixed(1)}</span>
-				<span class="workout__unit">min/km</span>
-			</div>
-			<div class="workout__details">
-				<span class="workout__icon">🦶🏼</span>
-				<span class="workout__value">${workout.cadence}</span>
-				<span class="workout__unit">spm</span>
-			</div>
-		</li>
-		`;
-
-		if (workout.type === 'cycling')
-		html += `
-			<div class="workout__details">
-				<span class="workout__icon">⚡️</span>
-				<span class="workout__value">${workout.speed}</span>
-				<span class="workout__unit">km/h</span>
-			</div>
-			<div class="workout__details">
-				<span class="workout__icon">⛰</span>
-				<span class="workout__value">${workout.elevGain}</span>
-				<span class="workout__unit">m</span>
-			</div>
-		</li>
-		`;
-
-		form.insertAdjacentHTML('afterend', html);
-	}
-
-	function setDescription(type, date) {
+	function setWorkoutDescription(type, date) {
 		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${
@@ -177,19 +99,18 @@ export default async function workoutForm(map) {
 		 return description;
 	}
 
-	function runningWorkout(coordinates, distance, duration, cadence, date, id) {
+	function createRunningWorkoutObject(coordinates, distance, duration, cadence, date, id) {
 		const type = 'running';
 		const pace = calculatePace(duration, distance);
-		description = setDescription(type, date);
+		const description = setWorkoutDescription(type, date);
 		const running = {description, pace, coordinates, distance, duration, cadence, date, id, type};
 		return running;
-
 	}
 
-	function cyclingWorkout(coordinates, distance, duration, elevGain, date, id) {
+	function createCyclingWorkoutObject(coordinates, distance, duration, elevGain, date, id) {
 		const type = 'cycling';
 		const speed = calculateSpeed(distance, duration);
-		description = setDescription(type, date);
+		const description = setWorkoutDescription(type, date);
 		const cycling = {description, speed, coordinates, distance, duration, elevGain, date, id, type};
 		return cycling;
 	}
@@ -215,10 +136,7 @@ export default async function workoutForm(map) {
 		setTimeout(() => (form.style.display = 'grid'), 1000);
 	}
 
-
-
 	async function sendWorkoutToSanity(workout) {
-
 		try {
 			const mutations = [
 				{

@@ -6,6 +6,8 @@ export default function renderWorkouts(map, workouts) {
 
 	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
 
+	renderHTML(workouts);
+
 	function handleContainerWorkoutsClick(event) {
 		moveToPopup(event);
 	}
@@ -21,12 +23,17 @@ export default function renderWorkouts(map, workouts) {
 		work => work._id === workoutElement.dataset.id
 		);
 
-		console.log(workoutElement);
-
 		map.flyTo({
 			center: workout.coordinates
 		});
 	}
+
+	function renderHTML(workouts) {
+		for (let index = 0; index < workouts.length; index++) {
+			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
+			renderWorkoutList(workouts[index]);
+		}
+	 }
 
 	 // Render workout on map as a marker
 	 function renderWorkoutMaker(coordinates, description) {
@@ -45,7 +52,7 @@ export default function renderWorkouts(map, workouts) {
  
 	 //Render wokrout in list
 	 function renderWorkoutList(workout) {
-		 //SKRIV OM!!!!
+		 //SKRIV	i OM!!!!
 		 let html = `
 		 <li class="workout workout--${workout.type}" data-id="${workout._id}">
 			 <h2 class="workout__title">${workout.description}</h2>
@@ -96,14 +103,4 @@ export default function renderWorkouts(map, workouts) {
  
 		 form.insertAdjacentHTML('afterend', html);
 	 }
-
-	 renderHTML(workouts)
-
-	 function renderHTML(workouts) {
-		for (let index = 0; index < workouts.length; index++) {
-			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
-			renderWorkoutList(workouts[index]);
-		}
-	 }
- 
 }

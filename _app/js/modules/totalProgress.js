@@ -1,11 +1,11 @@
 import { sanity } from "../sanity.js";
+
 export default async function totalProgress() {
 	const totalProgress = document.querySelector('.total-progress__stats--distance-value');
 	const totalTime = document.querySelector('.total-progress__stats--time-value');
 
 	const workouts = await fetchTotalProgress();
 	calculateTotalProgress(workouts);
-
 
 	async function fetchTotalProgress() {
 		const query = `*[_type == 'workout']{
@@ -20,13 +20,13 @@ export default async function totalProgress() {
 	function calculateTotalProgress(workouts) {
 		let distance = [];
 		let time = [];
+		const initialValue = 0;
+
 		for (const workout of workouts) {
 			distance.push(workout.distance);
 			time.push(workout.duration);
 		}
 
-		const initialValue = 0;
-		
 		const reducedDistance = distance.reduce(
 			(accumulator, currentValue) => accumulator + currentValue, initialValue
 		);

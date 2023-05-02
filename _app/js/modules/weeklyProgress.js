@@ -7,26 +7,40 @@ export default  async function weeklyProgress() {
 	const weeklyDistanceRemaining = document.querySelector('.weekly-goal__progress-info--remaining');
 
 	let goalInput = document.querySelector('.weekly-goal__input');
-	let progress = 0;
-	let finalValue;
+	let totalDistance;
 	let weeklyValue = 0;
 	let progressPerecentage;
 
+	const weeklyGoal = await setWeeklyGoalUIValue();
+	const workouts = await fetchWorkouts();
+
 	goalInput.addEventListener('keyup', handleGoalInputKeyup);
 
-	const weeklyGoal = await setWeeklyGoal();
-	const workouts = await fetchDistance();
-	calculateDistance(workouts)
-	changeProgressBarWidth(weeklyGoal);
+	renderHTML(weeklyGoal, workouts);
 
+	async function handleGoalInputKeyup(event) {
+		if(event.key == 'Enter') {
+			weeklyValue = parseInt(goalInput.value, 10);
 
-	async function setWeeklyGoal() {
+			await sendWeeklyGoalToSanity(weeklyValue);
+			const weeklyGoal = await setWeeklyGoalUIValue();
+			renderHTML(weeklyGoal, workouts)
+		} else {
+			return
+		}
+	}
+
+	function renderHTML(weeklyGoal, workouts) {
+		calculateDistances(weeklyGoal, workouts); 
+		changeProgressBarWidth(weeklyGoal);
+	}
+
+	async function setWeeklyGoalUIValue() {
 		const weeklyGoal = await fetchWeeklyGoal();
 		goalInput.value = '';
 		goalInput.value = weeklyGoal;
 		return weeklyGoal;
 	}
-
 
 	async function fetchWeeklyGoal() {
 		const query = `*[_id == 'settings'][0]`
@@ -34,48 +48,33 @@ export default  async function weeklyProgress() {
 		return goal.weeklyGoal;
 	}
 
-	async function fetchDistance() {
+	async function fetchWorkouts() {
 		const query = `*[_type == 'workout']{
 			distance
 		}`;
 
 		const workouts = await sanity.fetch(query);
-
 		return workouts;
 	}
 
-	function calculateDistance(workouts) {
+	function calculateDistances(weeklyGoal, workouts) {
+		const initialValue = 0;
 		let distance = [];
+
 		for (const workout of workouts) {
 			distance.push(workout.distance)
 		}
 
-		const initialValue = 0;
-		
-		const reducedDistance = distance.reduce(
-			(accumulator, currentValue) => accumulator + currentValue, initialValue
-		);
+		const reducedDistance = distance.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		const distanceRemaining = parseInt((weeklyGoal - reducedDistance));
 
-		finalValue = reducedDistance;
+		totalDistance = reducedDistance;
 		weeklyDistanceDone.textContent = reducedDistance;
-		weeklyDistanceRemaining.textContent = parseInt((weeklyGoal - reducedDistance));
-	}
-
-
-	async function handleGoalInputKeyup(event) {
-		if(event.key == 'Enter') {
-			weeklyValue = parseInt(goalInput.value, 10);
-			await sendWeeklyGoalToSanity(weeklyValue);
-			const weeklyGoal = await setWeeklyGoal();
-			changeProgressBarWidth(weeklyGoal);
-			calculateDistance(workouts); //FÅ TIL Å FUNKE
-		} else {
-			return
-		}
+		weeklyDistanceRemaining.textContent = distanceRemaining >= 0 ? distanceRemaining : 0;
 	}
 
 	function calculateProgressPercentage(weeklyGoal) {
-		progressPerecentage = (finalValue / weeklyGoal) * 100;
+		progressPerecentage = (totalDistance / weeklyGoal) * 100;
 		return progressPerecentage;
 	}
 
@@ -85,8 +84,6 @@ export default  async function weeklyProgress() {
 	}
 
 	async function sendWeeklyGoalToSanity(goal) {
-		//FUNKER IKKE Å ENDRE??
-
 		try {
 			const mutations = [
 				{
