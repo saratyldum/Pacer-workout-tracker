@@ -7,18 +7,33 @@ export default  async function weeklyProgress() {
 	const weeklyDistanceRemaining = document.querySelector('.weekly-goal__progress-info--remaining');
 
 	let goalInput = document.querySelector('.weekly-goal__input');
-	let progress = 0;
 	let finalValue;
 	let weeklyValue = 0;
 	let progressPerecentage;
 
-	goalInput.addEventListener('keyup', handleGoalInputKeyup);
-
 	const weeklyGoal = await setWeeklyGoal();
 	const workouts = await fetchDistance();
-	calculateDistance(workouts)
-	changeProgressBarWidth(weeklyGoal);
 
+	goalInput.addEventListener('keyup', handleGoalInputKeyup);
+
+	renderHTML(weeklyGoal, workouts);
+
+	async function handleGoalInputKeyup(event) {
+		if(event.key == 'Enter') {
+			weeklyValue = parseInt(goalInput.value, 10);
+
+			await sendWeeklyGoalToSanity(weeklyValue);
+			const weeklyGoal = await setWeeklyGoal();
+			renderHTML(weeklyGoal, workouts)
+		} else {
+			return
+		}
+	}
+
+	function renderHTML(weeklyGoal, workouts) {
+		calculateDistance(weeklyGoal, workouts); 
+		changeProgressBarWidth(weeklyGoal);
+	}
 
 	async function setWeeklyGoal() {
 		const weeklyGoal = await fetchWeeklyGoal();
@@ -26,7 +41,6 @@ export default  async function weeklyProgress() {
 		goalInput.value = weeklyGoal;
 		return weeklyGoal;
 	}
-
 
 	async function fetchWeeklyGoal() {
 		const query = `*[_id == 'settings'][0]`
@@ -40,38 +54,25 @@ export default  async function weeklyProgress() {
 		}`;
 
 		const workouts = await sanity.fetch(query);
-
 		return workouts;
 	}
 
-	function calculateDistance(workouts) {
+	function calculateDistance(weeklyGoal, workouts) {
 		let distance = [];
 		for (const workout of workouts) {
 			distance.push(workout.distance)
 		}
 
 		const initialValue = 0;
-		
 		const reducedDistance = distance.reduce(
 			(accumulator, currentValue) => accumulator + currentValue, initialValue
 		);
 
+		const distanceRemaining = parseInt((weeklyGoal - reducedDistance));
+
 		finalValue = reducedDistance;
 		weeklyDistanceDone.textContent = reducedDistance;
-		weeklyDistanceRemaining.textContent = parseInt((weeklyGoal - reducedDistance));
-	}
-
-
-	async function handleGoalInputKeyup(event) {
-		if(event.key == 'Enter') {
-			weeklyValue = parseInt(goalInput.value, 10);
-			await sendWeeklyGoalToSanity(weeklyValue);
-			const weeklyGoal = await setWeeklyGoal();
-			changeProgressBarWidth(weeklyGoal);
-			calculateDistance(workouts); //FÅ TIL Å FUNKE
-		} else {
-			return
-		}
+		weeklyDistanceRemaining.textContent = distanceRemaining >= 0 ? distanceRemaining : 0;
 	}
 
 	function calculateProgressPercentage(weeklyGoal) {
@@ -85,8 +86,6 @@ export default  async function weeklyProgress() {
 	}
 
 	async function sendWeeklyGoalToSanity(goal) {
-		//FUNKER IKKE Å ENDRE??
-
 		try {
 			const mutations = [
 				{
