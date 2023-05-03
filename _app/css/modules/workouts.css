@@ -81,7 +81,6 @@
 	/* transition for when form becomes activity */
 	transition: all 0.5s, transform 1ms;
 	position: relative;
-	padding-bottom: 3rem;
  }
 
  
@@ -160,6 +159,10 @@
  @media screen and (max-width: 992px) {
 	.workouts {
 		padding-top: 1rem;
+	}
+
+	.workout-form {
+		padding-bottom: 3rem;
 	}
 
 	.workout-form__submit-button {
