@@ -5,8 +5,8 @@ import renderWorkouts from "./modules/renderWorkouts.js";
 import weeklyProgress from "./modules/weeklyProgress.js";
 import dailyProgress from "./modules/dailyProgress.js";
 import totalProgress from "./modules/totalProgress.js";
-
-
+import deleteWorkout from "./modules/deleteWorkout.js";
+	
 const workouts = await fetchWorkouts();
 
 if(navigator.geolocation) {
