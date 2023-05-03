@@ -76,7 +76,7 @@ export default async function dailyProgress() {
 		}
 
 		const reducedDailyDistances = dailyDistances.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
-		const percentageOfWeekly = reducedDailyDistances / weeklyGoal * 100;
+		const percentageOfWeekly = reducedDailyDistances / (weeklyGoal / 2) * 100;
 
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
 	}
