@@ -19,8 +19,10 @@ async function handleGeolocationSucess(position) {
 	await dailyProgress();
 	await totalProgress();
 	workoutForm(map)
+	await deleteWorkout()
 }
 
 function errorPosition() {
 alert('Could not get your position')
 }
+
