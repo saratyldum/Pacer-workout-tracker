@@ -7,12 +7,6 @@ import deleteWorkout from "./deleteWorkout.js";
 
 export default async function updateUI(map, workout) {
 	// const workouts = await fetchWorkouts();
-	await renderHTMl(map, workout)
-	
-	async function renderHTMl(map, workout) {
-		if(map !== undefined && workout !== undefined) {
-			renderWorkouts(map, [workout]);
-		}
 		await weeklyProgress();
 		await totalProgress();
 		await dailyProgress();
