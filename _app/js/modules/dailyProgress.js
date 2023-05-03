@@ -36,7 +36,6 @@ export default async function dailyProgress() {
 	}
 
 	function renderHTML(tabButton) {
-		console.log(tabButton);
 		let isCycling = false;
 
 		if(tabButton !== undefined) {
