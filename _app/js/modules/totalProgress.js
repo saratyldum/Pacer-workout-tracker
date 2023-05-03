@@ -8,13 +8,17 @@ export default async function totalProgress() {
 	calculateTotalProgress(workouts);
 
 	async function fetchTotalProgress() {
-		const query = `*[_type == 'workout']{
-			distance,
-			duration
-		}`;
-
-		const workouts = await sanity.fetch(query);
-		return workouts;
+		try {
+			const query = `*[_type == 'workout']{
+				distance,
+				duration
+			}`;
+	
+			const workouts = await sanity.fetch(query);
+			return workouts;
+		} catch(error) {
+			console.error(error.message)
+		}
 	}
 
 	function calculateTotalProgress(workouts) {

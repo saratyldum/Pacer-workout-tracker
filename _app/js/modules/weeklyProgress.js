@@ -43,18 +43,28 @@ export default  async function weeklyProgress() {
 	}
 
 	async function fetchWeeklyGoal() {
-		const query = `*[_id == 'settings'][0]`
-		const goal = await sanity.fetch(query);
-		return goal.weeklyGoal;
+		try {
+			const query = `*[_id == 'settings'][0]`
+			const goal = await sanity.fetch(query);
+			
+			return goal.weeklyGoal;
+		} catch(error) {
+			console.error(error.message);
+		}
+
 	}
 
 	async function fetchWorkouts() {
-		const query = `*[_type == 'workout']{
-			distance
-		}`;
-
-		const workouts = await sanity.fetch(query);
-		return workouts;
+		try {
+			const query = `*[_type == 'workout']{
+				distance
+			}`;
+	
+			const workouts = await sanity.fetch(query);
+			return workouts;
+		} catch(error) {
+			console.error(error.message)
+		}
 	}
 
 	function calculateDistances(weeklyGoal, workouts) {
