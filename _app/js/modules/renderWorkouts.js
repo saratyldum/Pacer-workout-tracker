@@ -1,11 +1,13 @@
-export default function renderWorkouts(map, workouts) {
+import fetchWorkouts from "./fetchWorkouts.js";
+export default async function renderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
 	map = map;
-	workouts = workouts;
+
+	const allWorkouts = 	await fetchWorkouts();
 
 	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
-
+	
 	renderHTML(workouts);
 
 	function handleContainerWorkoutsClick(event) {
@@ -14,12 +16,13 @@ export default function renderWorkouts(map, workouts) {
 
 	function moveToPopup(event) {
 		if (!map) return;
+		//FUNKER IKKE MED NY ADDEDE WORKOUTS=???
 
 		const workoutElement = event.target.closest('.workout');
 
 		if (!workoutElement) return;
 
-		const workout = workouts.find(
+		const workout = allWorkouts.find(
 		work => work._id === workoutElement.dataset.id
 		);
 
@@ -54,7 +57,7 @@ export default function renderWorkouts(map, workouts) {
 	 function renderWorkoutList(workout) {
 		 //SKRIV	i OM!!!!
 		 let html = `
-		 <li class="workout workout--${workout.type}" data-id="${workout._id}">
+		 <li class="workout workout--${workout.type}" data-id="${(workout._id || workout.id)}">
 			 <h2 class="workout__title">${workout.description}</h2>
 			 <button class="workout__delete-button"><img src="./_app/assets/icons/delete.png" alt="Delete workout"></button>
 			 <div class="workout__details">

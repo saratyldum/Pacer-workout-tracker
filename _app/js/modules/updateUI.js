@@ -10,9 +10,9 @@ export default async function updateUI(map, workout) {
 	
 	async function renderHTMl(map, workout) {
 		if(map !== undefined && workout !== undefined) {
-			renderWorkouts(map, [workout]);
+			await renderWorkouts(map, [workout]);
 		}
-	// const workouts = await fetchWorkouts();
+
 		await weeklyProgress();
 		await totalProgress();
 		await dailyProgress();

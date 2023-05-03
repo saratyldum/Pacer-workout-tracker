@@ -6,7 +6,7 @@ import weeklyProgress from "./modules/weeklyProgress.js";
 import dailyProgress from "./modules/dailyProgress.js";
 import totalProgress from "./modules/totalProgress.js";
 import deleteWorkout from "./modules/deleteWorkout.js";
-	
+
 const workouts = await fetchWorkouts();
 
 if(navigator.geolocation) {
@@ -15,7 +15,7 @@ if(navigator.geolocation) {
 
 async function handleGeolocationSucess(position) {
 	const map = loadMap(position);
-	renderWorkouts(map, workouts);
+	await renderWorkouts(map, workouts);
 	await weeklyProgress();
 	await dailyProgress();
 	await totalProgress();
