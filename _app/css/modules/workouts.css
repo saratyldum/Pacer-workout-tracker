@@ -81,7 +81,6 @@
 	/* transition for when form becomes activity */
 	transition: all 0.5s, transform 1ms;
 	position: relative;
-
  }
 
  
@@ -150,7 +149,7 @@
 	transition: all 0.2s ease;
  }
 
- .workout-form__button:hover {
+ .workout-form__submit-button:hover {
 	color: var(--primary-color);
 	border: 1px solid var(--primary-color);
 	background-color: var(--font-color-light);
@@ -162,6 +161,11 @@
 		padding-top: 1rem;
 	}
 
+	.workout-form__submit-button {
 		display: block;
+	}
+
+	.workout-form {
+		padding-bottom: 3rem;
 	}
  }
