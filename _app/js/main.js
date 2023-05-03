@@ -1,7 +1,10 @@
 import loadMap from "./modules/loadMap.js";
 import fetchWorkouts from "./modules/fetchWorkouts.js";
 import workoutForm from "./modules/workoutForm.js";
-import updateUI from "./modules/updateUI.js";
+import renderWorkouts from "./modules/renderWorkouts.js";
+import weeklyProgress from "./modules/weeklyProgress.js";
+import dailyProgress from "./modules/dailyProgress.js";
+import totalProgress from "./modules/totalProgress.js";
 
 const workouts = await fetchWorkouts();
 
@@ -9,9 +12,12 @@ if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
 }
 
-function handleGeolocationSucess(position) {
+async function handleGeolocationSucess(position) {
 	const map = loadMap(position);
-	updateUI(map, workouts);
+	renderWorkouts(map, workouts);
+	await weeklyProgress();
+	await dailyProgress();
+	await totalProgress();
 	workoutForm(map)
 }
 

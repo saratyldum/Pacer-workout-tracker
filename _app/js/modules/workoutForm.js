@@ -28,7 +28,7 @@ export default async function workoutForm(map) {
 		await sendWorkoutToSanity(workout);
 
 		hideWorkoutForm();
-		await updateUI(map);
+		await updateUI(map, workout);
 	}
 
 	function toggleElevationField() {
