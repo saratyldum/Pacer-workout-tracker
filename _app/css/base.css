@@ -62,6 +62,7 @@ button {
 	.grid-wrapper {
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-areas: 
-			'progress-view map map workout-list'
+			'progress-view map map workout-list';
+		height: 100dvh;
 	}
 }
