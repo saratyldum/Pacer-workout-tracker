@@ -15,7 +15,7 @@
 .workout-form, .workout {
 	background-color: var(--workout);
 	border-radius: 5px;
-	padding: 1rem 1rem;
+	padding: 1rem 0.5rem;
 	margin-bottom: 1.5rem;
 	display: grid;
 	gap: 0.5rem 0.5rem;
@@ -23,6 +23,7 @@
 }
 
 .workout {
+	position: relative;
 	cursor: pointer;
 	grid-template-columns: repeat(4, 1fr);
 }
@@ -67,12 +68,20 @@
 	text-transform: uppercase;
  }
 
+ .workout__delete-button {
+	width: 1rem;
+	position: absolute;
+	right: 0.5rem;
+	top: 1rem;
+	z-index: 3;
+ }
+
  .workout-form {
 	grid-template-columns: 1fr 1fr;
 	/* transition for when form becomes activity */
 	transition: all 0.5s, transform 1ms;
 	position: relative;
-	padding-bottom: 3rem;
+
  }
 
  
@@ -125,7 +134,7 @@
 	color: var(--secondary-color);
  }
 
- .workout-form__button {
+ .workout-form__submit-button {
 	display: none;
 	background: transparent;
 	color: inherit;
@@ -153,7 +162,6 @@
 		padding-top: 1rem;
 	}
 
-	.workout-form__button {
 		display: block;
 	}
  }

@@ -6,6 +6,7 @@ import weeklyProgress from "./modules/weeklyProgress.js";
 import dailyProgress from "./modules/dailyProgress.js";
 import totalProgress from "./modules/totalProgress.js";
 
+
 const workouts = await fetchWorkouts();
 
 if(navigator.geolocation) {
@@ -19,8 +20,10 @@ async function handleGeolocationSucess(position) {
 	await dailyProgress();
 	await totalProgress();
 	workoutForm(map)
+	await deleteWorkout()
 }
 
 function errorPosition() {
 alert('Could not get your position')
 }
+
