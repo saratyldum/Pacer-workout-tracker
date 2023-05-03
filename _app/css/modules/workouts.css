@@ -15,7 +15,7 @@
 .workout-form, .workout {
 	background-color: var(--workout);
 	border-radius: 5px;
-	padding: 1rem 1rem;
+	padding: 1rem 0.5rem;
 	margin-bottom: 1.5rem;
 	display: grid;
 	gap: 0.5rem 0.5rem;
@@ -73,6 +73,7 @@
 	position: absolute;
 	right: 0.5rem;
 	top: 1rem;
+	z-index: 3;
  }
 
  .workout-form {
@@ -161,7 +162,7 @@
 		padding-top: 1rem;
 	}
 
-	.workout-form__button {
+	.workout-form__submit-button {
 		display: block;
 	}
  }
