@@ -4,12 +4,13 @@ import totalProgress from "./totalProgress.js";
 import fetchWorkouts from "./fetchWorkouts.js";
 import dailyProgress from "./dailyProgress.js"
 
-export default async function updateUI(map) {
-	const workouts = await fetchWorkouts();
-	await renderHTMl(map, workouts)
+export default async function updateUI(map, workout) {
+	// const workouts = await fetchWorkouts();
+	// console.log(workouts);
+	await renderHTMl(map, workout)
 	
-	async function renderHTMl(map, workouts) {
-		renderWorkouts(map, workouts);
+	async function renderHTMl(map, workout) {
+		renderWorkouts(map, [workout]);
 		await weeklyProgress();
 		await totalProgress();
 		await dailyProgress();
