@@ -1,4 +1,5 @@
 import { sanityMutate  } from "../sanity.js";
+import updateUI from "./updateUI.js";
 
 export default async function deleteWorkout() {
 	const deleteButtons = document.querySelectorAll('.workout__delete-button');
@@ -12,6 +13,7 @@ export default async function deleteWorkout() {
 		const workoutID = workoutElement.dataset.id;
 		await deleteWorkoutFromSanity(workoutID);
 		workoutElement.remove();
+		await updateUI();
 	}
 
 	async function deleteWorkoutFromSanity(workoutID) {
@@ -35,5 +37,4 @@ export default async function deleteWorkout() {
 			console.error(error.message);
 		}
 	}
-	console.log(deleteButton);
 }
