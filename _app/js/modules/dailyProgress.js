@@ -81,14 +81,18 @@ export default async function dailyProgress() {
 	}
 	
 	async function fetchWorkouts() {
-		const query = `*[_type == 'workout'] {
-			distance,
-			type,
-			date
-		}`
-		
-		const workouts = await sanity.fetch(query);
-		return workouts;
+		try {
+			const query = `*[_type == 'workout'] {
+				distance,
+				type,
+				date
+			}`
+			
+			const workouts = await sanity.fetch(query);
+			return workouts;
+		} catch(error) {
+			console.error(error.message)
+		}
 	}
 	
 }
