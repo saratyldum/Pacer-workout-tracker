@@ -7,17 +7,28 @@ export default async function renderWorkouts(map, workouts) {
 	const allWorkouts = 	await fetchWorkouts();
 
 	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
-	
+
+	/**
+	 * Renders at least once after loading the module for the first time.
+	 * 
+	 * @see renderHTML()
+	 */
 	renderHTML(workouts);
 
 	function handleContainerWorkoutsClick(event) {
 		moveToPopup(event);
 	}
 
+	/**
+	 * Finds the ID of the workout element that has been clicked and find the equivilant
+	 *  workout object from sanity to get the workouts coordinates and center the map around the clicked workout.
+	 * 
+	 * @param {*} event - takes the click event from when user clicks on one of the workouts in the list
+	 *
+	 * @returns out of the function if there is no valid map or if there is no workout element found
+	 */
 	function moveToPopup(event) {
 		if (!map) return;
-		//FUNKER IKKE MED NY ADDEDE WORKOUTS=???
-
 		const workoutElement = event.target.closest('.workout');
 
 		if (!workoutElement) return;
@@ -31,29 +42,46 @@ export default async function renderWorkouts(map, workouts) {
 		});
 	}
 
+	/**
+	 * The only function that makes changes to the DOM. Every action and change to the DOM will be handled with this function.
+	 * @param {array} workouts - an array of all workout objects to be rendered.
+	 */
+
 	function renderHTML(workouts) {
 		for (let index = 0; index < workouts.length; index++) {
 			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
 			renderWorkoutList(workouts[index]);
+			// const workoutDOMElement = renderWorkoutList(workouts[index]);
+			// form.appendChild(workoutDOMElement);
 		}
 	 }
 
-	 // Render workout on map as a marker
+	 /**
+	  * Renders workout on the map as a marker using Mapbox
+	  * 
+	  * @param {array} coordinates - coordinates from when the user clicked on the map to create a new workout.
+	  * @param {string} description - description of the workout.
+	  */
 	 function renderWorkoutMaker(coordinates, description) {
-		 //Create popup
+		 //Creates popup
 		 const popup = new mapboxgl.Popup({closeOnClick: false})
 		 .setText(description)
 		 .setLngLat(coordinates)
 		 .addClassName('running-popup');
  
-		 //Add marker
+		 //Adds the marker
 		 const marker = new mapboxgl.Marker({ color: 'var(--primary-color)'})
 		 .setLngLat(coordinates)
 		 .setPopup(popup)
 		 .addTo(map)
 	 }
  
-	 //Render wokrout in list
+	 /**
+	  * Creates a workout DOM element for each workout object
+	  * .
+	  * @param {object} workout 
+	  * @returns the DOM element to be appended on the site
+	  */
 	 function renderWorkoutList(workout) {
 		 //SKRIV	i OM!!!!
 		 let html = `

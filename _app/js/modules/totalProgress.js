@@ -1,26 +1,16 @@
 import { sanity } from "../sanity.js";
 
-export default async function totalProgress() {
+export default async function totalProgress(workouts) {
 	const totalProgress = document.querySelector('.total-progress__stats--distance-value');
 	const totalTime = document.querySelector('.total-progress__stats--time-value');
 
-	const workouts = await fetchTotalProgress();
 	calculateTotalProgress(workouts);
 
-	async function fetchTotalProgress() {
-		try {
-			const query = `*[_type == 'workout']{
-				distance,
-				duration
-			}`;
-	
-			const workouts = await sanity.fetch(query);
-			return workouts;
-		} catch(error) {
-			console.error(error.message)
-		}
-	}
-
+	/**
+	 * Calculates the users total distance and total time they have spend in activity.
+	 * 
+	 * @param {array} workouts all workouts done by user, fetched from sanity
+	 */
 	function calculateTotalProgress(workouts) {
 		let distance = [];
 		let time = [];

@@ -1,6 +1,6 @@
 import { sanity } from "../sanity.js";
 
-export default async function dailyProgress() {
+export default function dailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
 	const tabContents = document.querySelectorAll('.daily-activities__tab-content');
 	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
@@ -11,20 +11,33 @@ export default async function dailyProgress() {
 	 * change "This week" - value
 	 */
 
-	let allDays = [];
+	let allWorkouts = [];
 
-	const workouts = await fetchWorkouts();
+	/**
+	 * Creates new workout objects with the information we need to generate the daily progress bars.
+	 * 
+	 * Turns each workout date into a number between 0-6 depending on the day. This number correlates to each 
+	 * progress bars' index so we know which workouts to render on which progress bar.
+	 * 
+	 * @see calculateBarHeight()
+	 */
 	for (const workout of workouts) {
 		const day = new Date(workout.date).getDay()-1;
-		allDays.push({
+		allWorkouts.push({
 			day: day,
 			distance: workout.distance,
 			type: workout.type
 		})
 	}
 
+	/**
+	 * Renders at least once after loading the module for the first time.
+	 * 
+	 * @see renderHTML()
+	 */
 	renderHTML()
 	
+
 	tabButtons.forEach(tabButton => {
 		tabButton.addEventListener('click', handleTabButtonClick)
 	})
@@ -35,6 +48,18 @@ export default async function dailyProgress() {
 		renderHTML(tabButton);
 	}
 
+	/**
+	 * Finds what acitivity tab has been clicked and makes changes to the DOM thereafter.
+	 * Since running is the activity being displayed when the site is loaded, the default is that isCycling is false.
+	 * This changes as the user clicks on one of the tabs making the tabs change color and the workout list filter based
+	 * on the acitivity that is clicked. With the filtered workout list each days progress bar gets calculated.
+	 * 
+	 * @param {*} tabButton - The tab that has been clicked. This defines what activity needs to be shown in the DOM.
+	 * 
+	 * @see toggleTabColor()
+	 * @see calculateBarHeight()
+	 */
+
 	function renderHTML(tabButton) {
 		let isCycling = false;
 
@@ -44,12 +69,12 @@ export default async function dailyProgress() {
 		}
 
 		if(isCycling) {
-			const cyclingWorkouts = allDays.filter(workout => workout.type === 'cycling');
+			const cyclingWorkouts = allWorkouts.filter(workout => workout.type === 'cycling');
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(cyclingWorkouts, index)
 			}
 		} else {
-			const runningWorkouts = allDays.filter(workout => workout.type === 'running');
+			const runningWorkouts = allWorkouts.filter(workout => workout.type === 'running');
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(runningWorkouts, index)
 			}
@@ -64,6 +89,13 @@ export default async function dailyProgress() {
 		tabButton.style.backgroundColor = 'inherit';
 	}
 
+	/**
+	 * Filters throught the workouts and calculates the bar height depending on the users activities on the days with the 
+	 * corresponding index numbers. The bars height is calculated as a percentage relevant to the weekly goal set by the user.
+	 * 
+	 * @param {array} workouts - filtered list of workouts
+	 * @param {number} index - the index of the progress bar being calculated
+	 */
 	function calculateBarHeight(workouts, index) {
 		const initialValue = 0;
 		const oneDay = workouts.filter(day => day.day === index);
@@ -78,21 +110,6 @@ export default async function dailyProgress() {
 		const percentageOfWeekly = reducedDailyDistances / (weeklyGoal / 2) * 100;
 
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
-	}
-	
-	async function fetchWorkouts() {
-		try {
-			const query = `*[_type == 'workout'] {
-				distance,
-				type,
-				date
-			}`
-			
-			const workouts = await sanity.fetch(query);
-			return workouts;
-		} catch(error) {
-			console.error(error.message)
-		}
 	}
 	
 }

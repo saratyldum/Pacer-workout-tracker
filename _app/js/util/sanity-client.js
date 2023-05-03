@@ -1,4 +1,6 @@
 /**
+ *  * /// ALL CODE BELOW  IS BORROWED FROM AND WRITTEN OF ALEJANDRO ROJAS TO SIMPLYFY FETCHING FROM SANITY ///
+
  * @param {object} config Client configuration for all requests
  * @param {string} config.id Project ID
  * @param {string} config.dataset Dataset name – e.g. "production"

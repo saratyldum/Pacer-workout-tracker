@@ -1,6 +1,14 @@
 import { SanityClient } from "./util/sanity-client.js";
 import { SanityClientMutate } from "./util/sanity-client-mutate.js";
 
+/**
+ * Please note:
+ * 	I am very aware of the fact that I am exposing my token, allowing anyone to use it
+ * 	and make changes  to my dataset. This is a problem when it comes to frontend
+ * 	projects and it' only implemented like this in this final project for the sake of
+ * 	simplicity.
+ */
+
 export const sanityMutate = SanityClientMutate({
 	id: 'qtf22vsb',
 	dataset: 'production',

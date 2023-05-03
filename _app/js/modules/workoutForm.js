@@ -136,6 +136,44 @@ export default async function workoutForm(map) {
 		setTimeout(() => (form.style.display = 'grid'), 1000);
 	}
 
+	/**
+	 * 	/// THE MUTATE METHODS CODE IS BORROWED FROM ALEJANDRO ROJAS ///
+	 * 	The mutate method is written to work with the "mutate" endpoint
+	 * 	from Sanity's HTTP API: 
+	 * 	https://www.sanity.io/docs/http-mutations#afccc1b9ef78
+	 * 
+	 * 	Basic usage: pass an array of mutations (transactions), using
+	 * 	the same example from the documentation:
+	 * 
+	 * 	const mutations = [
+	 * 		{"createOrReplace": {
+	 * 			"_id": "person-1",
+	 * 			"_type": "person",
+	 * 			"name": "John Appleseed"
+	 * 		}},
+	 * 		{"createOrReplace": {
+	 * 			"_id": "person-2",
+	 * 			"_type": "person",
+	 * 			"name": "Carrie Anderton"
+	 * 		}}
+	 * 	]
+	 * 
+	 * 	You can also set the param "dryRun" to true to test the mutation.
+	 * 	The client will return a copy of the affected document(s) *as if* 
+	 * 	they were mutated, but without affecting the actual document(s) 
+	 * 	stored in your dataset.
+	 * 
+	 * 	https://www.sanity.io/docs/http-mutations#952b77deb110
+	 * 	https://www.sanity.io/docs/http-mutations#692cd4bdd9f7
+	 * 
+	 * 	const params = {
+	 * 		returnIds: false;
+	 * 		returnDocuments: false;
+	 * 		dryRun: false;
+	 * 	}
+	 * 
+	 * 	const result = await sanity.mutate(mutations, params);
+	 */
 	async function sendWorkoutToSanity(workout) {
 		try {
 			const mutations = [
