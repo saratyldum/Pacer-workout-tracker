@@ -1,7 +1,7 @@
 import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
 
-export default  async function weeklyProgress() {
+export default async function weeklyProgress(workouts) {
 	const progressBar = document.querySelector('.weekly-goal__progress-bar--bar');
 	const weeklyDistanceDone = document.querySelector('.weekly-goal__progress-info--done');
 	const weeklyDistanceRemaining = document.querySelector('.weekly-goal__progress-info--remaining');
@@ -12,7 +12,6 @@ export default  async function weeklyProgress() {
 	let progressPerecentage;
 
 	const weeklyGoal = await setWeeklyGoalUIValue();
-	const workouts = await fetchWorkouts();
 
 	goalInput.addEventListener('keyup', handleGoalInputKeyup);
 
@@ -52,19 +51,6 @@ export default  async function weeklyProgress() {
 			console.error(error.message);
 		}
 
-	}
-
-	async function fetchWorkouts() {
-		try {
-			const query = `*[_type == 'workout']{
-				distance
-			}`;
-	
-			const workouts = await sanity.fetch(query);
-			return workouts;
-		} catch(error) {
-			console.error(error.message)
-		}
 	}
 
 	function calculateDistances(weeklyGoal, workouts) {

@@ -1,6 +1,6 @@
 import { sanity } from "../sanity.js";
 
-export default async function dailyProgress() {
+export default function dailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
 	const tabContents = document.querySelectorAll('.daily-activities__tab-content');
 	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
@@ -13,7 +13,6 @@ export default async function dailyProgress() {
 
 	let allDays = [];
 
-	const workouts = await fetchWorkouts();
 	for (const workout of workouts) {
 		const day = new Date(workout.date).getDay()-1;
 		allDays.push({
@@ -78,21 +77,6 @@ export default async function dailyProgress() {
 		const percentageOfWeekly = reducedDailyDistances / (weeklyGoal / 2) * 100;
 
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
-	}
-	
-	async function fetchWorkouts() {
-		try {
-			const query = `*[_type == 'workout'] {
-				distance,
-				type,
-				date
-			}`
-			
-			const workouts = await sanity.fetch(query);
-			return workouts;
-		} catch(error) {
-			console.error(error.message)
-		}
 	}
 	
 }

@@ -16,9 +16,9 @@ if(navigator.geolocation) {
 async function handleGeolocationSucess(position) {
 	const map = loadMap(position);
 	await renderWorkouts(map, workouts);
-	await weeklyProgress();
-	await dailyProgress();
-	await totalProgress();
+	await weeklyProgress(workouts);
+	dailyProgress(workouts);
+	totalProgress(workouts);
 	workoutForm(map)
 	await deleteWorkout()
 }
