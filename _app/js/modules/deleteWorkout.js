@@ -16,6 +16,12 @@ export default async function deleteWorkout() {
 		await updateUI();
 	}
 
+	/**
+	 * Takes the workoutID of the workout element being deleted and removes the element from sanity. 
+	 * 
+	 * @param {string} workoutID - the unique ID of the workout being deleted
+	 * @see sendWorkoutToSanity() - under the workoutForm module for an explanation of the muatate function
+	 */
 	async function deleteWorkoutFromSanity(workoutID) {
 		console.log(workoutID);
 		try {

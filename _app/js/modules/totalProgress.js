@@ -6,6 +6,11 @@ export default async function totalProgress(workouts) {
 
 	calculateTotalProgress(workouts);
 
+	/**
+	 * Calculates the users total distance and total time they have spend in activity.
+	 * 
+	 * @param {array} workouts all workouts done by user, fetched from sanity
+	 */
 	function calculateTotalProgress(workouts) {
 		let distance = [];
 		let time = [];
