@@ -71,6 +71,8 @@
 	grid-template-columns: 1fr 1fr;
 	/* transition for when form becomes activity */
 	transition: all 0.5s, transform 1ms;
+	position: relative;
+	padding-bottom: 3rem;
  }
 
  
@@ -125,11 +127,33 @@
 
  .workout-form__button {
 	display: none;
+	background: transparent;
+	color: inherit;
+	font-family: inherit;
+	border: 1px solid var(--font-color-light);
+	position: absolute;
+	left: 50%;
+	bottom: 0.5rem;
+	transform: translateX(-50%);
+	width: 10rem;
+	padding: 0.2rem;
+	border-radius: 3px;
+	transition: all 0.2s ease;
+ }
+
+ .workout-form__button:hover {
+	color: var(--primary-color);
+	border: 1px solid var(--primary-color);
+	background-color: var(--font-color-light);
  }
 
 
  @media screen and (max-width: 992px) {
 	.workouts {
 		padding-top: 1rem;
+	}
+
+	.workout-form__button {
+		display: block;
 	}
  }
