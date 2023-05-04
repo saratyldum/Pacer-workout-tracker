@@ -12,6 +12,7 @@ export default function generateUserGreeting(userInfo) {
 		return firstName;
 	}
 
+	function createUserDOMElement(firstName) {
 	const userImage = document.createElement('img');
 	const userMessage = document.createElement('div');
 
@@ -20,7 +21,11 @@ export default function generateUserGreeting(userInfo) {
 	userImage.setAttribute('alt', 'User Profile Image');
 
 	userMessage.classList = 'user__message';
-	userMessage.innerHTML = `Hello, <strong>${userInfo.userName}</strong>`;
+		userMessage.innerHTML = `Hello, <strong>${firstName}</strong>`;
+
+		return [userImage, userMessage]
+	
+	}
 
 	userContainer.append(userImage, userMessage)
 }
