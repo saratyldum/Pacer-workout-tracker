@@ -4,6 +4,14 @@ export default function generateUserGreeting(userInfo) {
 
 	console.log(userContainer);
 
+	function formatUserName(userInfo) {
+		const userName = userInfo.userName;
+		const userNameArray = userName.split(' ');
+		const firstName = userNameArray[0];
+
+		return firstName;
+	}
+
 	const userImage = document.createElement('img');
 	const userMessage = document.createElement('div');
 
