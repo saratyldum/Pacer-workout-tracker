@@ -1,9 +1,10 @@
-import renderWorkouts from "./renderWorkouts.js";
-import weeklyProgress from "./weeklyProgress.js";
-import totalProgress from "./totalProgress.js";
-import fetchWorkouts from "./fetchWorkouts.js";
-import dailyProgress from "./dailyProgress.js"
-import deleteWorkout from "./deleteWorkout.js";
+import progressWeeklyProgress from "./progress-WeeklyProgress.js";
+import progressTotalProgress from "./progress-TotalProgress.js";
+import progressDailyProgress from "./progress-DailyProgress.js"
+
+import workoutsRenderWorkouts from "./workouts-renderWorkouts.js";
+import workoutsFetchWorkouts from "./workouts-fetchWorkouts.js";
+import workoutsDeleteWorkout from "./workouts-DeleteWorkout.js";
 
 export default async function updateUI(map, workout) {
 	await renderHTMl(map, workout)
@@ -16,15 +17,15 @@ export default async function updateUI(map, workout) {
 	 * because that is what the renderWorkouts module takes as a parameter.
 	 */
 	async function renderHTMl(map, workout) {
-		const workouts = await fetchWorkouts();
+		const workouts = await workoutsFetchWorkouts();
 
 		if(map !== undefined && workout !== undefined) {
-			await renderWorkouts(map, [workout]);
+			await workoutsRenderWorkouts(map, [workout]);
 		}
 
-		await weeklyProgress(workouts);
-		totalProgress(workouts);
-		dailyProgress(workouts);
-		await deleteWorkout();
+		await progressWeeklyProgress(workouts);
+		progressTotalProgress(workouts);
+		progressDailyProgress(workouts);
+		await workoutsDeleteWorkout();
 	}
 }

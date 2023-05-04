@@ -1,6 +1,6 @@
 import { sanity } from "../sanity.js";
 
-export default async function fetchUserInformation() {
+export default async function progressFetchUserInformation() {
 
 	try {
 		const query = `*[_type == 'user'][0] {

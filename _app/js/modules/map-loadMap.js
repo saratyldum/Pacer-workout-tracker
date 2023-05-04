@@ -1,4 +1,4 @@
-export default function loadMap(position) {
+export default function mapLoadMap(position) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
 	const inputType = document.querySelector('.workout-form__input--type');

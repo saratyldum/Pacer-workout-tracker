@@ -1,7 +1,7 @@
 import { sanityMutate  } from "../sanity.js";
 import updateUI from "./updateUI.js";
 
-export default async function deleteWorkout() {
+export default async function workoutsDeleteWorkout() {
 	const deleteButtons = document.querySelectorAll('.workout__delete-button');
 
 	deleteButtons.forEach(deleteButton => {

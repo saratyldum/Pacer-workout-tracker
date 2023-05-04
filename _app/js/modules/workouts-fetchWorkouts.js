@@ -6,7 +6,7 @@ import { sanity } from "../sanity.js";
 	 * 	Baseic usage: The sanity fetch method works by passing a query, using the same structure as the documentation
 	 * 	and fetching the result from Sanity. 
 	 */
-export default async function fetchWorkouts() {
+export default async function workoutsFetchWorkouts() {
 	let workouts; 
 	try {
 		const query = `*[_type == 'workout'] {

@@ -1,5 +1,6 @@
-import fetchWorkouts from "./fetchWorkouts.js";
-export default async function renderWorkouts(map, workouts) {
+import fetchWorkouts from "./workouts-fetchWorkouts.js";
+
+export default async function workoutsRenderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
 	map = map;
