@@ -5,16 +5,6 @@ export default {
 	type: 'document',
 	fields: [
 		{
-			title: 'User Name',
-			name: 'userName',
-			type: 'string',
-		},
-		{
-			title: 'User Image',
-			name: 'userImage',
-			type: 'image',
-		},
-		{
 			title: 'Weekly goal',
 			name: 'weeklyGoal',
 			type: 'string',
