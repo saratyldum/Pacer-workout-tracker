@@ -6,12 +6,18 @@ import weeklyProgress from "./modules/weeklyProgress.js";
 import dailyProgress from "./modules/dailyProgress.js";
 import totalProgress from "./modules/totalProgress.js";
 import deleteWorkout from "./modules/deleteWorkout.js";
+import fetchUserInformation from "./modules/fetchUserInformation.js";
+import generateUserGreeting from "./modules/generateUserGreeting.js";
+
 
 const workouts = await fetchWorkouts();
+const user = await fetchUserInformation();
+generateUserGreeting(user);
 
 if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
 }
+
 
 async function handleGeolocationSucess(position) {
 	const map = loadMap(position);
@@ -23,6 +29,7 @@ async function handleGeolocationSucess(position) {
 	await deleteWorkout()
 }
 
+//fiks bedre error
 function errorPosition() {
 alert('Could not get your position')
 }
