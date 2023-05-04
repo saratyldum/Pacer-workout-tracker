@@ -61,6 +61,7 @@ export default function progressDailyProgress(workouts) {
 	 */
 
 	function renderHTML(tabButton) {
+
 		let isCycling = false;
 
 		if(tabButton !== undefined) {
@@ -73,11 +74,13 @@ export default function progressDailyProgress(workouts) {
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(cyclingWorkouts, index)
 			}
+
 		} else {
 			const runningWorkouts = allWorkouts.filter(workout => workout.type === 'running');
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(runningWorkouts, index)
 			}
+
 		}
 	}
 
@@ -111,5 +114,6 @@ export default function progressDailyProgress(workouts) {
 
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
 	}
+
 	
 }
