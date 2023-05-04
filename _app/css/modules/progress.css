@@ -42,6 +42,10 @@
 	font-size: 1rem;
 }
 
+.weekly-goal__km {
+	color: var(--primary-color);
+}
+
 .weekly-goal__progress-info {
 	display: flex;
 	justify-content: space-between;
