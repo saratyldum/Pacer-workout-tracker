@@ -60,7 +60,8 @@ export default function progressDailyProgress(workouts) {
 	 * @see calculateBarHeight()
 	 */
 
-	function renderHTML(tabButton) {
+	 function renderHTML(tabButton) {
+		const thisWeekValueContainer = document.querySelector('.daily-activities__tab-content--span');
 
 		let isCycling = false;
 
@@ -74,13 +75,16 @@ export default function progressDailyProgress(workouts) {
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(cyclingWorkouts, index)
 			}
+			const thisWeekValue = calculateWeeklyDistance(cyclingWorkouts);
+			thisWeekValueContainer.textContent = `${thisWeekValue}km`;
 
 		} else {
 			const runningWorkouts = allWorkouts.filter(workout => workout.type === 'running');
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(runningWorkouts, index)
 			}
-
+			const thisWeekValue = calculateWeeklyDistance(runningWorkouts)
+			thisWeekValueContainer.textContent = `${thisWeekValue}km`
 		}
 	}
 
@@ -115,5 +119,16 @@ export default function progressDailyProgress(workouts) {
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
 	}
 
+	function calculateWeeklyDistance(workouts) {
+		const initialValue = 0;
+		let allDistances = [];
+
+		for (const workout of workouts) {
+			allDistances.push(workout.distance);
+		}
+
+		const reducedWeeklyDistances = allDistances.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		return reducedWeeklyDistances;
+	}
 	
 }
