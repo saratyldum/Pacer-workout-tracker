@@ -50,9 +50,7 @@ export default async function renderWorkouts(map, workouts) {
 	function renderHTML(workouts) {
 		for (let index = 0; index < workouts.length; index++) {
 			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description)
-			renderWorkoutList(workouts[index]);
-			// const workoutDOMElement = renderWorkoutList(workouts[index]);
-			// form.appendChild(workoutDOMElement);
+			createWorkoutListDOMElement(workouts[index]);
 		}
 	 }
 
@@ -82,57 +80,121 @@ export default async function renderWorkouts(map, workouts) {
 	  * @param {object} workout 
 	  * @returns the DOM element to be appended on the site
 	  */
-	 function renderWorkoutList(workout) {
-		 //SKRIV	i OM!!!!
-		 let html = `
-		 <li class="workout workout--${workout.type}" data-id="${(workout._id || workout.id)}">
-			 <h2 class="workout__title">${workout.description}</h2>
-			 <button class="workout__delete-button"><img src="./_app/assets/icons/delete.png" alt="Delete workout"></button>
-			 <div class="workout__details">
-				 <span class="workout__icon">${
-				 workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
-				 }</span>
-				 <span class="workout__value">${workout.distance}</span>
-				 <span class="workout__unit">km</span>
-			 </div>
-			 <div class="workout__details">
-				 <span class="workout__icon">⏱</span>
-				 <span class="workout__value">${workout.duration}</span>
-				 <span class="workout__unit">min</span>
-			 </div>
-		 `;
- 
-		 if (workout.type === 'running')
-		 html += `
-			 <div class="workout__details">
-				 <span class="workout__icon">⚡️</span>
-				 <span class="workout__value">${workout.pace.toFixed(1)}</span>
+	 function createWorkoutListDOMElement(workout) {
+		const workoutElement = document.createElement('li');
+		const workoutDescription = document.createElement('h2');
+		const deleteButton = document.createElement('button');
+		const deleteIcon = document.createElement('img');
 
-				 <span class="workout__unit">min/km</span>
-			 </div>
-			 <div class="workout__details">
-				 <span class="workout__icon">🦶🏼</span>
-				 <span class="workout__value">${workout.cadence}</span>
-				 <span class="workout__unit">spm</span>
-			 </div>
-		 </li>
-		 `;
- 
-		 if (workout.type === 'cycling')
-		 html += `
-			 <div class="workout__details">
-				 <span class="workout__icon">⚡️</span>
-				 <span class="workout__value">${workout.speed}</span>
-				 <span class="workout__unit">km/h</span>
-			 </div>
-			 <div class="workout__details">
-				 <span class="workout__icon">⛰</span>
-				 <span class="workout__value">${workout.elevGain}</span>
-				 <span class="workout__unit">m</span>
-			 </div>
-		 </li>
-		 `;
- 
-		 form.insertAdjacentHTML('afterend', html);
+		const workoutDistanceDetailsBlock = document.createElement('div'); 
+		const workoutTypeIcon  = document.createElement('span');
+		const workoutDistanceValue = document.createElement('span');
+		const workoutDistanceUnit = document.createElement('span');
+
+		const workoutDurationDetailsBlock = document.createElement('div');
+		const workoutDurationIcon = document.createElement('span');
+		const workoutDurationValue = document.createElement('span');
+		const workoutDurationUnit = document.createElement('span');
+
+		workoutElement.className = `workout--${workout.type}`;
+		workoutElement.classList.add('workout');
+		workoutElement.dataset.id = `${workout._id || workout.id}`
+
+		workoutDescription.classList = 'workout__title'
+		workoutDescription.innerText = `${workout.description}`;
+
+		deleteButton.classList = 'workout__delete-button';
+		deleteIcon.setAttribute('src', './_app/assets/icons/delete.png');
+		deleteIcon.setAttribute('alt', 'Delete workout');
+
+		
+		workoutDistanceDetailsBlock.classList = 'workout__details';
+		workoutTypeIcon.classList = 'workout__icon';
+		workoutTypeIcon.innerText = `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}`;
+		workoutDistanceValue.classList = 'workout__value';
+		workoutDistanceValue.innerText = `${workout.distance}`;
+		workoutDistanceUnit.classList = 'workout__unit';
+		workoutDistanceUnit.innerText = 'km';
+		
+		workoutDurationDetailsBlock.classList = 'workout__details';
+		workoutDurationIcon.classList = 'workout__icon';
+		workoutDurationIcon.innerText = '⏱';
+		workoutDurationValue.classList = 'workout__value';
+		workoutDurationValue.innerText = `${workout.duration}`;
+		workoutDurationUnit.classList = 'workout__unit';
+		workoutDurationUnit.innerText = 'min';
+
+		deleteButton.appendChild(deleteIcon);
+		workoutDistanceDetailsBlock.append(workoutTypeIcon, workoutDistanceValue, workoutDistanceUnit);
+		workoutDurationDetailsBlock.append(workoutDurationIcon, workoutDurationValue, workoutDurationUnit)
+
+		workoutElement.append(workoutDescription, deleteButton, workoutDistanceDetailsBlock, workoutDurationDetailsBlock);
+
+		if (workout.type === 'running') {
+			const workoutRunningPaceDetailsBlock = document.createElement('div');
+			const workoutRunningPaceIcon = document.createElement('span');
+			const workoutRunningPaceValue = document.createElement('span');
+			const workoutRunningPaceUnit = document.createElement('span');
+
+			const workoutRunningCadenceDetailsBlock = document.createElement('div');
+			const workoutRunningCadenceIcon = document.createElement('span');
+			const workoutRunningCadenceValue = document.createElement('span');
+			const workoutRunningCadenceUnit = document.createElement('span');
+
+			workoutRunningPaceDetailsBlock.classList = 'workout__details';
+			workoutRunningPaceIcon.classList = 'workout__icon';
+			workoutRunningPaceIcon.innerText = '⚡️';
+			workoutRunningPaceValue.classList = 'workout__value';
+			workoutRunningPaceValue.innerText = `${workout.pace.toFixed(1)}`;
+			workoutRunningPaceUnit.classList = 'workout__unit';
+			workoutRunningPaceUnit.innerText = 'min/km';
+
+			workoutRunningCadenceDetailsBlock.classList = 'workout__details';
+			workoutRunningCadenceIcon.classList = 'workout__icon';
+			workoutRunningCadenceIcon.innerText = '🦶🏼';
+			workoutRunningCadenceValue.classList = 'workout__value';
+			workoutRunningCadenceValue.innerText = `${workout.cadence}`;
+			workoutRunningCadenceUnit.classList = 'workout__unit';
+			workoutRunningCadenceUnit.innerText = 'spm';
+
+			workoutRunningPaceDetailsBlock.append(workoutRunningPaceIcon, workoutRunningPaceValue, workoutRunningPaceUnit);
+			workoutRunningCadenceDetailsBlock.append(workoutRunningCadenceIcon, workoutRunningCadenceValue, workoutRunningCadenceUnit);
+
+			workoutElement.append(workoutRunningPaceDetailsBlock, workoutRunningCadenceDetailsBlock);
+			form.after(workoutElement);
+
+		} else if(workout.type === 'cycling') {
+			const workoutCyclingSpeedDetailsBlock = document.createElement('div');
+			const workoutCyclingSpeedIcon = document.createElement('span');
+			const workoutCyclingSpeedValue = document.createElement('span');
+			const workoutCyclingSpeedUnit = document.createElement('span');
+
+			const workoutCyclingElevGainDetailsBlock = document.createElement('div');
+			const workoutCyclingElevGainIcon = document.createElement('span');
+			const workoutCyclingElevGainValue = document.createElement('span');
+			const workoutCyclingElevGainUnit = document.createElement('span');
+
+			workoutCyclingSpeedDetailsBlock.classList = 'workout__details';
+			workoutCyclingSpeedIcon.classList = 'workout__icon';
+			workoutCyclingSpeedIcon.innerText = '⚡️';
+			workoutCyclingSpeedValue.classList = 'workout__value';
+			workoutCyclingSpeedValue.innerText = `${workout.speed}`;
+			workoutCyclingSpeedUnit.classList = 'workout__unit';
+			workoutCyclingSpeedUnit.innerText = 'km/h';
+
+			workoutCyclingElevGainDetailsBlock.classList = 'workout__details';
+			workoutCyclingElevGainIcon.classList = 'workout__icon';
+			workoutCyclingElevGainIcon.innerText = '⛰';
+			workoutCyclingElevGainValue.classList = 'workout__value';
+			workoutCyclingElevGainValue.innerText = `${workout.elevGain}`;
+			workoutCyclingElevGainUnit.classList = 'workout__unit';
+			workoutCyclingElevGainUnit.innerText = 'm';
+
+			workoutCyclingSpeedDetailsBlock.append(workoutCyclingSpeedIcon, workoutCyclingSpeedValue, workoutCyclingSpeedUnit);
+			workoutCyclingElevGainDetailsBlock.append(workoutCyclingElevGainIcon, workoutCyclingElevGainValue, workoutCyclingElevGainUnit);
+
+			workoutElement.append(workoutCyclingSpeedDetailsBlock, workoutCyclingElevGainDetailsBlock);
+			form.after(workoutElement);
+		}
 	 }
 }
