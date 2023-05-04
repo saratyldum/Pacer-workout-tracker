@@ -111,6 +111,7 @@ export default async function renderWorkouts(map, workouts) {
 		workoutDistanceDetailsBlock.classList = 'workout__details';
 		workoutTypeIcon.classList = 'workout__icon';
 		workoutTypeIcon.innerText = `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}`;
+		workoutTypeIcon.ariaHidden = 'true';
 		workoutDistanceValue.classList = 'workout__value';
 		workoutDistanceValue.innerText = `${workout.distance}`;
 		workoutDistanceUnit.classList = 'workout__unit';
@@ -119,6 +120,8 @@ export default async function renderWorkouts(map, workouts) {
 		workoutDurationDetailsBlock.classList = 'workout__details';
 		workoutDurationIcon.classList = 'workout__icon';
 		workoutDurationIcon.innerText = '⏱';
+		workoutDurationIcon.ariaHidden = 'true';
+
 		workoutDurationValue.classList = 'workout__value';
 		workoutDurationValue.innerText = `${workout.duration}`;
 		workoutDurationUnit.classList = 'workout__unit';
@@ -144,6 +147,7 @@ export default async function renderWorkouts(map, workouts) {
 			workoutRunningPaceDetailsBlock.classList = 'workout__details';
 			workoutRunningPaceIcon.classList = 'workout__icon';
 			workoutRunningPaceIcon.innerText = '⚡️';
+			workoutRunningPaceIcon.ariaHidden = 'true';
 			workoutRunningPaceValue.classList = 'workout__value';
 			workoutRunningPaceValue.innerText = `${workout.pace.toFixed(1)}`;
 			workoutRunningPaceUnit.classList = 'workout__unit';
@@ -152,6 +156,7 @@ export default async function renderWorkouts(map, workouts) {
 			workoutRunningCadenceDetailsBlock.classList = 'workout__details';
 			workoutRunningCadenceIcon.classList = 'workout__icon';
 			workoutRunningCadenceIcon.innerText = '🦶🏼';
+			workoutRunningCadenceIcon.ariaHidden = 'true';
 			workoutRunningCadenceValue.classList = 'workout__value';
 			workoutRunningCadenceValue.innerText = `${workout.cadence}`;
 			workoutRunningCadenceUnit.classList = 'workout__unit';
