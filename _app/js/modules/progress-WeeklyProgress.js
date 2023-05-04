@@ -1,7 +1,7 @@
 import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
 
-export default async function weeklyProgress(workouts) {
+export default async function progressWeeklyProgress(workouts) {
 	const progressBar = document.querySelector('.weekly-goal__progress-bar--bar');
 	const weeklyDistanceDone = document.querySelector('.weekly-goal__progress-info--done');
 	const weeklyDistanceRemaining = document.querySelector('.weekly-goal__progress-info--remaining');

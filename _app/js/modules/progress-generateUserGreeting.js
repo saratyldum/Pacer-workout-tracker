@@ -1,4 +1,4 @@
-export default function generateUserGreeting(userInfo) {
+export default function progressGenerateUserGreeting(userInfo) {
 	const userContainer = document.querySelector('.user');
 	
 renderHTML()

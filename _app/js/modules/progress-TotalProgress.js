@@ -1,6 +1,6 @@
 import { sanity } from "../sanity.js";
 
-export default async function totalProgress(workouts) {
+export default async function progressTotalProgress(workouts) {
 	const totalProgress = document.querySelector('.total-progress__stats--distance-value');
 	const totalTime = document.querySelector('.total-progress__stats--time-value');
 

@@ -1,18 +1,19 @@
-import loadMap from "./modules/loadMap.js";
-import fetchWorkouts from "./modules/fetchWorkouts.js";
-import workoutForm from "./modules/workoutForm.js";
-import renderWorkouts from "./modules/renderWorkouts.js";
-import weeklyProgress from "./modules/weeklyProgress.js";
-import dailyProgress from "./modules/dailyProgress.js";
-import totalProgress from "./modules/totalProgress.js";
-import deleteWorkout from "./modules/deleteWorkout.js";
-import fetchUserInformation from "./modules/fetchUserInformation.js";
-import generateUserGreeting from "./modules/generateUserGreeting.js";
+import mapLoadMap from "./modules/map-loadMap.js";
+import progressFetchUserInformation from "./modules/progress-fetchUserInformation.js";
+import progressGenerateUserGreeting from "./modules/progress-generateUserGreeting.js";
+import progressWeeklyProgress from "./modules/progress-WeeklyProgress.js";
+import progressDailyProgress from "./modules/progress-DailyProgress.js";
+import progressTotalProgress from "./modules/progress-TotalProgress.js";
+
+import workoutsFetchWorkouts from "./modules/workouts-fetchWorkouts.js";
+import workoutsWorkoutForm from "./modules/workouts-workoutForm.js";
+import workoutsRenderWorkouts from "./modules/workouts-renderWorkouts.js";
+import workoutsDeleteWorkout from "./modules/workouts-DeleteWorkout.js";
 
 
-const workouts = await fetchWorkouts();
-const user = await fetchUserInformation();
-generateUserGreeting(user);
+const workouts = await workoutsFetchWorkouts();
+const user = await progressFetchUserInformation();
+progressGenerateUserGreeting(user);
 
 if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
@@ -20,13 +21,13 @@ if(navigator.geolocation) {
 
 
 async function handleGeolocationSucess(position) {
-	const map = loadMap(position);
-	await renderWorkouts(map, workouts);
-	await weeklyProgress(workouts);
-	dailyProgress(workouts);
-	totalProgress(workouts);
-	workoutForm(map)
-	await deleteWorkout()
+	const map = mapLoadMap(position);
+	await workoutsRenderWorkouts(map, workouts);
+	await progressWeeklyProgress(workouts);
+	progressDailyProgress(workouts);
+	progressTotalProgress(workouts);
+	workoutsWorkoutForm(map)
+	await workoutsDeleteWorkout()
 }
 
 //fiks bedre error

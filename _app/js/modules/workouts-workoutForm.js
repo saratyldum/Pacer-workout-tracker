@@ -1,6 +1,6 @@
 import { sanityMutate  } from "../sanity.js";
 import updateUI from "./updateUI.js";
-export default async function workoutForm(map) {
+export default async function workoutsWorkoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
 	const inputType = document.querySelector('.workout-form__input--type');

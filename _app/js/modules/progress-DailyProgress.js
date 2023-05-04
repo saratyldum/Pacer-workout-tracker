@@ -1,6 +1,6 @@
 import { sanity } from "../sanity.js";
 
-export default function dailyProgress(workouts) {
+export default function progressDailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
 	const tabContents = document.querySelectorAll('.daily-activities__tab-content');
 	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
