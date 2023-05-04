@@ -1,6 +1,5 @@
 .grid-progress {
 	padding: 1rem;
-	height: 100dvh;
 }
 
 .user {
@@ -26,6 +25,7 @@
 
 .weekly-goal {
 	padding: 1rem;
+	position: relative;
 }
 
 .weekly-goal__goal {
@@ -44,6 +44,21 @@
 
 .weekly-goal__km {
 	color: var(--primary-color);
+}
+
+.weekly-goal__submit-button {
+	display: none;
+	background: var(--primary-color);
+	color: var(--font-color-light);
+	font-family: inherit;
+	border: 1px solid var(--font-color-light);
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	width: 3rem;
+	padding: 0.2rem 0.3rem;
+	border-radius: 3px;
+	transition: all 0.4s ease;
 }
 
 .weekly-goal__progress-info {
@@ -67,8 +82,6 @@
 	background-color: var(--primary-color);
 	width: 0;
 	max-width: 100%;
-	transition: 1s ease 0.3s;
-
 }
 .daily-activities {
 	padding-bottom: 1rem;
@@ -198,6 +211,10 @@
 		background-color: var(--secondary-color);
 		max-width: 450px;
 		margin: 0 auto 1rem;
+	}
+
+	 .weekly-goal__input:focus ~ .weekly-goal__submit-button {
+		display: block;
 	}
 }
 
