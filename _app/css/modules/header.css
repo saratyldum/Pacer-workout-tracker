@@ -2,12 +2,41 @@
 	padding: 0.2rem 1rem;
 	background-color: var(--primary-color);
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
+	align-items: center;
 }
+
 
 .logo img {
 	height: 2rem;
 	object-fit: contain;
+}
+
+.error-box {
+	display: none;
+	width: 100%;
+	justify-content: center;
+	text-align: center;
+	color: white;
+	position: relative;
+	margin: 0 1rem;
+	align-items: center;
+}
+
+.error-box__close-button {
+	border: 1px solid white;
+	padding: 0.25rem 0.5rem;
+	color: white;
+	position: absolute;
+	right: 1rem;
+}
+
+.error-box__close-button:hover {
+	text-decoration: underline;
+}
+
+.error {
+	background-color: var(--error-box);
 }
 
 @media screen and (max-width: 992px) {
