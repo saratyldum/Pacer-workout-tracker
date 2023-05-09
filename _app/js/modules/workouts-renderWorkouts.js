@@ -1,4 +1,5 @@
 import fetchWorkouts from "./workouts-fetchWorkouts.js";
+import toggleStarterMessage from "./toggleStarterMessage.js";
 
 export default async function workoutsRenderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
@@ -49,9 +50,13 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 */
 
 	function renderHTML(workouts) {
-		for (let index = 0; index < workouts.length; index++) {
-			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
-			createWorkoutListDOMElement(workouts[index]);
+		if(workouts.length > 0) {
+			for (let index = 0; index < workouts.length; index++) {
+				renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
+				createWorkoutListDOMElement(workouts[index]);
+			}
+		}else {
+			toggleStarterMessage(true);
 		}
 	 }
 
@@ -75,7 +80,6 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 		 marker.style.width = '35px';
 		 marker.style.height = '35px';
 		 marker.style.backgroundSize = '100%';
-		 console.log(marker);
 
 		 new mapboxgl.Marker(marker)
 		 .setLngLat(coordinates)

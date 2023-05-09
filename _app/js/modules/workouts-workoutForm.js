@@ -1,6 +1,7 @@
 import { sanityMutate  } from "../sanity.js";
 import updateUI from "./updateUI.js";
 import handleError from "./handleError.js";
+import toggleStarterMessage from "./toggleStarterMessage.js";
 export default async function workoutsWorkoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
@@ -21,6 +22,7 @@ export default async function workoutsWorkoutForm(map) {
 	}
 
 	function handleMapClick(event) {
+		toggleStarterMessage(false)
 		showWorkoutForm(event);
 	}
 
@@ -203,7 +205,7 @@ export default async function workoutsWorkoutForm(map) {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			console.error(error.message);
+			handleError(error.message)
 		}
 	}
 }

@@ -4,7 +4,8 @@ import progressDailyProgress from "./progress-DailyProgress.js"
 
 import workoutsRenderWorkouts from "./workouts-renderWorkouts.js";
 import workoutsFetchWorkouts from "./workouts-fetchWorkouts.js";
-import workoutsDeleteWorkout from "./workouts-DeleteWorkout.js";
+import workoutsDeleteWorkout from "./workouts-deleteWorkout.js";
+import toggleStarterMessage from "./toggleStarterMessage.js";
 
 export default async function updateUI(map, workout) {
 	await renderHTMl(map, workout)
@@ -19,8 +20,11 @@ export default async function updateUI(map, workout) {
 	async function renderHTMl(map, workout) {
 		const workouts = await workoutsFetchWorkouts();
 
-		if(map !== undefined && workout !== undefined) {
+		if(map !== undefined && workout !== undefined) 
 			await workoutsRenderWorkouts(map, [workout]);
+
+		if (workouts.length === 0) {
+			toggleStarterMessage(true)	
 		}
 
 		await progressWeeklyProgress(workouts);
