@@ -13,17 +13,15 @@
 	
 	<body>
 		<header class="header">
-			<div class="logo"><img src="./_app/assets/icons/logo.svg" alt="Pacer logo">
-			</div>
+			<div class="logo"><img src="./_app/assets/icons/logo.svg" alt="Logo"></div>
 		</header>
 		<main class="grid-wrapper">
-			<div class="grid-progress">
-				<div class="user">
-				</div>
+			<section class="grid-progress">
+				<div class="user"></div>
 				<div class="weekly-goal">
 					<form class="weekly-goal__goal">
 						<label for="weeklyGoal">Week goal</label>
-						<input type="number" name='weeklyGoal' class="weekly-goal__input"><span class="weekly-goal__km">km</span></input>
+						<input type="number" name='weeklyGoal' id="weeklyGoal" class="weekly-goal__input"><span class="weekly-goal__km">km</span></input>
 						<button type="submit" class="weekly-goal__submit-button">OK</button>
 					</form>
 					<div class="weekly-goal__progress-info">
@@ -77,10 +75,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="daily-activities__tab-content daily-activities__tab-content--cycling hidden">
-						This Week <span class="daily-activities__tab-content--span">35km</span>
-						<div class="daily-activities__cycling-statistic"></div>
-					</div> -->
+
 				</div>
 				<div class="total-progress">
 					<div class="total-progress__title">Total progress</div>
@@ -90,53 +85,61 @@
 						<div class="total-progress__stats--time"> <img class="total-progress__stats--icon" aria-hidden='true' src="./_app/assets/icons/clock.svg" alt=""><span class="total-progress__stats--time-value"></span></div>
 					</div>
 				</div>
-			</div>
+			</section>
 
-			<div class="grid-map" id='map'></div>
+			<section class="grid-map" id='map'></section>
 
-			<div class="grid-workouts">
+			<section class="grid-workouts">
 				<ul class="workouts">
 					<form class="workout-form hidden">
 						<div class="workout-form__row">
-							<label class="workout-form__label">Type</label>
-							<select class="workout-form__input workout-form__input--type">
+							<label for="activity" class="workout-form__label">Type</label>
+							<select id="activity" class="workout-form__input workout-form__input--type">
 								<option value="running">Running</option>
 								<option value="cycling">Cycling</option>
 							</select>
 						</div>
 						<div class="workout-form__row">
-							<label class="workout-form__label">Distance</label>
+							<label class="workout-form__label" for="distance">Distance</label>
 							<input 
+								aria-label="Distance in km"
 								type="text" 
+								id="distance"
 								class="workout-form__input workout-form__input--distance"
 								placeholder="km">
 						</div>
 						<div class="workout-form__row">
-							<label class="workout-form__label">Duration</label>
+							<label class="workout-form__label" for="duration">Duration</label>
 							<input 
+								aria-label="Duration in min"
+								id="duration"
 								type="text" 
 								class="workout-form__input workout-form__input--duration"
 								placeholder="min">
 						</div>
 
 						<div class="workout-form__row">
-							<label class="workout-form__label">Cadence</label>
+							<label class="workout-form__label" for="cadence">Cadence</label>
 							<input 
-							type="text" 
-							class="workout-form__input workout-form__input--cadence"
-							placeholder="step/min">
+								aria-label="Cadence with step/min"
+								id="cadence"
+								type="text" 
+								class="workout-form__input workout-form__input--cadence"
+								placeholder="step/min">
 						</div>
 						<div class="workout-form__row workout-form__row--hidden">
-							<label class="workout-form__label">Elev Gain</label>
+							<label class="workout-form__label" for="elevationGain">Elev Gain</label>
 							<input 
-							type="text" 
-							class="workout-form__input workout-form__input--elevation"
-							placeholder="meters">
+								aria-label="Elevation gain in meteres"
+								id="elevationGain"
+								type="text" 
+								class="workout-form__input workout-form__input--elevation"
+								placeholder="meters">
 						</div>
 						<button type='submit' class="workout-form__submit-button">OK</button>
 					</form>
 				</ul>
-			</div>
+			</section>
 		</main>
 	</body>
 </html>
