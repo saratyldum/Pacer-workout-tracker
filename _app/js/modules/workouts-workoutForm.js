@@ -1,5 +1,6 @@
 import { sanityMutate  } from "../sanity.js";
 import updateUI from "./updateUI.js";
+import handleError from "./handleError.js";
 export default async function workoutsWorkoutForm(map) {
 
 	const form = document.querySelector('.workout-form');
@@ -67,8 +68,8 @@ export default async function workoutsWorkoutForm(map) {
 			if (
 				!isValidInputs(distance, duration, cadence) || 
 				!allPositive(distance, duration, cadence)
-			) 
-				return alert('Input have to be positive number'); //fiks bedre error meldinger
+			)
+				return handleError('All inputs have to be positive numbers');	
 
 			const workout = createRunningWorkoutObject(coordinates, distance, duration, cadence, date, id);
 			return workout;
@@ -82,7 +83,7 @@ export default async function workoutsWorkoutForm(map) {
 				!isValidInputs(distance, duration, elevGain) ||
 				!allPositive(distance, duration)
 			) 
-				return alert('Input have to be positive number'); //fiks bedre error meldinger
+				return handleError('Distance and duration have to be positive numbers. Elevation Gain can be positive or negative.')
 			
 			const workout = createCyclingWorkoutObject(coordinates, distance, duration, elevGain, date, id);
 			return workout;

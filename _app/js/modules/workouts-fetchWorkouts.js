@@ -1,4 +1,5 @@
 import { sanity } from "../sanity.js";
+import handleError from "./handleError.js";
 
 	/**
 	 * 	/// THIS FETCH METHOD CODE IS BORROWED FROM ALEJANDRO ROJAS ///
@@ -26,7 +27,7 @@ export default async function workoutsFetchWorkouts() {
 		const workouts = await sanity.fetch(query);
 		return workouts
 	} catch(error) {
-		console.error(error.message);
+		handleError(error.message)
 	}
 
 	return workouts;
