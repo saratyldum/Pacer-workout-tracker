@@ -82,6 +82,7 @@
 	background-color: var(--primary-color);
 	width: 0;
 	max-width: 100%;
+	transition: 1s ease 0.3s;
 }
 .daily-activities {
 	padding-bottom: 1rem;

@@ -81,7 +81,6 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 		 marker.style.width = '35px';
 		 marker.style.height = '35px';
 		 marker.style.backgroundSize = '100%';
-		 console.log(marker);
 
 		 new mapboxgl.Marker(marker)
 		 .setLngLat(coordinates)

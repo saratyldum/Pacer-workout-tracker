@@ -1,4 +1,5 @@
 import { sanityMutate  } from "../sanity.js";
+import handleError from "./handleError.js";
 import updateUI from "./updateUI.js";
 
 export default async function workoutsDeleteWorkout() {
@@ -40,12 +41,13 @@ export default async function workoutsDeleteWorkout() {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			console.error(error.message);
+			handleError(error.message)
 		}
 	}
 
 	function deleteMarkerFromMap(workoutID) {
 		const marker = document.getElementById(workoutID);
+		if(marker !== null)
 		marker.remove();
 	}
 }

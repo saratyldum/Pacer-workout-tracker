@@ -1,5 +1,6 @@
 import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
+import handleError from "./handleError.js";
 
 export default async function progressWeeklyProgress(workouts) {
 	const progressBar = document.querySelector('.weekly-goal__progress-bar--bar');
@@ -48,7 +49,7 @@ export default async function progressWeeklyProgress(workouts) {
 			
 			return goal.weeklyGoal;
 		} catch(error) {
-			console.error(error.message);
+			handleError(error.message)
 		}
 
 	}
@@ -98,7 +99,7 @@ export default async function progressWeeklyProgress(workouts) {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			console.error(error.message);
+			handleError(error.message)
 		}
 	}
 }

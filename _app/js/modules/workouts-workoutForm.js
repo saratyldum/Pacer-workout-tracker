@@ -21,7 +21,7 @@ export default async function workoutsWorkoutForm(map) {
 	}
 
 	function handleMapClick(event) {
-		toggleStarterMessage(false);
+		toggleStarterMessage(false)
 		showWorkoutForm(event);
 	}
 
@@ -204,7 +204,7 @@ export default async function workoutsWorkoutForm(map) {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			console.error(error.message);
+			handleError(error.message)
 		}
 	}
 }

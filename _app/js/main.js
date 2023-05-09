@@ -19,8 +19,6 @@ progressGenerateUserGreeting(user);
 /**
  * I decided to get the users location here instead of making a separate 
  * module because it is only being done once when the site has loaded and then not again. 
- * Because og that i thought it was unecessary to create a module that needs to be imported when 
- * before it can run.
  */
 if(navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(handleGeolocationSucess, errorPosition)
