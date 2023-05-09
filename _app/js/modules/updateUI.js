@@ -4,7 +4,7 @@ import progressDailyProgress from "./progress-DailyProgress.js"
 
 import workoutsRenderWorkouts from "./workouts-renderWorkouts.js";
 import workoutsFetchWorkouts from "./workouts-fetchWorkouts.js";
-import workoutsDeleteWorkout from "./workouts-DeleteWorkout.js";
+import workoutsDeleteWorkout from "./workouts-deleteWorkout.js";
 
 export default async function updateUI(map, workout) {
 	await renderHTMl(map, workout)

@@ -1,8 +1,10 @@
 import fetchWorkouts from "./workouts-fetchWorkouts.js";
+import toggleStarterMessage from "./toggleStarterMessage.js";
 
 export default async function workoutsRenderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
+
 	map = map;
 
 	const allWorkouts = 	await fetchWorkouts();
@@ -49,9 +51,13 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 */
 
 	function renderHTML(workouts) {
-		for (let index = 0; index < workouts.length; index++) {
-			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
-			createWorkoutListDOMElement(workouts[index]);
+		if(workouts.length > 0) {
+			for (let index = 0; index < workouts.length; index++) {
+				renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
+				createWorkoutListDOMElement(workouts[index]);
+			}
+		}else {
+			toggleStarterMessage(true);
 		}
 	 }
 
@@ -211,4 +217,10 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 			form.after(workoutElement);
 		}
 	 }
+
+	//  function toggleStarterMessage() {
+	// 	starterMessage = !starterMessage;
+	// 	starterMessageContainer.style.display = 'block'
+
+	//  }
 }
