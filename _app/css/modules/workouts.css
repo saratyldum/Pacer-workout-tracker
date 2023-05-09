@@ -15,7 +15,7 @@
 
 .workout-form, .workout {
 	background-color: var(--workout);
-	border-radius: 5px;
+	border-radius: var(--border-radius-section);
 	padding: 1rem 0.5rem;
 	margin-bottom: 1.5rem;
 	display: grid;
@@ -103,7 +103,7 @@
  }
 
  .workout-form__label {
-	flex: 0 0 50%; /*LES NØYERE OM DETTE*/
+	flex: 0 0 50%;
 	font-size: 1rem;
 	font-weight: 600;
  }
@@ -115,7 +115,7 @@
 	font-size: 0.8rem;
 	border: 1px solid var(--secondary-color);
 	color: var(--secondary-color);
-	border-radius: 3px;
+	border-radius: var(--border-radius-button);
 	transition: all 0.2s;
 	background-color: var(--primary-color-light);
  }
@@ -146,7 +146,7 @@
 	transform: translateX(-50%);
 	width: 10rem;
 	padding: 0.2rem;
-	border-radius: 3px;
+	border-radius: var(--border-radius-button);
 	transition: all 0.2s ease;
  }
 
