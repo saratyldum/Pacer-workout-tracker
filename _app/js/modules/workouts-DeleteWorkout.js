@@ -13,6 +13,7 @@ export default async function workoutsDeleteWorkout() {
 		const workoutID = workoutElement.dataset.id;
 		await deleteWorkoutFromSanity(workoutID);
 		workoutElement.remove();
+		deleteMarkerFromMap(workoutID);
 		await updateUI();
 	}
 
@@ -23,7 +24,6 @@ export default async function workoutsDeleteWorkout() {
 	 * @see sendWorkoutToSanity() - under the workoutForm module for an explanation of the muatate function
 	 */
 	async function deleteWorkoutFromSanity(workoutID) {
-		console.log(workoutID);
 		try {
 			const mutations = [
 				{
@@ -42,5 +42,10 @@ export default async function workoutsDeleteWorkout() {
 		} catch(error) {
 			console.error(error.message);
 		}
+	}
+
+	function deleteMarkerFromMap(workoutID) {
+		const marker = document.getElementById(workoutID);
+		marker.remove();
 	}
 }
