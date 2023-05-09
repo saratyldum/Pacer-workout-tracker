@@ -7,20 +7,28 @@
 	max-height: 100dvh;
 }
 
+.addWorkoutMessage {
+	color: var(--font-color-light);
+	text-align: center;
+	display: none;
+}
+
 .workouts {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	color: var(--font-color-light);
 }
 
-.workout-form, .workout {
+.workout-form, .workout, .addWorkoutMessage {
 	background-color: var(--workout);
 	border-radius: var(--border-radius-section);
 	padding: 1rem 0.5rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem; 
+}
+
+.workout-form, .workout {
 	display: grid;
 	gap: 0.5rem 0.5rem;
- 
 }
 
 .workout {
