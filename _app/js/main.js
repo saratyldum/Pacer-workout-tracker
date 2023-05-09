@@ -9,6 +9,7 @@ import workoutsFetchWorkouts from "./modules/workouts-fetchWorkouts.js";
 import workoutsWorkoutForm from "./modules/workouts-workoutForm.js";
 import workoutsRenderWorkouts from "./modules/workouts-renderWorkouts.js";
 import workoutsDeleteWorkout from "./modules/workouts-DeleteWorkout.js";
+import handleError from "./modules/handleError.js";
 
 
 const workouts = await workoutsFetchWorkouts();
@@ -32,6 +33,6 @@ async function handleGeolocationSucess(position) {
 
 //fiks bedre error
 function errorPosition() {
-alert('Could not get your position')
+	handleError('Could not get your position')
 }
 
