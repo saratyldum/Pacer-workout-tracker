@@ -5,7 +5,9 @@ import progressDailyProgress from "./progress-DailyProgress.js"
 import workoutsRenderWorkouts from "./workouts-renderWorkouts.js";
 import workoutsFetchWorkouts from "./workouts-fetchWorkouts.js";
 import workoutsDeleteWorkout from "./workouts-deleteWorkout.js";
+
 import toggleStarterMessage from "./toggleStarterMessage.js";
+
 
 export default async function updateUI(map, workout) {
 	await renderHTMl(map, workout)

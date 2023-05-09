@@ -4,6 +4,7 @@ import toggleStarterMessage from "./toggleStarterMessage.js";
 export default async function workoutsRenderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
+
 	map = map;
 
 	const allWorkouts = 	await fetchWorkouts();
@@ -215,4 +216,10 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 			form.after(workoutElement);
 		}
 	 }
+
+	//  function toggleStarterMessage() {
+	// 	starterMessage = !starterMessage;
+	// 	starterMessageContainer.style.display = 'block'
+
+	//  }
 }
