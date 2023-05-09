@@ -49,9 +49,8 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 */
 
 	function renderHTML(workouts) {
-		console.log(workouts);
 		for (let index = 0; index < workouts.length; index++) {
-			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, workouts[index]._id)
+			renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
 			createWorkoutListDOMElement(workouts[index]);
 		}
 	 }
@@ -70,13 +69,15 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 		 .addClassName('running-popup');
  
 		 //Adds the marker
-		 const element = document.createElement('div');
-		 element.setAttribute('id', id);
-		 element.style.width = '20px';
-		 element.style.height = '20px';
-		 element.style.backgroundColor = 'var(--primary-color)';
+		 const marker = document.createElement('div');
+		 marker.setAttribute('id', id);
+		 marker.style.backgroundImage = `url(/_app/assets/icons/marker.svg)`;
+		 marker.style.width = '35px';
+		 marker.style.height = '35px';
+		 marker.style.backgroundSize = '100%';
+		 console.log(marker);
 
-		 new mapboxgl.Marker(element)
+		 new mapboxgl.Marker(marker)
 		 .setLngLat(coordinates)
 		 .setPopup(popup)
 		 .addTo(map)
