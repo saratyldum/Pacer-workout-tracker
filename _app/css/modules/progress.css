@@ -57,7 +57,7 @@
 	top: 1rem;
 	width: 3rem;
 	padding: 0.2rem 0.3rem;
-	border-radius: 3px;
+	border-radius: var(--border-radius-button);
 	transition: all 0.4s ease;
 }
 
@@ -71,14 +71,14 @@
 
 .weekly-goal__progress-bar {
 	height: 8px;
-	border-radius: 5px;
+	border-radius: var(--border-radius-section);
 	width: 100%;
 	background-color: var(--secondary-color-light);
 }
 
 .weekly-goal__progress-bar--bar {
 	height: 100%;
-	border-radius: 5px;
+	border-radius: var(--border-radius-section);
 	background-color: var(--primary-color);
 	width: 0;
 	max-width: 100%;
@@ -140,7 +140,7 @@
 
 .daily-activities__bar {
 	background-color: var(--primary-color);
-	border-radius: 5px 5px 0 0;
+	border-radius: var(--border-radius-section) var(--border-radius-section) 0 0;
 	height: 1%;
 	width: 100%;
 	max-height: 100%;
@@ -185,7 +185,6 @@
 	opacity: 0.1;
 }
 .total-progress__stats--icon {
-	/* object-position: 5px 5px; */
 	height: 2.5rem;
 }
 
