@@ -1,12 +1,14 @@
 import { sanity } from "../sanity.js";
 import handleError from "./handleError.js";
 
-	/**
-	 * 	/// THIS FETCH METHOD CODE IS BORROWED FROM ALEJANDRO ROJAS ///
-	 * 
-	 * 	Baseic usage: The sanity fetch method works by passing a query, using the same structure as the documentation
-	 * 	and fetching the result from Sanity. 
-	 */
+/**
+ * 	/// THIS FETCH METHOD CODE ARCHITECTURE  IS BORROWED FROM ALEJANDRO ROJAS ///
+ * 
+ * 	Basic usage: The sanity fetch method works by passing a query, using the same structure as the documentation
+ * 	and fetching the result from Sanity. 
+ * 
+ * 	@returns all workouts fetched from Sanity
+ */
 export default async function workoutsFetchWorkouts() {
 	let workouts; 
 	try {
