@@ -6,7 +6,7 @@ body {
 	font-family: 'Manrope', sans-serif;
 	font-weight: 400;
 	height: 100dvh;
-	background-color: var(--primary-color);
+	background-color: var(--secondary-color);
 	color: var(--font-color);
 }
 
@@ -49,20 +49,22 @@ button {
 
 .grid-wrapper {
 	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	grid-template-areas: 
+		'progress-view map map workout-list';
+	height: 100dvh;
+	
+}
+
+@media screen and (max-width: 992px) {
+	body {
+		background-color: var(--primary-color);
+	}
+	.grid-wrapper {
+		grid-template-columns: repeat(1, 1fr);
+		grid-template-areas: 
 		'progress-view'
 		'map'
 		'workout-list';
-}
-
-@media screen and (min-width: 992px) {
-	body {
-		background-color: var(--secondary-color);
-	}
-	.grid-wrapper {
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-areas: 
-			'progress-view map map workout-list';
-		height: 100dvh;
 	}
 }
