@@ -1,7 +1,17 @@
+/**
+ * Creates a message greeting the user using the information about the user existing in Sanity.
+ * 
+ * @param {object} userInfo The user info fetched from Sanity Studio
+ */
 export default function progressGenerateUserGreeting(userInfo) {
 	const userContainer = document.querySelector('.user');
-	
-renderHTML()
+
+	/**
+	 * Renders at least once after loading the module for the first time.
+	 * 
+	 * @see renderHTML()
+	 */
+	renderHTML()
 
 	function formatUserName(userInfo) {
 		const userName = userInfo.userName;
