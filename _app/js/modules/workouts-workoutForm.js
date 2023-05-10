@@ -2,6 +2,13 @@ import { sanityMutate  } from "../sanity.js";
 import updateUI from "./updateUI.js";
 import handleError from "./handleError.js";
 import toggleStarterMessage from "./toggleStarterMessage.js";
+
+/**
+ * Shows the workout form whenever the user clicks on the map and creates new workout objects when user submits
+ * form with workout data. The new workout object then gets sent to Sanity.
+ * 
+ * @param {object} map - map object from MApbox
+ */
 export default async function workoutsWorkoutForm(map) {
 	const form = document.querySelector('.workout-form');
 	const inputType = document.querySelector('.workout-form__input--type');
@@ -20,34 +27,58 @@ export default async function workoutsWorkoutForm(map) {
 		toggleElevationField();
 	}
 
+	/**
+	 * Saves the click event in the global mapEvent variable so the that we can access the coordinates data
+	 * when creating a new workout object. Also removes the starter message if its visible to show the workout form.
+	 * 
+	 * @param {object} event the click event from when user clicks the map
+	 * @see createNewWorkoutObject()
+	 */
 	function handleMapClick(event) {
+		mapEvent = event;
 		toggleStarterMessage(false)
 		showWorkoutForm(event);
 	}
 
+	/**
+	 * When a workout form is submitted a new workout object is created and sent to Sanity, and the UI gets updated.
+	 * @param {object} event the submit event
+	 */
 	async function handleFormSubmit(event) {
-		const workout = createNewWorkoutObject(event);
+		event.preventDefault();
+		const workout = createNewWorkoutObject();
 		await sendWorkoutToSanity(workout);
-
 		hideWorkoutForm();
 		await updateUI(map, workout);
 	}
 
+	/**
+	 * Toggles between the Cadence and Elevation Gain input fields depending on what the user has chosen.
+	 */
 	function toggleElevationField() {
 		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 	}
 
-	function showWorkoutForm(event) {
-		mapEvent = event;
+	/**
+	 * Shows the workout form when the user clicks on the map
+	 */
+	function showWorkoutForm() {
 		form.classList.remove('hidden');
 		inputDistance.focus();
 	}
 
+	/**
+	 * Creates a new workout object based on the users input in the form. There are separate functions creating a
+	 * running object and a cycling object based on the activity chosen.
+	 * 
+	 * @see createRunningWorkoutObject()
+	 * @see createCyclingWorkoutObject()
+	 * 
+	 * @returns the workout object
+	 */
 	function createNewWorkoutObject(event) {
-		event.preventDefault();
-
-		//helping functions
+		//helping functions to check that all inputs are valid
 		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input)); //les mer om isFinite
 		const allPositive = (...inputs) => inputs.every(input => input > 0);
 
@@ -101,6 +132,18 @@ export default async function workoutsWorkoutForm(map) {
 		 return description;
 	}
 
+	/**
+	 * Creates a running object based on the input values gathered from the workout form 
+	 * 
+	 * @param {array} coordinates - an array of the coordinates from where on the map the user clicked
+	 * @param {number} distance - the distance value
+	 * @param {number} duration - duration value 
+	 * @param {number} cadence - cadence vale
+	 * @param {object} date - date value
+	 * @param {string} id - id value
+	 * 
+	 * @returns running object
+	 */
 	function createRunningWorkoutObject(coordinates, distance, duration, cadence, date, id) {
 		const type = 'running';
 		const pace = calculatePace(duration, distance);
@@ -109,6 +152,18 @@ export default async function workoutsWorkoutForm(map) {
 		return running;
 	}
 
+		/**
+	 * Creates a cycling object based on the input values gathered from the workout form 
+	 * 
+	 * @param {array} coordinates - an array of the coordinates from where on the map the user clicked
+	 * @param {number} distance - the distance value
+	 * @param {number} duration - duration value 
+	 * @param {number} elevGain - elevation gain vale
+	 * @param {object} date - date value
+	 * @param {string} id - id value
+	 * 
+	 * @returns cycling object
+	 */
 	function createCyclingWorkoutObject(coordinates, distance, duration, elevGain, date, id) {
 		const type = 'cycling';
 		const speed = calculateSpeed(distance, duration);

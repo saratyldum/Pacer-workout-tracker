@@ -62,7 +62,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 				//create workout marker with popup
 				[popup, marker] = createWorkoutMarker(workouts[index].description, (workouts[index]._id || workouts[index].id))
-				
+
 				//Add marker to map
 				new mapboxgl.Marker(marker)
 				.setLngLat(workouts[index].coordinates)
@@ -82,7 +82,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	  * @param {string} description - description of the workout.
 	  * @param {string} id - the id of the workout
 	  */
-	 function createWorkoutMarker(coordinates, description, id) {
+	 function createWorkoutMarker(description, id) {
 		 //Creates popup
 		 const popup = new mapboxgl.Popup({closeOnClick: false})
 		 .setText(description)
