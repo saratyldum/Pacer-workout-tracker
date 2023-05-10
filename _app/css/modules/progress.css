@@ -20,7 +20,7 @@
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	margin-bottom: 1rem;
-	border: 3px solid var(--primary-color-low-opacity);
+	border: var(--border-radius-button) solid var(--primary-color-low-opacity);
 }
 
 .weekly-goal {
@@ -29,16 +29,14 @@
 }
 
 .weekly-goal__goal {
-	font-size: 0.9rem;
+	font-size: 1rem;
 	font-weight: 600;
 }
 
 .weekly-goal__input {
 	color: var(--primary-color);
-	background-color: inherit;
-	font-family: inherit;
 	border: none;
-	width: 2rem;
+	width: 2.5rem;
 	font-size: 1rem;
 }
 
@@ -50,13 +48,11 @@
 	display: none;
 	background: var(--primary-color);
 	color: var(--font-color-light);
-	font-family: inherit;
-	border: 1px solid var(--font-color-light);
+	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
-	width: 3rem;
-	padding: 0.2rem 0.3rem;
+	padding: 0.1rem 1rem;
 	border-radius: var(--border-radius-button);
 	transition: all 0.4s ease;
 }
@@ -64,13 +60,13 @@
 .weekly-goal__progress-info {
 	display: flex;
 	justify-content: space-between;
-	font-size: 0.75rem;
+	font-size: 1rem;
 	margin-top: 1rem;
 	margin-bottom: 0.5rem;
 }
 
 .weekly-goal__progress-bar {
-	height: 8px;
+	height: 0.5rem;
 	border-radius: var(--border-radius-section);
 	width: 100%;
 	background-color: var(--secondary-color-light);
@@ -95,9 +91,6 @@
 }
 
 .daily-activities__running-tab, .daily-activities__cycling-tab {
-	background-color: inherit;
-	border: none;
-	cursor: pointer;
 	width: 100%;
 	padding: 0.5rem;
 }
@@ -110,7 +103,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-size: 0.9rem;
+	font-size: 1rem;
 	padding: 1rem;
 }
 
@@ -134,8 +127,8 @@
 }
 
 .daily-activities__bar-container {
-	width: 0.6rem;
-	height: 120px;
+	width: 0.5rem;
+	height: 7.5rem;
 	position: relative;
 }
 
@@ -152,7 +145,7 @@
 
 .daily-activities__bar--day {
 	position: absolute;
-	font-size: 0.6rem;
+	font-size: 0.75rem;
 	bottom: -1rem;
 }
 
@@ -171,7 +164,7 @@
 	justify-content: space-between;
 	border-radius: 0.5rem;
 	background-color: var(--primary-color-lighter);
-	border: 1px solid var(--primary-color-low-opacity);
+	border: var(--border-small) solid var(--primary-color-low-opacity);
 }
 
 .total-progress__stats--distance, .total-progress__stats--time {
@@ -199,8 +192,8 @@
 	}
 
 	.user__image {
-		height: 50px;
-		width: 50px;
+		height: 3rem;
+		width: 3rem;
 	}
 
 	.grid-progress {

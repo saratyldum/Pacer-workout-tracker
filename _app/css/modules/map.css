@@ -6,7 +6,7 @@
 .mapboxgl-popup-content {
 	background-color: var(--primary-color);
 	color: var(--secondary-color);
-	border-radius: 5px;
+	border-radius: var(--border-radius-section);
 }
 
 
@@ -18,15 +18,15 @@
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
 	border-top-color: var(--primary-color);
-	margin-bottom: 1.2rem;
+	margin-bottom: 1.25rem;
 }
 
  .running-popup .mapboxgl-popup-content {
-	border-left: 5px solid var(--running);
+	border-left: var(--border-radius-section) solid var(--running);
 }
 
 .cycling-popup .mapboxgl-popup-content {
-	border-left: 5px solid var(--cycling);
+	border-left: var(--border-radius-section)solid var(--cycling);
 }
 
 @media screen and (max-width: 992px) {

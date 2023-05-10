@@ -3,7 +3,7 @@
 	padding: 0 1rem 1rem 1rem;
 	display: flex;
 	flex-direction: column;
-	min-width: 400px;
+	min-width: 410px;
 	max-height: 100dvh;
 }
 
@@ -38,11 +38,11 @@
 }
 
 .workout--running {
-	border-left: 5px solid var(--running);
+	border-left: var(--border-radius-section) solid var(--running);
  }
 
 .workout--cycling {
-	border-left: 5px solid var(--cycling);
+	border-left: var(--border-radius-section) solid var(--cycling);
  }
 
  .workout__title {
@@ -63,7 +63,7 @@
 
 .workout__icon {
 	font-size: 1rem;
-	margin-right: 0.2rem;
+	margin-right: 0.25rem;
  }
 
  .workout__value {
@@ -72,7 +72,7 @@
  }
 
  .workout__unit {
-	font-size: 0.9rem;
+	font-size: 1rem;
 	color: var(--secondary-color-light);
 	text-transform: uppercase;
  }
@@ -119,9 +119,8 @@
  .workout-form__input {
 	width: 100%;
 	padding: 0.3rem;
-	font-family: inherit;
-	font-size: 0.8rem;
-	border: 1px solid var(--secondary-color);
+	font-size: 0.75rem;
+	border: var(--border-small) solid var(--secondary-color);
 	color: var(--secondary-color);
 	border-radius: var(--border-radius-button);
 	transition: all 0.2s;
@@ -144,10 +143,7 @@
 
  .workout-form__submit-button {
 	display: none;
-	background: transparent;
-	color: inherit;
-	font-family: inherit;
-	border: 1px solid var(--font-color-light);
+	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	left: 50%;
 	bottom: 0.5rem;
@@ -160,7 +156,7 @@
 
  .workout-form__submit-button:hover {
 	color: var(--primary-color);
-	border: 1px solid var(--primary-color);
+	border: var(--border-small) solid var(--primary-color);
 	background-color: var(--font-color-light);
  }
 
