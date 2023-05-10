@@ -10,6 +10,10 @@ body {
 	color: var(--font-color);
 }
 
+.overflow-wrapper {
+	width: 100vw;
+}
+
 .hidden {
 	display: none;
 }

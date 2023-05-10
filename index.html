@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0 ">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Pacer | Workout Tracker</title>
 		<script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
 		<link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
@@ -12,141 +12,144 @@
 	</head>
 	
 	<body>
-		<header class="header">
-			<div class="logo"><img src="./_app/assets/icons/logo.svg" alt="Logo"></div>
-			<div class="error-box">
-				<div role="alert" class="error-box__message"></div>
-				<button class="error-box__close-button">Close</button>
-			</div>
-		</header>
-		<main class="grid-wrapper">
-			<section class="grid-progress">
-				<div class="user"></div>
-				<div class="weekly-goal">
-					<form class="weekly-goal__goal">
-						<label for="weeklyGoal">Week goal</label>
-						<input type="number" name='weeklyGoal' id="weeklyGoal" class="weekly-goal__input"><span class="weekly-goal__km">km</span></input>
-						<button type="submit" class="weekly-goal__submit-button">OK</button>
-					</form>
-					<div class="weekly-goal__progress-info">
-						<div ><span class="weekly-goal__progress-info--done">10</span>km done</div>
-						<div ><span class="weekly-goal__progress-info--remaining">40</span>km left</div>
-					</div>
-					<div class="weekly-goal__progress-bar">
-						<div class="weekly-goal__progress-bar--bar"></div>
-					</div>
+		<div class="overflow-wrapper">
+			
+			<header class="header">
+				<div class="logo"><img src="./_app/assets/icons/logo.svg" alt="Logo"></div>
+				<div class="error-box">
+					<div role="alert" class="error-box__message"></div>
+					<button class="error-box__close-button">Close</button>
 				</div>
-				<div class="daily-activities ">
-					<div class="daily-activities-tab">
-						<button class="daily-activities-tab-button daily-activities__running-tab"><img class="daily-activities__icon" src="./_app/assets/icons/running.svg" alt="Daily progress tab for running activity"></button>
-						<button class="daily-activities-tab-button daily-activities__cycling-tab daily-activities-tab--inactive"><img class="daily-activities__icon" src="./_app/assets/icons/cycling.svg" alt="Daily progress tab for cycling activity"></button>
-					</div>
-
-					<div class="daily-activities__tab-content daily-activities__tab-content--running">
-						This Week <span class="daily-activities__tab-content--span"></span>
-						<div class="daily-activities__running-statistic">
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar"></div>
-								<div class="daily-activities__bar--day">M</div>
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar"></div>
-								<div class="daily-activities__bar--day">T</div>
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar"></div>
-								<div class="daily-activities__bar--day">W</div>
-
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar"></div>
-								<div class="daily-activities__bar--day">T</div>
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar"></div>
-								<div class="daily-activities__bar--day">F</div>
-
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar saturday"></div>
-								<div class="daily-activities__bar--day">S</div>
-
-							</div>
-							<div class="daily-activities__bar-container">
-								<div class="daily-activities__bar sunday"></div>
-								<div class="daily-activities__bar--day">S</div>
-
-							</div>
+			</header>
+			<main class="grid-wrapper">
+				<section class="grid-progress">
+					<div class="user"></div>
+					<div class="weekly-goal">
+						<form class="weekly-goal__goal">
+							<label for="weeklyGoal">Week goal</label>
+							<input type="number" name='weeklyGoal' id="weeklyGoal" class="weekly-goal__input"><span class="weekly-goal__km">km</span></input>
+							<button type="submit" class="weekly-goal__submit-button">OK</button>
+						</form>
+						<div class="weekly-goal__progress-info">
+							<div ><span class="weekly-goal__progress-info--done">10</span>km done</div>
+							<div ><span class="weekly-goal__progress-info--remaining">40</span>km left</div>
+						</div>
+						<div class="weekly-goal__progress-bar">
+							<div class="weekly-goal__progress-bar--bar"></div>
 						</div>
 					</div>
-
-				</div>
-				<div class="total-progress">
-					<div class="total-progress__title">Total progress</div>
-					<div class="total-progress__stats">
-						<div class="total-progress__stats--distance"><img class="total-progress__stats--icon" aria-hidden='true' src="./_app/assets/icons/running-man.svg" alt=""><span class="total-progress__stats--distance-value"></span></div>
-						<div class="total-progress__stats-divider"></div>
-						<div class="total-progress__stats--time"> <img class="total-progress__stats--icon" aria-hidden='true' src="./_app/assets/icons/clock.svg" alt=""><span class="total-progress__stats--time-value"></span></div>
+					<div class="daily-activities ">
+						<div class="daily-activities-tab">
+							<button class="daily-activities-tab-button daily-activities__running-tab"><img class="daily-activities__icon" src="./_app/assets/icons/running.svg" alt="Daily progress tab for running activity"></button>
+							<button class="daily-activities-tab-button daily-activities__cycling-tab daily-activities-tab--inactive"><img class="daily-activities__icon" src="./_app/assets/icons/cycling.svg" alt="Daily progress tab for cycling activity"></button>
+						</div>
+	
+						<div class="daily-activities__tab-content daily-activities__tab-content--running">
+							This Week <span class="daily-activities__tab-content--span"></span>
+							<div class="daily-activities__running-statistic">
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar"></div>
+									<div class="daily-activities__bar--day">M</div>
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar"></div>
+									<div class="daily-activities__bar--day">T</div>
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar"></div>
+									<div class="daily-activities__bar--day">W</div>
+	
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar"></div>
+									<div class="daily-activities__bar--day">T</div>
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar"></div>
+									<div class="daily-activities__bar--day">F</div>
+	
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar saturday"></div>
+									<div class="daily-activities__bar--day">S</div>
+	
+								</div>
+								<div class="daily-activities__bar-container">
+									<div class="daily-activities__bar sunday"></div>
+									<div class="daily-activities__bar--day">S</div>
+	
+								</div>
+							</div>
+						</div>
+	
 					</div>
-				</div>
-			</section>
-
-			<section class="grid-map" id='map'></section>
-
-			<section class="grid-workouts">
-				<div class="addWorkoutMessage">
-					<p>Click on map to track activity</p>
-				</div>
-				<ul class="workouts">
-					<form class="workout-form hidden">
-						<div class="workout-form__row">
-							<label for="activity" class="workout-form__label">Type</label>
-							<select id="activity" class="workout-form__input workout-form__input--type">
-								<option value="running">Running</option>
-								<option value="cycling">Cycling</option>
-							</select>
+					<div class="total-progress">
+						<div class="total-progress__title">Total progress</div>
+						<div class="total-progress__stats">
+							<div class="total-progress__stats--distance"><img class="total-progress__stats--icon" aria-hidden='true' src="./_app/assets/icons/running-man.svg" alt=""><span class="total-progress__stats--distance-value"></span></div>
+							<div class="total-progress__stats-divider"></div>
+							<div class="total-progress__stats--time"> <img class="total-progress__stats--icon" aria-hidden='true' src="./_app/assets/icons/clock.svg" alt=""><span class="total-progress__stats--time-value"></span></div>
 						</div>
-						<div class="workout-form__row">
-							<label class="workout-form__label" for="distance">Distance</label>
-							<input 
-								aria-label="Distance in km"
-								type="text" 
-								id="distance"
-								class="workout-form__input workout-form__input--distance"
-								placeholder="km">
-						</div>
-						<div class="workout-form__row">
-							<label class="workout-form__label" for="duration">Duration</label>
-							<input 
-								aria-label="Duration in min"
-								id="duration"
-								type="text" 
-								class="workout-form__input workout-form__input--duration"
-								placeholder="min">
-						</div>
-
-						<div class="workout-form__row">
-							<label class="workout-form__label" for="cadence">Cadence</label>
-							<input 
-								aria-label="Cadence with step/min"
-								id="cadence"
-								type="text" 
-								class="workout-form__input workout-form__input--cadence"
-								placeholder="step/min">
-						</div>
-						<div class="workout-form__row workout-form__row--hidden">
-							<label class="workout-form__label" for="elevationGain">Elev Gain</label>
-							<input 
-								aria-label="Elevation gain in meteres"
-								id="elevationGain"
-								type="text" 
-								class="workout-form__input workout-form__input--elevation"
-								placeholder="meters">
-						</div>
-						<button type='submit' class="workout-form__submit-button">OK</button>
-					</form>
-				</ul>
-			</section>
-		</main>
+					</div>
+				</section>
+	
+				<section class="grid-map" id='map'></section>
+	
+				<section class="grid-workouts">
+					<div class="addWorkoutMessage">
+						<p>Click on map to track activity</p>
+					</div>
+					<ul class="workouts">
+						<form class="workout-form hidden">
+							<div class="workout-form__row">
+								<label for="activity" class="workout-form__label">Type</label>
+								<select id="activity" class="workout-form__input workout-form__input--type">
+									<option value="running">Running</option>
+									<option value="cycling">Cycling</option>
+								</select>
+							</div>
+							<div class="workout-form__row">
+								<label class="workout-form__label" for="distance">Distance</label>
+								<input 
+									aria-label="Distance in km"
+									type="text" 
+									id="distance"
+									class="workout-form__input workout-form__input--distance"
+									placeholder="km">
+							</div>
+							<div class="workout-form__row">
+								<label class="workout-form__label" for="duration">Duration</label>
+								<input 
+									aria-label="Duration in min"
+									id="duration"
+									type="text" 
+									class="workout-form__input workout-form__input--duration"
+									placeholder="min">
+							</div>
+	
+							<div class="workout-form__row">
+								<label class="workout-form__label" for="cadence">Cadence</label>
+								<input 
+									aria-label="Cadence with step/min"
+									id="cadence"
+									type="text" 
+									class="workout-form__input workout-form__input--cadence"
+									placeholder="step/min">
+							</div>
+							<div class="workout-form__row workout-form__row--hidden">
+								<label class="workout-form__label" for="elevationGain">Elev Gain</label>
+								<input 
+									aria-label="Elevation gain in meteres"
+									id="elevationGain"
+									type="text" 
+									class="workout-form__input workout-form__input--elevation"
+									placeholder="meters">
+							</div>
+							<button type='submit' class="workout-form__submit-button">OK</button>
+						</form>
+					</ul>
+				</section>
+			</main>
+		</div>
 	</body>
 </html>
