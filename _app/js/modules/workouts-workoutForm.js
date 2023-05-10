@@ -47,7 +47,7 @@ export default async function workoutsWorkoutForm(map) {
 	async function handleFormSubmit(event) {
 		event.preventDefault();
 		const workout = createNewWorkoutObject();
-		await sendWorkoutToSanity(workout);
+		if (workout !== undefined) await sendWorkoutToSanity(workout);
 		hideWorkoutForm();
 		await updateUI(map, workout);
 	}
