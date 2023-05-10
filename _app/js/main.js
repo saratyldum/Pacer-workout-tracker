@@ -38,7 +38,7 @@ if(navigator.geolocation) {
  * they will get an error message informing them about the need for their position to be able to
  * run the application.
  * 
- * @param {object} position 
+ * @param {object} position the position gathered from users data
  * 
  * @see updateUI.js module
  * @see errorPosition() for the error handling
