@@ -119,7 +119,6 @@
  .workout-form__input {
 	width: 100%;
 	padding: 0.3rem;
-	font-family: inherit;
 	font-size: 0.8rem;
 	border: 1px solid var(--secondary-color);
 	color: var(--secondary-color);
@@ -144,9 +143,6 @@
 
  .workout-form__submit-button {
 	display: none;
-	background: transparent;
-	color: inherit;
-	font-family: inherit;
 	border: 1px solid var(--font-color-light);
 	position: absolute;
 	left: 50%;

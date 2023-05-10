@@ -35,8 +35,6 @@
 
 .weekly-goal__input {
 	color: var(--primary-color);
-	background-color: inherit;
-	font-family: inherit;
 	border: none;
 	width: 2rem;
 	font-size: 1rem;
@@ -50,7 +48,6 @@
 	display: none;
 	background: var(--primary-color);
 	color: var(--font-color-light);
-	font-family: inherit;
 	border: 1px solid var(--font-color-light);
 	position: absolute;
 	right: 1rem;
@@ -95,7 +92,6 @@
 }
 
 .daily-activities__running-tab, .daily-activities__cycling-tab {
-	background-color: inherit;
 	border: none;
 	cursor: pointer;
 	width: 100%;
