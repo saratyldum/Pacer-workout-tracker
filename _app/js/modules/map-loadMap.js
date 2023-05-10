@@ -8,7 +8,6 @@
 export default function mapLoadMap(position) {
 	const {latitude, longitude} = position.coords;
 	const userCoordinates = [longitude, latitude];
-
 	let map;
 
 	/**
