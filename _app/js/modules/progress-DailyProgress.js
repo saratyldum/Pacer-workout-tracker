@@ -1,5 +1,7 @@
 /**
- * Takes an array of workouts and renderes the daily progress tab accordingly.
+ * Takes an array of workouts and renderes the daily progress tab accordingly. Ideally this data would reset at the beginning
+ * of every week, but for the sake of simplicity that does not happen in this project.
+ * 
  * @param {array} workouts the workouts to be added or removed from the progress tabs.
  */
 
@@ -60,7 +62,9 @@ export default function progressDailyProgress(workouts) {
 
 	 function renderHTML(tabButton) {
 		const thisWeekValueContainer = document.querySelector('.daily-activities__tab-content--span');
+		let thisWeeksActivityValue;
 		let isCycling = false;
+
 
 		if(tabButton !== undefined) {
 			toggleTabColor(tabButton);
@@ -69,23 +73,21 @@ export default function progressDailyProgress(workouts) {
 
 		if(isCycling) {
 			const cyclingWorkouts = newWorkoutObjects.filter(workout => workout.type === 'cycling');
-			const thisWeekValue = calculateWeeklyDistance(cyclingWorkouts);
+			thisWeeksActivityValue = calculateWeeklyDistanceValue(cyclingWorkouts);
 			
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(cyclingWorkouts, index)
 			}
 			
-			thisWeekValueContainer.textContent = `${thisWeekValue}km`;
-
 		} else {
 			const runningWorkouts = newWorkoutObjects.filter(workout => workout.type === 'running');
-			const thisWeekValue = calculateWeeklyDistance(runningWorkouts)
+			thisWeeksActivityValue = calculateWeeklyDistanceValue(runningWorkouts)
 
 			for (let index = 0; index < barContainers.length; index++) {
 				calculateBarHeight(runningWorkouts, index)
 			}
-			thisWeekValueContainer.textContent = `${thisWeekValue}km`
 		}
+		thisWeekValueContainer.textContent = `${thisWeeksActivityValue}km`
 	}
 
 	function toggleTabColor(tabButton) {
@@ -120,7 +122,13 @@ export default function progressDailyProgress(workouts) {
 		barContainers[index].firstElementChild.style.height = `${percentageOfWeekly > 0 ? percentageOfWeekly : 1}%`;
 	}
 
-	function calculateWeeklyDistance(workouts) {
+	/**
+	 * Takes the distances from each day and reduces them into one number being the total distance the user has trained with the given activity.
+	 * 
+	 * @param {array} workouts filtered list of workouts
+	 * @returns the total weekly distance user has been cycling or running.
+	 */
+	function calculateWeeklyDistanceValue(workouts) {
 		const initialValue = 0;
 		let allDistances = [];
 
@@ -131,5 +139,4 @@ export default function progressDailyProgress(workouts) {
 		const reducedWeeklyDistances = allDistances.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
 		return reducedWeeklyDistances;
 	}
-	
 }
