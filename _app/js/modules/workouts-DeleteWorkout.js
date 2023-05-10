@@ -53,7 +53,6 @@ export default async function workoutsDeleteWorkout() {
 	 * @param {string} workoutID the ID of the workout element clicked
 	 */
 	function renderHTML(workoutElement, workoutID) {
-		console.log(typeof workoutID);
 		const marker = document.getElementById(workoutID);
 		
 		if(marker !== null) marker.remove();
