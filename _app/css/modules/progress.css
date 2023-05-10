@@ -45,14 +45,15 @@
 }
 
 .weekly-goal__submit-button {
-	display: none;
+	display: block;
 	background: var(--primary-color);
 	color: var(--font-color-light);
 	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
-	padding: 0.1rem 1rem;
+	font-size: 0.75rem;
+	padding: 0.25rem 1rem;
 	border-radius: var(--border-radius-button);
 	transition: all 0.4s ease;
 }
@@ -206,8 +207,5 @@
 		margin: 0 auto 1rem;
 	}
 
-	 .weekly-goal__input:focus ~ .weekly-goal__submit-button {
-		display: block;
-	}
 }
 
