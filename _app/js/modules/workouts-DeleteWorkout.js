@@ -12,17 +12,18 @@ export default async function workoutsDeleteWorkout() {
 	async function handleDeleteButtonClick(event) {
 		const workoutElement = event.target.closest('.workout');
 		const workoutID = workoutElement.dataset.id;
+
 		await deleteWorkoutFromSanity(workoutID);
-		workoutElement.remove();
-		deleteMarkerFromMap(workoutID);
+		renderHTML(workoutElement, workoutID)
 		await updateUI();
 	}
 
 	/**
 	 * Takes the workoutID of the workout element being deleted and removes the element from sanity. 
+	 * The code architecture is borrowed from Alejandro Rojas.
 	 * 
 	 * @param {string} workoutID - the unique ID of the workout being deleted
-	 * @see sendWorkoutToSanity() - under the workoutForm module for an explanation of the muatate function
+	 * @see sendWorkoutToSanity() - under the workouts-workoutForm.js module for an explanation of the muatate function
 	 */
 	async function deleteWorkoutFromSanity(workoutID) {
 		try {
@@ -45,9 +46,18 @@ export default async function workoutsDeleteWorkout() {
 		}
 	}
 
-	function deleteMarkerFromMap(workoutID) {
+	/**
+	 * Removed the workout element from the list and its marker.
+	 * 
+	 * @param {object} workoutElement the workout object clicked
+	 * @param {string} workoutID the ID of the workout element clicked
+	 */
+	function renderHTML(workoutElement, workoutID) {
 		const marker = document.getElementById(workoutID);
-		if(marker !== null)
-		marker.remove();
+		
+		if(marker !== null) marker.remove();
+
+		workoutElement.remove();
 	}
+
 }

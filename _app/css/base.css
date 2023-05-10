@@ -10,7 +10,6 @@ body {
 	color: var(--font-color);
 }
 
-
 .hidden {
 	display: none;
 }
@@ -35,9 +34,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-areas: 
-		'progress-view map map workout-list';
-	height: 100dvh;
-	
+		'progress-view map map workout-list';	
 }
 
 @media screen and (max-width: 992px) {

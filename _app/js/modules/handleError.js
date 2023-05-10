@@ -1,3 +1,9 @@
+/**
+ * These functions displays an error message for the user when an error has occured and allows the 
+ * user to remove the error message after they have read it. 
+ * 
+ * @param {string} errorMessage the error message to be displayed to the user
+ */
 export default function handleError(errorMessage) {
 	const errorContainer = document.querySelector('.error-box');
 	const errorMessageContainer = document.querySelector('.error-box__message');
@@ -9,7 +15,6 @@ export default function handleError(errorMessage) {
 	closeButton.addEventListener('click', removeErrorMessage)
 
 	function showErrorMessage(errorMessage) {
-		console.log(errorContainer);
 		errorContainer.style.display = 'flex';
 		errorMessageContainer.textContent = errorMessage;
 		header.classList.add('error');

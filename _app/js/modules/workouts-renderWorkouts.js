@@ -4,10 +4,9 @@ import toggleStarterMessage from "./toggleStarterMessage.js";
 export default async function workoutsRenderWorkouts(map, workouts) {
 	const form = document.querySelector('.workout-form');
 	const containerWorkouts = document.querySelector('.workouts');
+	const allWorkouts = 	await fetchWorkouts();
 
 	map = map;
-
-	const allWorkouts = 	await fetchWorkouts();
 
 	containerWorkouts.addEventListener('click', handleContainerWorkoutsClick);
 
@@ -26,7 +25,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 * Finds the ID of the workout element that has been clicked and find the equivilant
 	 *  workout object from sanity to get the workouts coordinates and center the map around the clicked workout.
 	 * 
-	 * @param {*} event - takes the click event from when user clicks on one of the workouts in the list
+	 * @param {object} event - takes the click event from when user clicks on one of the workouts in the list
 	 *
 	 * @returns out of the function if there is no valid map or if there is no workout element found
 	 */
@@ -36,13 +35,15 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 		if (!workoutElement) return;
 
-		const workout = allWorkouts.find(
+		const workoutClicked = allWorkouts.find(
 		work => work._id === workoutElement.dataset.id
 		);
 
-		map.flyTo({
-			center: workout.coordinates
-		});
+		if(workoutClicked !== undefined) {
+			map.flyTo({
+				center: workoutClicked.coordinates
+			});
+		}
 	}
 
 	/**
@@ -51,10 +52,22 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 */
 
 	function renderHTML(workouts) {
+		let workoutElement, popup, marker;
+
 		if(workouts.length > 0) {
 			for (let index = 0; index < workouts.length; index++) {
-				renderWorkoutMaker(workouts[index].coordinates, workouts[index].description, (workouts[index]._id || workouts[index].id))
-				createWorkoutListDOMElement(workouts[index]);
+				workoutElement = createWorkoutListDOMElement(workouts[index]);
+				//append workoutElement to DOM
+				form.after(workoutElement);
+
+				//create workout marker with popup
+				[popup, marker] = createWorkoutMarker(workouts[index].description, (workouts[index]._id || workouts[index].id))
+
+				//Add marker to map
+				new mapboxgl.Marker(marker)
+				.setLngLat(workouts[index].coordinates)
+				.setPopup(popup)
+				.addTo(map)
 			}
 		}else {
 			toggleStarterMessage(true);
@@ -62,36 +75,35 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 }
 
 	 /**
-	  * Renders workout on the map as a marker using Mapbox
+	  * Renders workout on the map as a marker using Mapbox giving the marker the same ID as the workout so that 
+	  * its easy to find when a workout needs to be deleted later.
 	  * 
 	  * @param {array} coordinates - coordinates from when the user clicked on the map to create a new workout.
 	  * @param {string} description - description of the workout.
+	  * @param {string} id - the id of the workout
 	  */
-	 function renderWorkoutMaker(coordinates, description, id) {
+	 function createWorkoutMarker(description, id) {
 		 //Creates popup
 		 const popup = new mapboxgl.Popup({closeOnClick: false})
 		 .setText(description)
-		 .setLngLat(coordinates)
 		 .addClassName('running-popup');
  
-		 //Adds the marker
+		 //Creates the marker
 		 const marker = document.createElement('div');
+
 		 marker.setAttribute('id', id);
 		 marker.style.backgroundImage = `url(/_app/assets/icons/marker.svg)`;
 		 marker.style.width = '35px';
 		 marker.style.height = '35px';
 		 marker.style.backgroundSize = '100%';
 
-		 new mapboxgl.Marker(marker)
-		 .setLngLat(coordinates)
-		 .setPopup(popup)
-		 .addTo(map)
+		 return [popup, marker];
 	 }
  
 	 /**
 	  * Creates a workout DOM element for each workout object
-	  * .
-	  * @param {object} workout 
+	  * 
+	  * @param {object} workout - each workout object that needs to be created in the DOM
 	  * @returns the DOM element to be appended on the site
 	  */
 	 function createWorkoutListDOMElement(workout) {
@@ -180,7 +192,6 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 			workoutRunningCadenceDetailsBlock.append(workoutRunningCadenceIcon, workoutRunningCadenceValue, workoutRunningCadenceUnit);
 
 			workoutElement.append(workoutRunningPaceDetailsBlock, workoutRunningCadenceDetailsBlock);
-			form.after(workoutElement);
 
 		} else if(workout.type === 'cycling') {
 			const workoutCyclingSpeedDetailsBlock = document.createElement('div');
@@ -213,13 +224,8 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 			workoutCyclingElevGainDetailsBlock.append(workoutCyclingElevGainIcon, workoutCyclingElevGainValue, workoutCyclingElevGainUnit);
 
 			workoutElement.append(workoutCyclingSpeedDetailsBlock, workoutCyclingElevGainDetailsBlock);
-			form.after(workoutElement);
 		}
+		return workoutElement;
 	 }
 
-	//  function toggleStarterMessage() {
-	// 	starterMessage = !starterMessage;
-	// 	starterMessageContainer.style.display = 'block'
-
-	//  }
 }
