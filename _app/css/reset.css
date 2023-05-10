@@ -24,6 +24,7 @@ canvas {
 button,
 select {
 	cursor: pointer;
+	border: none;
 }
 
 button,

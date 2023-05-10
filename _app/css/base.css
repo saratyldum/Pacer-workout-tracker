@@ -10,22 +10,6 @@ body {
 	color: var(--font-color);
 }
 
-img {
-	width: 100%;
-}
-
-li {
-	list-style: none;
-}
-
-button:hover {
-	cursor: pointer;
-}
-
-button {
-	background-color: transparent;
-	border: none;
-}
 
 .hidden {
 	display: none;
