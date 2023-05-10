@@ -20,7 +20,7 @@
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	margin-bottom: 1rem;
-	border: 3px solid var(--primary-color-low-opacity);
+	border: var(--border-radius-button) solid var(--primary-color-low-opacity);
 }
 
 .weekly-goal {
@@ -48,7 +48,7 @@
 	display: none;
 	background: var(--primary-color);
 	color: var(--font-color-light);
-	border: 1px solid var(--font-color-light);
+	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
@@ -91,8 +91,6 @@
 }
 
 .daily-activities__running-tab, .daily-activities__cycling-tab {
-	border: none;
-	cursor: pointer;
 	width: 100%;
 	padding: 0.5rem;
 }
@@ -166,7 +164,7 @@
 	justify-content: space-between;
 	border-radius: 0.5rem;
 	background-color: var(--primary-color-lighter);
-	border: 1px solid var(--primary-color-low-opacity);
+	border: var(--border-small) solid var(--primary-color-low-opacity);
 }
 
 .total-progress__stats--distance, .total-progress__stats--time {

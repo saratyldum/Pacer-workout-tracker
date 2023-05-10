@@ -19,5 +19,6 @@
 	/* ------------ BORDERS ----------- */
 	--border-radius-section: 5px;
 	--border-radius-button: 3px;
+	--border-small: 1px;
 
 }

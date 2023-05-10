@@ -24,7 +24,7 @@
 }
 
 .error-box__close-button {
-	border: 1px solid var(--font-color-light);
+	border: var(--border-small) solid var(--font-color-light);
 	padding: 0.25rem 0.5rem;
 	color: var(--font-color-light);
 	position: absolute;

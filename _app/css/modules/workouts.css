@@ -120,7 +120,7 @@
 	width: 100%;
 	padding: 0.3rem;
 	font-size: 0.75rem;
-	border: 1px solid var(--secondary-color);
+	border: var(--border-small) solid var(--secondary-color);
 	color: var(--secondary-color);
 	border-radius: var(--border-radius-button);
 	transition: all 0.2s;
@@ -143,7 +143,7 @@
 
  .workout-form__submit-button {
 	display: none;
-	border: 1px solid var(--font-color-light);
+	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	left: 50%;
 	bottom: 0.5rem;
@@ -156,7 +156,7 @@
 
  .workout-form__submit-button:hover {
 	color: var(--primary-color);
-	border: 1px solid var(--primary-color);
+	border: var(--border-small) solid var(--primary-color);
 	background-color: var(--font-color-light);
  }
 
