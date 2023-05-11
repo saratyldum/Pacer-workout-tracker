@@ -34,22 +34,22 @@ ambitious project with a lot of features. Because of the limimted time frame and
 simplify it a lot. In the two boxes you see what i ended up with as the minimum viable product and in the bottom left corner you see some of
 the features i had to discard. 
 
-<img width="880" alt="Thought process and MVP" src="https://github.com/saratyldum/Pacer-workout-tracker/assets/98975412/b421274f-0fc2-4c0d-b742-32b7d250356c">
+![Thought process and MVP](_app/assets/images/Thought%20process%20and%20MVP.png)
 
 In the image below you can se how i translated the MVP into my Github Project later.
 
-<img width="880" alt="MVP" src="https://github.com/saratyldum/Pacer-workout-tracker/assets/98975412/a3739dbf-2a31-426f-92da-f386178d9599">
+![MVP in Github Project](_app/assets/images/MVP.png)
 
 ### Workflow diagram
 To get a better understanding of the flow of my project i made a simple workflow diagram showing when i needed what to happen. 
-<img width="880" alt="Mind map of the project" src="https://github.com/saratyldum/Pacer-workout-tracker/assets/98975412/97cb21f9-16d1-45a3-88b4-ff52d6989f98">
+![Workflow chart](_app/assets/images/Workflow%20chart.png)
 
 ### Data base model
 Lasty I made an overview of my data base model and how i wanted it to be in Sanity. The data base is not very complex as it startes of empty before
 the user adds workouts through the UI. There only exist one unique Settings schema and User schema as we only need one of each of these for the
 application. The Workout schema on the other hand, is dynamically being added and removed by the user and they can create as many as they like.
 
-<img width="599" alt="Database model" src="https://github.com/saratyldum/Pacer-workout-tracker/assets/98975412/60562c01-b377-40e0-8a96-7b4d9c823274">
+![Data base model](_app/assets/images/Data%20base%20model.png)
 
 ## Links
 - Github profile: https://github.com/saratyldum/
