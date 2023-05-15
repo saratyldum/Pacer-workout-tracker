@@ -9,17 +9,31 @@ export default function progressDailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
 	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
 	const weeklyGoal = parseInt(document.querySelector('.weekly-goal__input').value, 10);
-
 	let newWorkoutObjects = [];
 
 	tabButtons.forEach(tabButton => {
 		tabButton.addEventListener('click', handleTabButtonClick)
 	})
-	 
-	 
+
 	async function handleTabButtonClick(event) {
 		const tabButton = event.currentTarget;
 		renderHTML(tabButton);
+	}
+	
+	/**
+	 * Creates new workout objects with the information we need to render the daily progress bars and pushes it into
+	 * a new array with 
+	 * Turns each workout date into a number between 0-6 depending on the day of the week. This number correlates to each 
+	 * progress bars' index so we know which workouts to render on which progress bar.
+	 */
+	for (const workout of workouts) {
+		const day = new Date(workout.date).getDay()-1;
+		
+		newWorkoutObjects.push({
+			day: day,
+			distance: workout.distance,
+			type: workout.type
+		})
 	}
 
 	/**
@@ -46,22 +60,6 @@ export default function progressDailyProgress(workouts) {
 		let thisWeeksActivityValue;
 		let dailyPercentage;
 		let isCycling = false;
-
-		/**
-		 * Creates new workout objects with the information we need to render the daily progress bars and pushes it into
-		 * a new array with 
-		 * Turns each workout date into a number between 0-6 depending on the day of the week. This number correlates to each 
-		 * progress bars' index so we know which workouts to render on which progress bar.
-		 */
-		for (const workout of workouts) {
-			const day = new Date(workout.date).getDay()-1;
-	
-			newWorkoutObjects.push({
-				day: day,
-				distance: workout.distance,
-				type: workout.type
-			})
-		}
 
 		//Changes the tab clicked's color and the isCycling variable depending on whether the tab button clicked has the cycling class or not.
 		if(tabButton !== undefined) {
