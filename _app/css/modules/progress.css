@@ -1,5 +1,5 @@
 .grid-progress {
-	padding: 1rem;
+	padding: 0 1rem;
 }
 
 .user {
@@ -9,14 +9,12 @@
 	padding: 1rem;
 }
 .user__image {
-	height: 80px;
 	width: 80px;
 	object-fit:cover;
 	border-radius: 50%;
 }
 
 .weekly-goal, .daily-activities, .total-progress {
-	width: 100%;
 	box-shadow: 0 4px 28px rgba(0, 0, 0, 0.1);
 	border-radius: 1rem;
 	margin-bottom: 1rem;
@@ -29,13 +27,11 @@
 }
 
 .weekly-goal__goal {
-	font-size: 1rem;
 	font-weight: 600;
 }
 
 .weekly-goal__input {
 	color: var(--primary-color);
-	border: none;
 	width: 2.5rem;
 	font-size: 1rem;
 }
@@ -48,7 +44,6 @@
 	display: block;
 	background: var(--primary-color);
 	color: var(--font-color-light);
-	border: var(--border-small) solid var(--font-color-light);
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
@@ -61,7 +56,6 @@
 .weekly-goal__progress-info {
 	display: flex;
 	justify-content: space-between;
-	font-size: 1rem;
 	margin-top: 1rem;
 	margin-bottom: 0.5rem;
 }
@@ -69,7 +63,6 @@
 .weekly-goal__progress-bar {
 	height: 0.5rem;
 	border-radius: var(--border-radius-section);
-	width: 100%;
 	background-color: var(--secondary-color-light);
 }
 
@@ -83,7 +76,6 @@
 }
 .daily-activities {
 	padding-bottom: 1rem;
-	width: 100%;
 }
 
 .daily-activities-tab {
@@ -104,7 +96,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-size: 1rem;
 	padding: 1rem;
 }
 
@@ -112,7 +103,6 @@
 	display: none;
 }
 .daily-activities__tab-content--span {
-	display: block;
 	color: var(--primary-color);
 	padding-bottom: 1rem;
 }

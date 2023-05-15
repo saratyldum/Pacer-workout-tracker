@@ -9,6 +9,7 @@ export default function handleError(errorMessage) {
 	const errorMessageContainer = document.querySelector('.error-box__message');
 	const closeButton = document.querySelector('.error-box__close-button')
 	const header = document.querySelector('.header');
+	const logo = document.querySelector('.logo');
 
 	showErrorMessage(errorMessage)
 
@@ -18,12 +19,15 @@ export default function handleError(errorMessage) {
 		errorContainer.style.display = 'flex';
 		errorMessageContainer.textContent = errorMessage;
 		header.classList.add('error');
+		logo.style.display = "none";
 		closeButton.focus();
 	}
 
 	function removeErrorMessage() {
 		errorContainer.style.display = 'none';
-		header.classList.remove('error')
+		header.classList.remove('error');
+		logo.style.display = "block";
+
 	}
 
 }

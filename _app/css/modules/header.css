@@ -2,10 +2,8 @@
 	padding: 0.25rem 1rem;
 	background-color: var(--primary-color);
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 }
-
 
 .logo img {
 	height: 2rem;
@@ -14,13 +12,12 @@
 
 .error-box {
 	display: none;
-	width: 100%;
+	position: absolute;
+	width: 100vw;
 	justify-content: center;
 	text-align: center;
-	color: var(--font-color-light);
-	position: relative;
-	margin: 0 1rem;
 	align-items: center;
+	color: var(--font-color-light);
 }
 
 .error-box__close-button {
@@ -28,7 +25,7 @@
 	padding: 0.25rem 0.5rem;
 	color: var(--font-color-light);
 	position: absolute;
-	right: 1rem;
+	right: 2rem;
 }
 
 .error-box__close-button:hover {
@@ -37,14 +34,15 @@
 
 .error {
 	background-color: var(--error-box);
+	height: 2.5rem;
 }
 
 @media screen and (max-width: 992px) {
-	.header {
+	.logo {
 		position: absolute;
 		width: 3rem;
 		right: 1rem;
-		top: 2rem;
+		top: 3rem;
 		padding: 0;
 	}
 }
