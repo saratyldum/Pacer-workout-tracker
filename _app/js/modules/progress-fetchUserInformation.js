@@ -12,12 +12,12 @@ export default async function progressFetchUserInformation() {
 		const query = `*[_type == 'user'][0] {
 			userName,
 			'userImage': userImage.asset -> url
-		}`
+		}`;
 		
 		const user = await sanity.fetch(query);
-		return user
+		return user;
 	} catch(error) {
-		handleError(error.message)
+		handleError(error.message);
 	}
 
 	return user;
