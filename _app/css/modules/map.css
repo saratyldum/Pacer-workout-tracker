@@ -33,6 +33,7 @@
 	#map {
 		height: 70vh;
 		max-width: 850px;
+		width: 100%;
 		margin: 0 auto;
 		border: 1rem solid var(--primary-color);
 	}
