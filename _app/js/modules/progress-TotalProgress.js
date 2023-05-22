@@ -1,6 +1,6 @@
 export default async function progressTotalProgress(workouts) {
-	const totalProgress = document.querySelector('.total-progress__stats--distance-value');
-	const totalTime = document.querySelector('.total-progress__stats--time-value');
+	const totalProgressContainer = document.querySelector('.total-progress__stats--distance-value');
+	const totalTimeContainer = document.querySelector('.total-progress__stats--time-value');
 
 	calculateTotalProgress(workouts);
 
@@ -19,16 +19,11 @@ export default async function progressTotalProgress(workouts) {
 			time.push(workout.duration);
 		}
 
-		const reducedDistance = distance.reduce(
-			(accumulator, currentValue) => accumulator + currentValue, initialValue
-		);
+		const totalDistance = distance.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		const totalTime = ((time.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue)) / 60).toFixed(1);
 
-		const reducedTime = ((time.reduce(
-			(accumulator, currentValue) => accumulator + currentValue, initialValue
-		)) / 60).toFixed(1);
-
-		totalProgress.textContent= `${reducedDistance}km`;
-		totalTime.textContent =`${reducedTime}hr`;
+		totalProgressContainer.textContent= `${totalDistance}km`;
+		totalTimeContainer.textContent =`${totalTime}hr`;
 	}
 
 }
