@@ -6,11 +6,7 @@
  */
 export default function toggleStarterMessage(state) {
 	const starterMessageContainer = document.querySelector('.addWorkoutMessage');
-	const starterMessage = state;
+	const starterMessageVisible = state;
 
-	if(starterMessage === true) {
-		starterMessageContainer.style.display = 'block'
-	} else (
-		starterMessageContainer.style.display = 'none'
-	)
+	starterMessageVisible === true ? starterMessageContainer.style.display = 'block' : starterMessageContainer.style.display = 'none';
 }
