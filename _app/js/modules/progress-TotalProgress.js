@@ -1,3 +1,5 @@
+import { reducer } from "./helperFunction-reducer.js";
+
 export default async function progressTotalProgress(workouts) {
 	const totalProgressContainer = document.querySelector('.total-progress__stats--distance-value');
 	const totalTimeContainer = document.querySelector('.total-progress__stats--time-value');
@@ -11,6 +13,7 @@ export default async function progressTotalProgress(workouts) {
 	 */
 	function calculateTotalProgress(workouts) {
 		const initialValue = 0;
+
 		let distance = [];
 		let time = [];
 
@@ -19,8 +22,8 @@ export default async function progressTotalProgress(workouts) {
 			time.push(workout.duration);
 		}
 
-		const totalDistance = distance.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
-		const totalTime = ((time.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue)) / 60).toFixed(1);
+		const totalDistance = distance.reduce(reducer, initialValue);
+		const totalTime = ((time.reduce(reducer, initialValue)) / 60).toFixed(1);
 
 		totalProgressContainer.textContent= `${totalDistance}km`;
 		totalTimeContainer.textContent =`${totalTime}hr`;

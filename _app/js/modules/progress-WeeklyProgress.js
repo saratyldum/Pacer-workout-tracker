@@ -1,6 +1,7 @@
 import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
 import handleError from "./handleError.js";
+import { reducer } from "./helperFunction-reducer.js";
 
 /**
  * Takes an array of workouts and renderes the weekly progress section accordingly. Ideally this data would reset at the beginning
@@ -79,7 +80,7 @@ export default async function progressWeeklyProgress(workouts) {
 			distance.push(workout.distance)
 		}
 
-		const reducedDistance = distance.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		const reducedDistance = distance.reduce(reducer, initialValue);
 		const distanceRemaining = parseInt((weeklyGoal - reducedDistance));
 
 		totalDistanceTrained = reducedDistance;

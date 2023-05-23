@@ -1,3 +1,4 @@
+import { reducer } from "./helperFunction-reducer.js";
 /**
  * Takes an array of workouts and renderes the daily progress tab accordingly. Ideally this data would reset at the beginning
  * of every week, but for the sake of simplicity that does not happen in this project.
@@ -9,6 +10,7 @@ export default function progressDailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
 	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
 	const weeklyGoal = parseInt(document.querySelector('.weekly-goal__input').value, 10);
+
 	let newWorkoutObjects = [];
 
 	tabButtons.forEach(tabButton => {
@@ -117,7 +119,7 @@ export default function progressDailyProgress(workouts) {
 			dailyDistances.push(day.distance)
 		}
 
-		const reducedDailyDistances = dailyDistances.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		const reducedDailyDistances = dailyDistances.reduce(reducer, initialValue);
 		const percentageOfWeekly = reducedDailyDistances / (weeklyGoal / 2) * 100;
 
 		return percentageOfWeekly;
@@ -137,7 +139,7 @@ export default function progressDailyProgress(workouts) {
 			allDistances.push(workout.distance);
 		}
 
-		const reducedWeeklyDistances = allDistances.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+		const reducedWeeklyDistances = allDistances.reduce(reducer, initialValue);
 		return reducedWeeklyDistances;
 	}
 }
