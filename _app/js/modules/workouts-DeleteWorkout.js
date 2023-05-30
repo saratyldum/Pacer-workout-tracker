@@ -24,6 +24,7 @@ export default async function workoutsDeleteWorkout() {
 	 * 
 	 * @param {string} workoutID - the unique ID of the workout being deleted
 	 * @see sendWorkoutToSanity() - under the workouts-workoutForm.js module for an explanation of the muatate function
+	 * @see handleError.js module for error handling
 	 */
 	async function deleteWorkoutFromSanity(workoutID) {
 		try {
@@ -47,7 +48,7 @@ export default async function workoutsDeleteWorkout() {
 	}
 
 	/**
-	 * Removed the workout element from the list and its marker.
+	 * Removes the workout element from the list and its corresponding marker.
 	 * 
 	 * @param {object} workoutElement the workout object clicked
 	 * @param {string} workoutID the ID of the workout element clicked

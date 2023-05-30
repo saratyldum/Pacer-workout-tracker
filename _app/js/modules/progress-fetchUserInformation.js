@@ -3,6 +3,8 @@ import handleError from "./handleError.js";
 
 /**
  * Fetches the user information and image from the Sanity Studio.
+ * 
+ * @see handleError.js module for error handling
  * @returns the user
  */
 export default async function progressFetchUserInformation() {

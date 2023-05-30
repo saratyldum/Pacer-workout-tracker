@@ -35,9 +35,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 		if (!workoutElement) return;
 
-		const workoutClicked = allWorkouts.find(
-		work => work._id === workoutElement.dataset.id
-		);
+		const workoutClicked = allWorkouts.find(work => work._id === workoutElement.dataset.id);
 
 		if(workoutClicked !== undefined) {
 			map.flyTo({
@@ -48,7 +46,10 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 	/**
 	 * The only function that makes changes to the DOM. Every action and change to the DOM will be handled with this function.
+	 * If there are no workouts to be rendered a starter message will be displayed to let user know how to start tracking their workouts.
+	 * 
 	 * @param {array} workouts - an array of all workout objects to be rendered.
+	 * @see toggleStarterMessage.js module
 	 */
 
 	function renderHTML(workouts) {
@@ -56,7 +57,9 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 		if(workouts.length > 0) {
 			for (let index = 0; index < workouts.length; index++) {
+				//create workout DOM element
 				workoutElement = createWorkoutListDOMElement(workouts[index]);
+
 				//append workoutElement to DOM
 				form.after(workoutElement);
 
@@ -75,12 +78,14 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	 }
 
 	 /**
-	  * Renders workout on the map as a marker using Mapbox giving the marker the same ID as the workout so that 
-	  * its easy to find when a workout needs to be deleted later.
+	  * Creates a marker and popup for a workout using Mapbox and giving the marker the same ID as the workout so that 
+	  * its easy to find when they need to be deleted later.
 	  * 
 	  * @param {array} coordinates - coordinates from when the user clicked on the map to create a new workout.
 	  * @param {string} description - description of the workout.
 	  * @param {string} id - the id of the workout
+	  * 
+	  * @returns the popup and the marker
 	  */
 	 function createWorkoutMarker(description, id) {
 		 //Creates popup
@@ -159,6 +164,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 		workoutElement.append(workoutDescription, deleteButton, workoutDistanceDetailsBlock, workoutDurationDetailsBlock);
 
+		//If the workout is running:
 		if (workout.type === 'running') {
 			const workoutRunningPaceDetailsBlock = document.createElement('div');
 			const workoutRunningPaceIcon = document.createElement('span');
@@ -193,6 +199,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 
 			workoutElement.append(workoutRunningPaceDetailsBlock, workoutRunningCadenceDetailsBlock);
 
+		// If the workout is cycling:
 		} else if(workout.type === 'cycling') {
 			const workoutCyclingSpeedDetailsBlock = document.createElement('div');
 			const workoutCyclingSpeedIcon = document.createElement('span');
@@ -227,5 +234,4 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 		}
 		return workoutElement;
 	 }
-
 }

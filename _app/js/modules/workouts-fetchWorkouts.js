@@ -7,6 +7,7 @@ import handleError from "./handleError.js";
  * 	Basic usage: The sanity fetch method works by passing a query, using the same structure as the documentation
  * 	and fetching the result from Sanity. 
  * 
+ * 	@see handleError.js module for error handling
  * 	@returns all workouts fetched from Sanity
  */
 export default async function workoutsFetchWorkouts() {
@@ -31,6 +32,5 @@ export default async function workoutsFetchWorkouts() {
 	} catch(error) {
 		handleError(error.message)
 	}
-
 	return workouts;
 }

@@ -1,9 +1,8 @@
 import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
-import handleError from "./handleError.js";
 import { reducer } from "./helperFunction-reducer.js";
+import handleError from "./handleError.js";
 import progressDailyProgress from "./progress-DailyProgress.js"
-
 
 /**
  * Takes an array of workouts and renderes the weekly progress section accordingly. Ideally this data would reset at the beginning
@@ -34,7 +33,6 @@ export default async function progressWeeklyProgress(workouts) {
 		const weeklyGoal = await fetchWeeklyGoal();
 		renderHTML(weeklyGoal, workouts)
 	}
-
 
 	/**
 	 * Renders at least once after loading the module for the first time.
@@ -69,11 +67,14 @@ export default async function progressWeeklyProgress(workouts) {
 	}
 
 	/**
-	 * Takes all distnces from the individual workouts and reduces them to one final total value before calcuating what 
+	 * Takes all distances from the individual workouts and reduces them to one final total value before calcuating what 
 	 * distance is remainig to reach the weekly goal.
+	 * Uses the "reducer" helper function for this. 
 	 * 
 	 * @param {number} weeklyGoal the weekly goal fetched from Sanity
 	 * @param {array} workouts the workouts to be rendered
+	 * @see helperFunction-reducer.js module
+	 * 
 	 * @returns total distances trained and the distance remaining to reach the goal
 	 */
 	function calculateDistances(weeklyGoal, workouts) {
@@ -103,7 +104,12 @@ export default async function progressWeeklyProgress(workouts) {
 		return progressPerecentage;
 	}
 
-
+	/**
+	 * Fetches the weekly goal from Sanity.
+	 * 
+	 * @see handleError.js module for error handling
+	 * @returns the weekly goal
+	 */
 	async function fetchWeeklyGoal() {
 		try {
 			const query = `*[_id == 'settings'][0]`
@@ -121,6 +127,7 @@ export default async function progressWeeklyProgress(workouts) {
 	 * 
 	 * @param {number} goal the goal set by user.
 	 * @see sendWorkoutToSanity() in workouts-workoutForm.js module for a more in depth comment on the mutate code
+	 * @see handleError.js module for error handling
 	 */
 	async function sendWeeklyGoalToSanity(goal) {
 		try {

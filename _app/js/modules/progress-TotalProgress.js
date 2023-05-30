@@ -8,8 +8,10 @@ export default async function progressTotalProgress(workouts) {
 
 	/**
 	 * Calculates the users total distance and total time they have spend in activity.
+	 * Uses the "reducer" helper function for this. 
 	 * 
 	 * @param {array} workouts all workouts done by user, fetched from sanity
+	 * @see helperFunction-reducer.js module
 	 */
 	function calculateTotalProgress(workouts) {
 		const initialValue = 0;
