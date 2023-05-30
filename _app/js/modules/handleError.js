@@ -12,6 +12,9 @@ export default function handleError(errorMessage) {
 	const logo = document.querySelector('.logo');
 	let isVisible = false;
 
+	/**
+	 * Runs the show error message function right away with the error message that is to be displayed
+	 */
 	showErrorMessage(errorMessage)
 
 	closeButton.addEventListener('click', removeErrorMessage)
@@ -26,6 +29,10 @@ export default function handleError(errorMessage) {
 		renderHTMl(isVisible)
 	}
 
+	/**
+	 * 
+	 * @param {boolean} isVisible tells function whether the error message is to be displayed or removed
+	 */
 	function renderHTMl(isVisible) {
 		if (isVisible) {
 			errorContainer.style.display = 'flex';
@@ -39,5 +46,4 @@ export default function handleError(errorMessage) {
 			logo.style.display = "block";
 		}
 	}
-
 }
