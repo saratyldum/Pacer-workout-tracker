@@ -16,57 +16,70 @@ export default async function workoutsWorkoutForm(map) {
 	const inputDuration = document.querySelector('.workout-form__input--duration');
 	const inputCadence = document.querySelector('.workout-form__input--cadence');
 	const inputElevation = document.querySelector('.workout-form__input--elevation');
-
 	let mapEvent;
 
 	inputType.addEventListener('change', handleInputTypeChange);
 	map.on('click', handleMapClick);
 	form.addEventListener('submit', handleFormSubmit);
 
-	function handleInputTypeChange() {
-		toggleElevationField();
+	function handleInputTypeChange(event) {
+		renderHTML(event);
 	}
 
 	/**
 	 * Saves the click event in the global mapEvent variable so the that we can access the coordinates data
-	 * when creating a new workout object. Also removes the starter message if its visible to show the workout form.
+	 * when creating a new workout object after a workout form is submitted. Also removes the starter message if its visible 
+	 * and renders html to show the workout form.
 	 * 
 	 * @param {object} event the click event from when user clicks the map
-	 * @see createNewWorkoutObject()
+	 * @see createNewWorkoutObject() - to see the use of the mapEvent
 	 */
 	function handleMapClick(event) {
 		mapEvent = event;
-		toggleStarterMessage(false)
-		showWorkoutForm(event);
+		toggleStarterMessage(false);
+		renderHTML(event);
 	}
 
 	/**
-	 * When a workout form is submitted a new workout object is created and sent to Sanity, and the UI gets updated.
+	 * When a workout form is submitted, a new workout object is created and sent to Sanity and the UI gets updated.
 	 * @param {object} event the submit event
 	 */
 	async function handleFormSubmit(event) {
 		event.preventDefault();
 		const workout = createNewWorkoutObject();
+
+		//sends workout to Sanity
 		if (workout !== undefined) await sendWorkoutToSanity(workout);
-		hideWorkoutForm();
+		// renders workout form html
+		renderHTML(event);
+		// runs most modules to update the UI 
 		await updateUI(map, workout);
 	}
 
 	/**
-	 * Toggles between the Cadence and Elevation Gain input fields depending on what the user has chosen.
+	 * Checks what event has occured and renders the html accordingly.
+	 * @param {object} event 
 	 */
-	function toggleElevationField() {
-		inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
-		inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+	function renderHTML(event) {
+		//Toggles between the Cadence and Elevation Gain input fields depending on what the user has chosen.
+		if (event.type === 'change') {
+			inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+			inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
+		} else if (event.type === 'click') {
+			// Shows the workout form when the user clicks on the map
+			form.classList.remove('hidden');
+			inputDistance.focus();
+		} else if (event.type === 'submit') {
+			//Clear input fields
+			inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+
+			//Hide workout form
+			form.style.display = 'none';
+			form.classList.add('hidden');
+			setTimeout(() => (form.style.display = 'grid'), 1000);
+		}
 	}
 
-	/**
-	 * Shows the workout form when the user clicks on the map
-	 */
-	function showWorkoutForm() {
-		form.classList.remove('hidden');
-		inputDistance.focus();
-	}
 
 	/**
 	 * Creates a new workout object based on the users input in the form. There are separate functions creating a
@@ -74,6 +87,7 @@ export default async function workoutsWorkoutForm(map) {
 	 * 
 	 * @see createRunningWorkoutObject()
 	 * @see createCyclingWorkoutObject()
+	 * @see handleError.js module for error handling
 	 * 
 	 * @returns the workout object
 	 */
@@ -122,14 +136,17 @@ export default async function workoutsWorkoutForm(map) {
 		}
 	}
 
+	/**
+	 * Creates a description for the workout that has been submitted.
+	 * 
+	 * @param {string} type 
+	 * @param {object} date 
+	 * @returns the workout decription string
+	 */
 	function setWorkoutDescription(type, date) {
 		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${
-			months[date.getMonth()]
-		 } ${date.getDate()}`;
-
-		 return description;
+		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${months[date.getMonth()]} ${date.getDate()}`;
+		return description;
 	}
 
 	/**
@@ -184,15 +201,6 @@ export default async function workoutsWorkoutForm(map) {
 		return speed;
 	}
 
-	function hideWorkoutForm() {
-		//Clear input fields
-		inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
-
-		form.style.display = 'none';
-		form.classList.add('hidden');
-		setTimeout(() => (form.style.display = 'grid'), 1000);
-	}
-
 	/**
 	 * 	/// THE MUTATE METHODS CODE IS BORROWED FROM ALEJANDRO ROJAS ///
 	 * 	The mutate method is written to work with the "mutate" endpoint
@@ -230,6 +238,8 @@ export default async function workoutsWorkoutForm(map) {
 	 * 	}
 	 * 
 	 * 	const result = await sanity.mutate(mutations, params);
+	 * 
+	 *  @see handleError.js module for error handling
 	 */
 	async function sendWorkoutToSanity(workout) {
 		try {
