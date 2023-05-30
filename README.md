@@ -40,6 +40,8 @@ In the image below you can se how i translated the MVP into my Github Project la
 
 ![MVP in Github Project](_app/assets/images/MVP.png)
 
+The images below are screenshots from my Github Project Roadmap, showing the tasks that have been done and merged.
+
 ### Workflow diagram
 To get a better understanding of the flow of my project i made a simple workflow diagram showing when i needed what to happen. 
 ![Workflow chart](_app/assets/images/Workflow%20chart.png)
@@ -51,6 +53,20 @@ application. The Workout schema on the other hand, is dynamically being added an
 
 ![Data base model](_app/assets/images/Data%20base%20model.png)
 
+## How to use the Project
+### When you open the application
+When you open the project a map will be centered around where you are at that specific time. I have added some workouts beforehand just to show you how the daily workouts tab displays workouts that gets added throughout the week, but these are placed around where I was when i had the application open. To find the workouts on the map you can click on the workouts in the list on the right side and the map will get centered on the clicked workout. From the list of workouts on the right you can also delete the previously added workouts to start with a clean project if you want. As i mentioned in the beginning, the progress sections do not reset every week for the sake of simplicity. So if you start adding workouts before deleting the old ones the progress will just be added on top of the workouts i added the week before. Everything will work just fine, but its a good thing to be aware of.
+
+### Set weekly goal
+You can set your own weekly goal by clicking (or tabbing) to the weekly goal section and chinging the number being displayed. This will change both the weekly progress and the daily progress to be relative to the weekly goal.
+
+### Add a workout
+To add a workout you simply click the map where you had your workout and add the data into the workout form showing. When the form gets submitted, the workout will be rendered on the map and in the list on the right side. All the progress sections will also get updated.
+
+### Remove a workout
+To remove a workout, simply click on the trash can icon on the workout element you would like to delete and everything will be updated accordingly.
+
 ## Links
-- Github profile: https://github.com/saratyldum/
-- This projects repository: https://github.com/saratyldum/Pacer-workout-tracker
+- Github Repository: https://github.com/saratyldum/Pacer-workout-tracker
+- Sanity Studio: https://pacer.sanity.studio/workouts
+- Netlify: https://pacer.netlify.app/
