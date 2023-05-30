@@ -42,6 +42,10 @@ In the image below you can se how i translated the MVP into my Github Project la
 
 The images below are screenshots from my Github Project Roadmap, showing the tasks that have been done and merged.
 
+![Screnshot of Roadmap](_app/assets/images/roadmap.png)
+![Screnshot of Roadmap](_app/assets/images/roadmap_2.png)
+![Screnshot of Roadmap](_app/assets/images/roadmap_3.png)
+
 ### Workflow diagram
 To get a better understanding of the flow of my project i made a simple workflow diagram showing when i needed what to happen. 
 ![Workflow chart](_app/assets/images/Workflow%20chart.png)
