@@ -28,15 +28,13 @@ export default async function workoutsWorkoutForm(map) {
 
 	/**
 	 * Saves the click event in the global mapEvent variable so the that we can access the coordinates data
-	 * when creating a new workout object after a workout form is submitted. Also removes the starter message if its visible 
-	 * and renders html to show the workout form.
+	 * when creating a new workout object after a workout form is submitted. Also renders html to show the workout form.
 	 * 
 	 * @param {object} event the click event from when user clicks the map
 	 * @see createNewWorkoutObject() - to see the use of the mapEvent
 	 */
 	function handleMapClick(event) {
 		mapEvent = event;
-		toggleStarterMessage(false);
 		renderHTML(event);
 	}
 
@@ -52,7 +50,7 @@ export default async function workoutsWorkoutForm(map) {
 		if (workout !== undefined) await sendWorkoutToSanity(workout);
 		// renders workout form html
 		renderHTML(event);
-		// runs most modules to update the UI 
+		// runs most modules to update the rest of the UI 
 		await updateUI(map, workout);
 	}
 
@@ -66,6 +64,9 @@ export default async function workoutsWorkoutForm(map) {
 			inputElevation.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 			inputCadence.closest('.workout-form__row').classList.toggle('workout-form__row--hidden');
 		} else if (event.type === 'click') {
+			//Removes starter message if it is visible
+			toggleStarterMessage(false);
+
 			// Shows the workout form when the user clicks on the map
 			form.classList.remove('hidden');
 			inputDistance.focus();
@@ -91,7 +92,7 @@ export default async function workoutsWorkoutForm(map) {
 	 * 
 	 * @returns the workout object
 	 */
-	function createNewWorkoutObject(event) {
+	function createNewWorkoutObject() {
 		//helping functions to check that all inputs are valid
 		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input)); //les mer om isFinite
 		const allPositive = (...inputs) => inputs.every(input => input > 0);
