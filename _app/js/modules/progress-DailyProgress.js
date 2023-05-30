@@ -8,14 +8,11 @@ import { reducer } from "./helperFunction-reducer.js";
 
 export default function progressDailyProgress(workouts) {
 	const tabButtons = document.querySelectorAll('.daily-activities-tab-button');
-	const barContainers = document.querySelectorAll('.daily-activities__bar-container');
+	const progressBarContainers = document.querySelectorAll('.daily-activities__bar-container');
 	const weeklyGoal = parseInt(document.querySelector('.weekly-goal__input').value, 10);
-
 	let newWorkoutObjects = [];
 
-	tabButtons.forEach(tabButton => {
-		tabButton.addEventListener('click', handleTabButtonClick)
-	})
+	tabButtons.forEach(tabButton => tabButton.addEventListener('click', handleTabButtonClick));
 
 	async function handleTabButtonClick(event) {
 		const tabButton = event.currentTarget;
@@ -53,8 +50,8 @@ export default function progressDailyProgress(workouts) {
 	 * 
 	 * @param {event} tabButton - The tab that has been clicked. This defines what activity needs to be shown in the DOM.
 	 * 
-	 * @see toggleTabColor()
-	 * @see calculateBarHeight()
+	 * @see calculateBarHeight() - The calculations for each bars height
+	 * @see calculateWeeklyDistanceValue() - The calculations for the distance trained with the different activities
 	 */
 
 	 function renderHTML(tabButton) {
@@ -65,7 +62,9 @@ export default function progressDailyProgress(workouts) {
 
 		//Changes the tab clicked's color and the isCycling variable depending on whether the tab button clicked has the cycling class or not.
 		if(tabButton !== undefined) {
-			toggleTabColor(tabButton);
+			tabButtons.forEach(tabButton => tabButton.style.backgroundColor = 'var(--secondary-color-light)');
+			tabButton.style.backgroundColor = 'inherit';
+	
 			isCycling = tabButton.classList.contains('daily-activities__cycling-tab');
 		}
 
@@ -74,30 +73,23 @@ export default function progressDailyProgress(workouts) {
 			const cyclingWorkouts = newWorkoutObjects.filter(workout => workout.type === 'cycling');
 			thisWeeksActivityValue = calculateWeeklyDistanceValue(cyclingWorkouts);
 			
-			for (let index = 0; index < barContainers.length; index++) {
+			for (let index = 0; index < progressBarContainers.length; index++) {
 				dailyPercentage = calculateBarHeight(cyclingWorkouts, index);
-				barContainers[index].firstElementChild.style.height = `${dailyPercentage > 0 ? dailyPercentage : 1}%`;
+				progressBarContainers[index].firstElementChild.style.height = `${dailyPercentage > 0 ? dailyPercentage : 1}%`;
 			}
 		//renders everything related to the running tab
 		} else {
 			const runningWorkouts = newWorkoutObjects.filter(workout => workout.type === 'running');
 			thisWeeksActivityValue = calculateWeeklyDistanceValue(runningWorkouts)
 
-			for (let index = 0; index < barContainers.length; index++) {
+			for (let index = 0; index < progressBarContainers.length; index++) {
 				dailyPercentage = calculateBarHeight(runningWorkouts, index);
-				barContainers[index].firstElementChild.style.height = `${dailyPercentage > 0 ? dailyPercentage : 1}%`;
+				progressBarContainers[index].firstElementChild.style.height = `${dailyPercentage > 0 ? dailyPercentage : 1}%`;
 			}
 		}
 
 		//set the weeks distance value for the tab open
 		thisWeekValueContainer.textContent = `${thisWeeksActivityValue}km`
-	}
-
-	function toggleTabColor(tabButton) {
-		tabButtons.forEach(tabButton => {
-			tabButton.style.backgroundColor = 'var(--secondary-color-light)';
-		});
-		tabButton.style.backgroundColor = 'inherit';
 	}
 
 	/**
@@ -127,8 +119,10 @@ export default function progressDailyProgress(workouts) {
 
 	/**
 	 * Takes the distances from each day and reduces them into one number being the total distance the user has trained with the given activity.
+	 * Uses the "reducer" helper function for this. 
 	 * 
 	 * @param {array} workouts filtered list of workouts
+	 * @see helperFunction-reducer.js module
 	 * @returns the total weekly distance user has been cycling or running.
 	 */
 	function calculateWeeklyDistanceValue(workouts) {
@@ -139,7 +133,7 @@ export default function progressDailyProgress(workouts) {
 			allDistances.push(workout.distance);
 		}
 
-		const reducedWeeklyDistances = allDistances.reduce(reducer, initialValue);
-		return reducedWeeklyDistances;
+		const totalWeeklyDistance = allDistances.reduce(reducer, initialValue);
+		return totalWeeklyDistance;
 	}
 }
