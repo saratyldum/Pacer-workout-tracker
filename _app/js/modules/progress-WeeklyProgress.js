@@ -2,6 +2,8 @@ import { sanity } from "../sanity.js";
 import { sanityMutate  } from "../sanity.js";
 import handleError from "./handleError.js";
 import { reducer } from "./helperFunction-reducer.js";
+import progressDailyProgress from "./progress-DailyProgress.js"
+
 
 /**
  * Takes an array of workouts and renderes the weekly progress section accordingly. Ideally this data would reset at the beginning
@@ -62,6 +64,8 @@ export default async function progressWeeklyProgress(workouts) {
 
 		//changes the width of the progress bar
 		progressBar.style.width = `${progressBarWidth}%`;
+
+		progressDailyProgress(workouts);
 	}
 
 	/**
