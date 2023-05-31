@@ -63,6 +63,7 @@ export default async function progressWeeklyProgress(workouts) {
 		//changes the width of the progress bar
 		progressBar.style.width = `${progressBarWidth}%`;
 
+		//runs the daily progress module to update that section accordingly
 		progressDailyProgress(workouts);
 	}
 
