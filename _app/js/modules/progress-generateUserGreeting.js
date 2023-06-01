@@ -11,8 +11,13 @@ export default function progressGenerateUserGreeting(userInfo) {
 	 * 
 	 * @see renderHTML()
 	 */
-	renderHTML()
+	renderHTML();
 
+	/**
+	 * Formats the user info into only being the first name 
+	 * @param {object} userInfo - the user object from Sanity
+	 * @returns users first name
+	 */
 	function formatUserName(userInfo) {
 		const userName = userInfo.userName;
 		const userNameArray = userName.split(' ');
@@ -21,6 +26,11 @@ export default function progressGenerateUserGreeting(userInfo) {
 		return firstName;
 	}
 
+	/**
+	 * Creates the user greeting DOMelement
+	 * @param {string} firstName 
+	 * @returns user image and the user message to be displayed
+	 */
 	function createUserDOMElement(firstName) {
 		const userImage = document.createElement('img');
 		const userMessage = document.createElement('div');
@@ -32,14 +42,17 @@ export default function progressGenerateUserGreeting(userInfo) {
 		userMessage.classList = 'user__message';
 		userMessage.innerHTML = `Hello, <strong>${firstName}</strong>`;
 
-		return [userImage, userMessage]
+		return [userImage, userMessage];
 	
 	}
 
+	/**
+	 * Renders the user greeting on the site
+	 */
 	function renderHTML() {
 		const firstName = formatUserName(userInfo);
 		const [userImage, userMessage] = createUserDOMElement(firstName);
 
-		userContainer.append(userImage, userMessage)
+		userContainer.append(userImage, userMessage);
 	}
 }
