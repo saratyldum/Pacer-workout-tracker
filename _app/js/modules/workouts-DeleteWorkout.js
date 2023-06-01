@@ -1,6 +1,6 @@
 import { sanityMutate  } from "../sanity.js";
+import { updateUI } from "../main.js";
 import handleError from "./handleError.js";
-import updateUI from "./updateUI.js";
 
 export default async function workoutsDeleteWorkout() {
 	const deleteButtons = document.querySelectorAll('.workout__delete-button');
@@ -13,8 +13,11 @@ export default async function workoutsDeleteWorkout() {
 		const workoutElement = event.target.closest('.workout');
 		const workoutID = workoutElement.dataset.id;
 
+		// removes workout from Sanity
 		await deleteWorkoutFromSanity(workoutID);
-		renderHTML(workoutElement, workoutID)
+		// removes workout from list and from the map
+		renderHTML(workoutElement, workoutID);
+		// runs most modules to update the rest of the UI with the deleted workout
 		await updateUI();
 	}
 

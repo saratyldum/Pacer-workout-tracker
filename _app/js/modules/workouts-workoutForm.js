@@ -1,5 +1,5 @@
 import { sanityMutate  } from "../sanity.js";
-import updateUI from "./updateUI.js";
+import { updateUI } from "../main.js";
 import handleError from "./handleError.js";
 import toggleStarterMessage from "./toggleStarterMessage.js";
 
@@ -50,7 +50,7 @@ export default async function workoutsWorkoutForm(map) {
 		if (workout !== undefined) await sendWorkoutToSanity(workout);
 		// renders workout form html
 		renderHTML(event);
-		// runs most modules to update the rest of the UI 
+		// runs most modules to update the rest of the UI with the newly added workout
 		await updateUI(map, workout);
 	}
 
