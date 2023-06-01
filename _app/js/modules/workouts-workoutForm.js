@@ -94,16 +94,16 @@ export default async function workoutsWorkoutForm(map) {
 	 */
 	function createNewWorkoutObject() {
 		//helping functions to check that all inputs are valid
-		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input)); //les mer om isFinite
+		const isValidInputs = (...inputs) => inputs.every(input => Number.isFinite(input));
 		const allPositive = (...inputs) => inputs.every(input => input > 0);
 
 		//Get data from form 
 		const type = inputType.value;
-		const distance = +inputDistance.value; //+ converts String to Number
+		const distance = +inputDistance.value; 
 		const duration = +inputDuration.value;
 		const latitude = mapEvent.lngLat.lat;
 		const longitude = mapEvent.lngLat.lng;
-		const coordinates = [longitude, latitude]
+		const coordinates = [longitude, latitude];
 		const date = new Date();
 		const id = (Date.now() + '').slice(-10);
 		
@@ -125,31 +125,20 @@ export default async function workoutsWorkoutForm(map) {
 		//If activity is cycling, create cycling object
 		if (type === 'cycling') {
 			const elevGain = +inputElevation.value;
+
 			//Check if data is valid
 			if (
 				!isValidInputs(distance, duration, elevGain) ||
 				!allPositive(distance, duration)
 			) 
-				return handleError('Distance and duration have to be positive numbers. Elevation Gain can be positive or negative.')
+				return handleError('Distance and duration have to be positive numbers. Elevation Gain can be positive or negative.');
 			
 			const workout = createCyclingWorkoutObject(coordinates, distance, duration, elevGain, date, id);
 			return workout;
 		}
 	}
 
-	/**
-	 * Creates a description for the workout that has been submitted.
-	 * 
-	 * @param {string} type 
-	 * @param {object} date 
-	 * @returns the workout decription string
-	 */
-	function setWorkoutDescription(type, date) {
-		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${months[date.getMonth()]} ${date.getDate()}`;
-		return description;
-	}
-
+	
 	/**
 	 * Creates a running object based on the input values gathered from the workout form 
 	 * 
@@ -169,8 +158,8 @@ export default async function workoutsWorkoutForm(map) {
 		const running = {description, pace, coordinates, distance, duration, cadence, date, id, type};
 		return running;
 	}
-
-		/**
+	
+	/**
 	 * Creates a cycling object based on the input values gathered from the workout form 
 	 * 
 	 * @param {array} coordinates - an array of the coordinates from where on the map the user clicked
@@ -188,6 +177,19 @@ export default async function workoutsWorkoutForm(map) {
 		const description = setWorkoutDescription(type, date);
 		const cycling = {description, speed, coordinates, distance, duration, elevGain, date, id, type};
 		return cycling;
+	}
+	
+	/**
+	 * Creates a description for the workout that has been submitted.
+	 * 
+	 * @param {string} type 
+	 * @param {object} date 
+	 * @returns the workout decription string
+	 */
+	function setWorkoutDescription(type, date) {
+		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		const description = `${type[0].toUpperCase()}${type.slice(1)} on ${months[date.getMonth()]} ${date.getDate()}`;
+		return description;
 	}
 
 	function calculatePace(duration, distance) {
@@ -270,7 +272,7 @@ export default async function workoutsWorkoutForm(map) {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			handleError(error.message)
+			handleError(error.message);
 		}
 	}
 }

@@ -46,7 +46,7 @@ export default async function workoutsDeleteWorkout() {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			handleError(error.message)
+			handleError(error.message);
 		}
 	}
 

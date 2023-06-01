@@ -23,7 +23,7 @@ export default function mapLoadMap(position) {
 	container: 'map', // container ID
 	style: 'mapbox://styles/mapbox/streets-v12',
 	center: userCoordinates, // starting position [lng, lat]
-	zoom: 13, // starting zoom
+	zoom: 12, // starting zoom
 	});
 
 	return map;

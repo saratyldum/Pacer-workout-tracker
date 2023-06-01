@@ -55,7 +55,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 	function renderHTML(workouts) {
 		let workoutElement, popup, marker;
 
-		if(workouts.length > 0) {
+		if (workouts.length > 0) {
 			for (let index = 0; index < workouts.length; index++) {
 				//create workout DOM element
 				workoutElement = createWorkoutListDOMElement(workouts[index]);
@@ -72,7 +72,7 @@ export default async function workoutsRenderWorkouts(map, workouts) {
 				.setPopup(popup)
 				.addTo(map)
 			}
-		}else {
+		} else {
 			toggleStarterMessage(true);
 		}
 	 }

@@ -1,6 +1,6 @@
 import { reducer } from "./helperFunction-reducer.js";
 /**
- * Takes an array of workouts and renderes the daily progress tab accordingly. Ideally this data would reset at the beginning
+ * Takes an array of workouts and renderes the "daily progress"-tab accordingly. Ideally this data would reset at the beginning
  * of every week, but for the sake of simplicity that does not happen in this project.
  * 
  * @param {array} workouts the workouts to be rendered on the daily progress bars
@@ -21,7 +21,7 @@ export default function progressDailyProgress(workouts) {
 	
 	/**
 	 * Creates new workout objects with the information we need to render the daily progress bars and pushes it into
-	 * a new array with 
+	 * a new array.
 	 * Turns each workout date into a number between 0-6 depending on the day of the week. This number correlates to each 
 	 * progress bars' index so we know which workouts to render on which progress bar.
 	 */
@@ -32,7 +32,7 @@ export default function progressDailyProgress(workouts) {
 			day: day,
 			distance: workout.distance,
 			type: workout.type
-		})
+		});
 	}
 
 	/**
@@ -40,7 +40,7 @@ export default function progressDailyProgress(workouts) {
 	 * 
 	 * @see renderHTML()
 	 */
-	 renderHTML()
+	 renderHTML();
 
 	/**
 	 * The only function that makes changes to the DOM. Finds what acitivity tab has been clicked and makes changes to the DOM thereafter.
@@ -80,7 +80,7 @@ export default function progressDailyProgress(workouts) {
 		//renders everything related to the running tab
 		} else {
 			const runningWorkouts = newWorkoutObjects.filter(workout => workout.type === 'running');
-			thisWeeksActivityValue = calculateWeeklyDistanceValue(runningWorkouts)
+			thisWeeksActivityValue = calculateWeeklyDistanceValue(runningWorkouts);
 
 			for (let index = 0; index < progressBarContainers.length; index++) {
 				dailyPercentage = calculateBarHeight(runningWorkouts, index);
@@ -89,7 +89,7 @@ export default function progressDailyProgress(workouts) {
 		}
 
 		//set the weeks distance value for the tab open
-		thisWeekValueContainer.textContent = `${thisWeeksActivityValue}km`
+		thisWeekValueContainer.textContent = `${thisWeeksActivityValue}km`;
 	}
 
 	/**

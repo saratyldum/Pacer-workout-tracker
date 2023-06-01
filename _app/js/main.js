@@ -9,6 +9,7 @@ import workoutsFetchWorkouts from "./modules/workouts-fetchWorkouts.js";
 import workoutsWorkoutForm from "./modules/workouts-workoutForm.js";
 import workoutsRenderWorkouts from "./modules/workouts-renderWorkouts.js";
 import workoutsDeleteWorkout from "./modules/workouts-deleteWorkout.js";
+
 import handleError from "./modules/handleError.js";
 import toggleStarterMessage from "./modules/toggleStarterMessage.js";
 
@@ -34,19 +35,18 @@ if(navigator.geolocation) {
 /**
  * When the page loads most functions will have to run one time in order to get the UI updated based on
  * the data existing in Sanity Studio. For whenever a workout is added or deleted later on I have a separate
- * function running most functions again to update the UI with the updated workouts as the user uses the application. 
+ * function running most functions again to update the UI thereafter. 
  * The function below runs only if user allows the application to get their position, if they decline
  * they will get an error message informing them about the need for their position to be able to
- * run the application.
+ * use the application.
  * 
  * @param {object} position the position gathered from users data
  * 
- * @see updateUI() 
+ * @see updateUI() for when a workout is added or deleted
  * @see errorPosition() for the error handling
  */
 async function handleGeolocationSucess(position) {
 	const map = mapLoadMap(position);
-	// updateUI(map)
 	
 	await workoutsRenderWorkouts(map, workouts);
 	await progressWeeklyProgress(workouts);
@@ -68,7 +68,7 @@ function errorPosition() {
 
 
 /**
- * Runs most modules to update the UI whenever a new workout has been submitted or deleted. Get 
+ * Runs most modules to update the UI whenever a new workout has been submitted or deleted. 
  * 
  * @param {object} map the map on the site, from Mapbox
  * @param {object} workout the one new workout that has been submited from the form. Gets sent as an array

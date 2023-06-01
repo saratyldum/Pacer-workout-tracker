@@ -28,9 +28,9 @@ export default async function workoutsFetchWorkouts() {
 		}`
 		
 		const workouts = await sanity.fetch(query);
-		return workouts
+		return workouts;
 	} catch(error) {
-		handleError(error.message)
+		handleError(error.message);
 	}
 	return workouts;
 }

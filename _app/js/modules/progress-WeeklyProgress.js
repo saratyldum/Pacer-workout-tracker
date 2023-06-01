@@ -29,9 +29,8 @@ export default async function progressWeeklyProgress(workouts) {
 		weeklyGoalValue = parseInt(goalInput.value, 10);
 
 		await sendWeeklyGoalToSanity(weeklyGoalValue);
-
 		const weeklyGoal = await fetchWeeklyGoal();
-		renderHTML(weeklyGoal, workouts)
+		renderHTML(weeklyGoal, workouts);
 	}
 
 	/**
@@ -47,6 +46,8 @@ export default async function progressWeeklyProgress(workouts) {
 	 * 
 	 * @param {number} weeklyGoal the weekly goal fetched from Sanity
 	 * @param {array} workouts the workouts to be rendered
+	 * @see calculateDistances()
+	 * @see calculateProgressPercentage()
 	 */
 	function renderHTML(weeklyGoal, workouts) {
 		const [distanceDone, distanceRemaining] = calculateDistances(weeklyGoal, workouts); 
@@ -63,7 +64,7 @@ export default async function progressWeeklyProgress(workouts) {
 		//changes the width of the progress bar
 		progressBar.style.width = `${progressBarWidth}%`;
 
-		//runs the daily progress module to update that section accordingly
+		//runs the daily progress module to update that section relative to the weekly goal
 		progressDailyProgress(workouts);
 	}
 
@@ -113,7 +114,7 @@ export default async function progressWeeklyProgress(workouts) {
 	 */
 	async function fetchWeeklyGoal() {
 		try {
-			const query = `*[_id == 'settings'][0]`
+			const query = `*[_id == 'settings'][0]`;
 			const goal = await sanity.fetch(query);
 			
 			return goal.weeklyGoal;
@@ -149,7 +150,7 @@ export default async function progressWeeklyProgress(workouts) {
 			const result = await sanityMutate.mutate(mutations, params);
 
 		} catch(error) {
-			handleError(error.message)
+			handleError(error.message);
 		}
 	}
 }

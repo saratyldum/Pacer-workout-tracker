@@ -15,22 +15,22 @@ export default function handleError(errorMessage) {
 	/**
 	 * Runs the show error message function right away with the error message that is to be displayed
 	 */
-	showErrorMessage(errorMessage)
+	showErrorMessage(errorMessage);
 
-	closeButton.addEventListener('click', removeErrorMessage)
+	closeButton.addEventListener('click', removeErrorMessage);
 
 	function showErrorMessage(errorMessage) {
 		isVisible = true;
-		renderHTMl(isVisible)
+		renderHTMl(isVisible);
 	}
 
 	function removeErrorMessage() {
 		isVisible = false;
-		renderHTMl(isVisible)
+		renderHTMl(isVisible);
 	}
 
 	/**
-	 * 
+	 * Shows and removes the error message from the UI.
 	 * @param {boolean} isVisible tells function whether the error message is to be displayed or removed
 	 */
 	function renderHTMl(isVisible) {
