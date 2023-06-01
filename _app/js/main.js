@@ -10,6 +10,7 @@ import workoutsWorkoutForm from "./modules/workouts-workoutForm.js";
 import workoutsRenderWorkouts from "./modules/workouts-renderWorkouts.js";
 import workoutsDeleteWorkout from "./modules/workouts-deleteWorkout.js";
 import handleError from "./modules/handleError.js";
+import toggleStarterMessage from "./modules/toggleStarterMessage.js";
 
 /**
  * When the page loads the workouts and user information in Sanity gets fetched and the user greeting
@@ -33,19 +34,20 @@ if(navigator.geolocation) {
 /**
  * When the page loads most functions will have to run one time in order to get the UI updated based on
  * the data existing in Sanity Studio. For whenever a workout is added or deleted later on I have a separate
- * function running all functions again to update the UI as the user uses the application. 
+ * function running most functions again to update the UI with the updated workouts as the user uses the application. 
  * The function below runs only if user allows the application to get their position, if they decline
  * they will get an error message informing them about the need for their position to be able to
  * run the application.
  * 
  * @param {object} position the position gathered from users data
  * 
- * @see updateUI.js module
+ * @see updateUI() 
  * @see errorPosition() for the error handling
  */
 async function handleGeolocationSucess(position) {
 	const map = mapLoadMap(position);
-
+	// updateUI(map)
+	
 	await workoutsRenderWorkouts(map, workouts);
 	await progressWeeklyProgress(workouts);
 	progressDailyProgress(workouts);
@@ -64,3 +66,23 @@ function errorPosition() {
 	handleError('Could not get your position')
 }
 
+
+/**
+ * Runs most modules to update the UI whenever a new workout has been submitted or deleted. Get 
+ * 
+ * @param {object} map the map on the site, from Mapbox
+ * @param {object} workout the one new workout that has been submited from the form. Gets sent as an array
+ * because that is what the renderWorkouts module takes as a parameter.
+ */
+export async function updateUI(map, workout) {
+	const workouts = await workoutsFetchWorkouts();
+
+	if(map !== undefined && workout !== undefined) await workoutsRenderWorkouts(map, [workout]);
+
+	if (workouts.length === 0) toggleStarterMessage(true);
+
+	await progressWeeklyProgress(workouts);
+	progressTotalProgress(workouts);
+	progressDailyProgress(workouts);
+	await workoutsDeleteWorkout();
+}
